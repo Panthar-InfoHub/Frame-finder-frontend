@@ -5,6 +5,7 @@ import Heart from "@/assets/heart_icon.png";
 import Share from "@/assets/share_icon.png";
 import { FaStar } from "react-icons/fa6";
 import { Button } from "@/components/ui/button";
+import Accordian from "@/ProductPage/Components/Accordian";
 const ProductPage = () => {
   const color1 = "black",
     color2 = "blue-400";
@@ -72,7 +73,8 @@ const ProductPage = () => {
             </Button>
           </div>
         </div>
-        <div className="">
+
+        <div className="flex gap-10 mt-24">
           <div className="flex gap-3 w-2/3">
             <div className="flex gap-3 flex-col">
               <img
@@ -99,7 +101,9 @@ const ProductPage = () => {
               />
             </div>
           </div>
-          <div className=""></div>
+          <div className="w-1/3">
+            <Accordian/>
+          </div>
         </div>
       </div>
     </div>
