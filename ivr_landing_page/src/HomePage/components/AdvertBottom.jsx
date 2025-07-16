@@ -11,7 +11,7 @@ const AdvertBottom = () => {
         alt="Advertisments"
         className="h-full w-1/2 object-cover"
       />
-      <div className="w-1/2 text-center flex flex-col justify-center items-center gap-6">
+      <div className="w-1/2 text-caenter flex flex-col justify-center items-center gap-6">
         <div className=" text-5xl font-bold w-3/4">BLUE COMPUTER GLASSES</div>
         <div className="text-2xl w-3/4">
           Blue computer glasses help reduce eye strain and enhance visula

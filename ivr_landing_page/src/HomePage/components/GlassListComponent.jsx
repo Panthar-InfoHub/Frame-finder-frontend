@@ -28,7 +28,7 @@ const GlassListComponent = ({prodArray,link,border_radius,heading}) => {
   return (
     <div className="mt-40">
       <div className="relative text-center w-full mx-auto">
-        <div className="font-lexend text-5xl font-semibold">{heading}</div>
+        <div className="font-lexend text-5xl ">{heading}</div>
         <Button
           variant="ghost"
           className="absolute right-0 top-2 w-fit h-fit cursor-pointer text-2xl py-4 bg-transparent text-green-400 active:text-green-600 hover:text-green-500 hover:bg-zinc-200"

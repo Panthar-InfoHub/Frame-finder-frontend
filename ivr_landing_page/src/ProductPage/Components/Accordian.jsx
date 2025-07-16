@@ -4,7 +4,7 @@ const Accordian = () => {
   return (
     <div>
       <div className="p-3 bg-zinc-300 mb-3">
-        <div className="h-10 font-semibold">
+        <div className="h-10 font-semibold flex justify-between">
             <div>
               DETAILS
             </div>

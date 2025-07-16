@@ -7,9 +7,9 @@ import ProductPage from "./ProductPage/ProductPage";
 function App() {
   return (
     <div className="min-h-screen w-full">
-      <HomePage/>
+      {/* <HomePage/> */}
       {/* <FilterPage/> */}
-      {/* <ProductPage/> */}
+      <ProductPage/>
     </div>
   );
 }
