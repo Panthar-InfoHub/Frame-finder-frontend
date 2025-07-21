@@ -3,9 +3,9 @@ import cust_1 from "@/assets/cust_1.jpg";
 import { Button } from "@/components/ui/button";
 import addvertImage from "@/assets/addvertImage.png";
 
-const AdvertBottom = () => {
+const Advert1 = () => {
   return (
-    <div className="h-[530px] w-full flex bg-[#F8F8F8] mt-36">
+    <div className="h-[530px] w-full flex bg-[#F8F8F8] mt-60">
       <img
         src={addvertImage}
         alt="Advertisments"
@@ -23,4 +23,4 @@ const AdvertBottom = () => {
   );
 };
 
-export default AdvertBottom;
+export default Advert1;

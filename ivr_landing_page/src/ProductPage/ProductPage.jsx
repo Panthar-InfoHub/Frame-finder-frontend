@@ -3,9 +3,13 @@ import Navbar from "@/components/Navbar/Navbar";
 import ProductImage from "@/assets/ProductImage.jpg";
 import Heart from "@/assets/heart_icon.png";
 import Share from "@/assets/share_icon.png";
+import featuresImage from "@/assets/ProductsPageFeaturesImage.png";
 import { FaStar } from "react-icons/fa6";
 import { Button } from "@/components/ui/button";
-import Accordian from "@/ProductPage/Components/Accordian";
+import AccordianVideoAdd from "@/ProductPage/Components/AccordianVideoAdd";
+import CardCaraousal from "./Components/CardCaraousal";
+import Advert1 from "@/components/Advertisments/Advert1";
+import Footer from "@/components/Footer/Footer";
 const ProductPage = () => {
   const color1 = "black",
     color2 = "blue-400";
@@ -15,7 +19,7 @@ const ProductPage = () => {
         <Navbar />
       </div>
       <div className="w-[90%] mx-auto">
-        <div className="font-[400] text-2xl">Home | Eyeware</div>
+        <div className="font-[400] text-4xl">Home | Eyeware</div>
         <div className="mt-10 flex h-[750px] justify-between">
           <div className="max-w-[976px] w-full rounded-md overflow-hidden border-2 drop-shadow-2xl">
             <img
@@ -68,44 +72,58 @@ const ProductPage = () => {
               ></div>
             </div>
 
-            <Button className="font-[400] text-2xl text-white bg-green-600 rounded-lg hover:bg-green-700 active:bg-green-800 cursor-pointer h-[100px] w-full ">
-              Select Lenses and Purchase
-            </Button>
+            <div className="flex gap-3">
+              <Button className="font-[400] text-lg flex-1 text-white bg-[#00aa78] rounded-lg hover:bg-[#3a826b] active:bg-[#295c4c] cursor-pointer h-[100px]">
+                Select Lenses and Purchase
+              </Button>
+              <Button className="font-[400] text-lg flex-1 text-white bg-[#00aa78] rounded-lg hover:bg-[#3a826b] active:bg-[#295c4c] cursor-pointer h-[100px]">
+                Buy Only Frame
+              </Button>
+            </div>
           </div>
         </div>
 
-        <div className="flex gap-10 mt-24">
+        <div className="flex gap-10 mb-15 mt-45">
           <div className="flex gap-3 w-2/3">
             <div className="flex gap-3 flex-col">
               <img
-                className="w-150 h-150 border-4"
+                className="w-150 h-150"
                 src={ProductImage}
                 alt="ProductImage"
               />
               <img
-                className="w-150 h-150 border-4"
+                className="w-150 h-150"
                 src={ProductImage}
                 alt="ProductImage"
               />
             </div>
             <div className="flex gap-3 flex-col">
               <img
-                className="w-70 h-80 border-4 object-cover"
+                className="w-72 h-80 object-cover"
                 src={ProductImage}
                 alt="ProductImage"
               />
               <img
-                className="w-130 h-150 border-4 object-cover"
+                className="w-144 h-150 object-cover"
                 src={ProductImage}
                 alt="ProductImage"
               />
             </div>
           </div>
           <div className="w-1/3">
-            <Accordian/>
+            <AccordianVideoAdd />
           </div>
         </div>
+
+        <CardCaraousal />
+        <Advert1 />
+        <img
+          src={featuresImage}
+          alt="featuresImg"
+          className="mx-auto w-[1000px] h-[230px] mt-60"
+        />
       </div>
+      <Footer />
     </div>
   );
 };

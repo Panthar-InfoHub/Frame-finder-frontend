@@ -6,7 +6,7 @@ import FilterComponent from "./components/FilterComponent";
 import ProductCard from "./components/ProductCard";
 import eyeGlass1 from "@/assets/eyeGlass1.jpg";
 import FilterPageAdd from "@/assets/FilterPageAdd.jpg";
-import Footer from "@/HomePage/components/Footer";
+import Footer from "@/components/Footer/Footer";
 import FilterPageTopImage from "@/assets/FilterPageTopImage.jpg";
 
 // const FilterPage = () => {

@@ -6,8 +6,8 @@ import GlassListComponent from "./components/GlassListComponent";
 import OurTopPicks from "./components/OurTopPicks";
 import AdvertTop from "./components/AdvertTop";
 import cust_1 from "@/assets/cust_1.jpg";
-import AdvertBottom from "./components/AdvertBottom";
-import Footer from "./components/Footer";
+// import AdvertBottom from "./components/AdvertBottom";
+import Footer from "@/components/Footer/Footer";
 import eyeGlass1 from "@/assets/eyeGlass1.jpg";
 import eyeGlass2 from "@/assets/eyeGlass2.jpg";
 import eyeGlass3 from "@/assets/eyeGlass3.jpg";
@@ -18,6 +18,7 @@ import sunGlass2 from "@/assets/sunGlass2.jpg";
 import sunGlass3 from "@/assets/sunGlass3.jpg";
 import sunGlass4 from "@/assets/sunGlass4.jpg";
 import sunGlass5 from "@/assets/sunGlass5.jpg";
+import Advert1 from "@/components/Advertisments/Advert1";
 
 const HomePage = () => {
   const EyeGlassArray = [
@@ -82,7 +83,7 @@ const HomePage = () => {
           border_radius
           heading={"Sun Glasses"}
         />
-        <AdvertBottom />
+        <Advert1 />
       </div>
       <Footer/>
     </div>
