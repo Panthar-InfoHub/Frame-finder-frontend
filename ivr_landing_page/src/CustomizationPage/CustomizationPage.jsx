@@ -15,8 +15,8 @@ const CustomizationPage = () => {
           backgroundSize: "cover",
         }}
       >
-        {/* <LensType /> */}
-        <LensDescriptionPage />
+        <LensType />
+        {/* <LensDescriptionPage /> */}
       </div>
     </>
   );

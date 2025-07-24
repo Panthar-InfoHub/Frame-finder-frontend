@@ -4,6 +4,7 @@ import HomePage from "./HomePage/HomePage";
 import FilterPage from "./FilterPage/FilterPage";
 import ProductPage from "./ProductPage/ProductPage";
 import CustomizationPage from "./CustomizationPage/CustomizationPage";
+import OnBoardingForm from "./components/OnBoardingForm/OnBoardingForm";
 
 function App() {
   return (
@@ -11,7 +12,8 @@ function App() {
       {/* <HomePage/> */}
       {/* <FilterPage/> */}
       {/* <ProductPage/> */}
-      <CustomizationPage/>
+      {/* <CustomizationPage/> */}
+      <OnBoardingForm/>
     </div>
   );
 }
