@@ -8,7 +8,7 @@ import TwitterIcon from "@/assets/Twitter.png";
 
 const Footer = () => {
   return (
-    <div className="bg-[#00aa78] text-white py-14 mt-72 h-screen">
+    <div className="bg-theme-color1 text-white py-14 mt-72 h-screen">
       <div className="font-bona-novasc mx-auto w-fit text-[200px] mb-18">FRAME FINDER</div>
       <div className="flex justify-between w-3/4 mx-auto">
         <div className="space-y-6">

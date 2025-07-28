@@ -22,7 +22,7 @@ export default function Caraousal() {
   return (
     <>
       <Swiper
-        spaceBetween={30}
+        spaceBetween={0}
         centeredSlides={true}
         autoplay={{
           delay: 2500,
@@ -31,6 +31,7 @@ export default function Caraousal() {
         pagination={false}
         navigation={false}
         modules={[Autoplay]}
+        loop={true}
         className="mySwiper w-full h-full"
       >
         <SwiperSlide><img src={HeroImage1} className="w-full h-full" alt="" /></SwiperSlide>

@@ -73,15 +73,15 @@ const OurTopPicks = () => {
         >
           See More
         </Button>
-        <TabsList className="mx-auto border-2 border-[#00aa78] bg-white rounded-full h-fit w-4/12 mb-16">
+        <TabsList className="mx-auto border-2 border-theme-color1 bg-white rounded-full h-fit w-4/12 mb-16">
           <TabsTrigger
-            className="p-4 rounded-full hover:cursor-pointer data-[state=active]:bg-[#00aa78] data-[state=active]:text-white text-[xl]"
+            className="p-4 rounded-full hover:cursor-pointer data-[state=active]:bg-theme-color1 data-[state=active]:text-white text-lg"
             value="new_arrivals"
           >
             New Arrivals
           </TabsTrigger>
           <TabsTrigger
-            className="p-4 rounded-full hover:cursor-pointer data-[state=active]:bg-[#00aa78] data-[state=active]:text-white text-[xl]"
+            className="p-4 rounded-full hover:cursor-pointer data-[state=active]:bg-theme-color1 data-[state=active]:text-white text-lg"
             value="best_seller"
           >
             Best Seller
@@ -92,8 +92,8 @@ const OurTopPicks = () => {
           className="h-4/5 flex flex-wrap gap-y-10 justify-between"
         >
           {prodArray.map((prod) => (
-            <div className="h-[524px] w-[457px] relative bg-zinc-100 hover:bg-zinc-200 cursor-pointer">
-              <div className="absolute text-white font-semibold text-lg bg-[#00aa78] p-2 rounded-l-full px-4 top-3.5 right-0 w-fit flex gap-2">
+            <div className="h-[524px] w-[457px] relative bg-green-200 hover:bg-green-300 cursor-pointer rounded-2xl overflow-hidden">
+              <div className="absolute text-white font-semibold text-lg bg-theme-color1 p-2 rounded-l-full px-4 top-3.5 right-0 w-fit flex gap-2">
                 <Star fill="white" className="text-white " />
                 <div>{prod.rating}</div>
               </div>
@@ -125,8 +125,8 @@ const OurTopPicks = () => {
           className="h-4/5 flex flex-wrap gap-y-10 justify-between"
         >
           {prodArray.map((prod) => (
-            <div className="h-[524px] w-[457px] relative bg-zinc-100 hover:bg-zinc-200 cursor-pointer">
-              <div className="absolute text-white font-semibold text-lg bg-[#00aa78] p-2 rounded-l-full px-4 top-3.5 right-0 w-fit flex gap-2">
+            <div className="h-[524px] w-[457px] relative bg-green-200 hover:bg-green-300 rounded-2xl overflow-hidden cursor-pointer">
+              <div className="absolute text-white font-semibold text-lg bg-theme-color1 p-2 rounded-l-full px-4 top-3.5 right-0 w-fit flex gap-2">
                 <Star fill="white" className="text-white " />
                 <div>{prod.rating}</div>
               </div>

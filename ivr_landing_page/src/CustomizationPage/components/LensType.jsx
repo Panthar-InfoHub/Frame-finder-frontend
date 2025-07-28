@@ -9,7 +9,7 @@ import Arrow from "@/assets/ArrowDown.png"
 const LensType = () => {
   return (
     <div className="w-screen h-screen flex justify-center items-center">
-      <div className="w-3/5 h-fit flex flex-col gap-3">
+      <div className="w-3/5 h-fit flex flex-col gap-3 mt-[5%]">
         <div className="flex gap-2 items-center ">
           <div className="hover:bg-white/20 hover:shadow-lg border border-transparent hover:border-white/30 hover:backdrop-blur-xs rounded-full hover:cursor-pointer">
             <IoIosArrowBack size={30} />

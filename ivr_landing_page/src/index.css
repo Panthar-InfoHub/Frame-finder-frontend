@@ -16,6 +16,7 @@
 
 @theme inline {
   --font-bona-novasc:'BonaNovaSC','sans-serif';
+  --color-theme-color1:#00aa78;
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);

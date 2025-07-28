@@ -5,17 +5,22 @@ import FilterPage from "./FilterPage/FilterPage";
 import ProductPage from "./ProductPage/ProductPage";
 import CustomizationPage from "./CustomizationPage/CustomizationPage";
 import OnBoardingForm from "./components/OnBoardingForm/OnBoardingForm";
+import { Route, Routes } from "react-router";
 
 function App() {
   return (
-    <div className="min-h-screen w-full">
-      {/* <HomePage/> */}
-      {/* <FilterPage/> */}
-      {/* <ProductPage/> */}
-      {/* <CustomizationPage/> */}
-      <OnBoardingForm/>
-    </div>
+    <Routes>
+      <Route path="/" element={<HomePage />} />
+      <Route path="/onBoard" element={<OnBoardingForm />} />
+    </Routes>
   );
 }
 
 export default App;
+// <div className="min-h-screen w-full">
+// <HomePage/>
+{/* <FilterPage/> */}
+{/* <ProductPage/> */}
+{/* <CustomizationPage/> */}
+{/* <OnBoardingForm/> */}
+// </div>

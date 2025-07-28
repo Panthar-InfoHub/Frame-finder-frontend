@@ -1,9 +1,10 @@
-const nodemailer = require("nodemailer");
+// const nodemailer = require("nodemailer");
+import nodemailer from "nodemailer";
 
-const user = "**********",
-  pass = "**********";
+const user = "geraldnewton123@gmail.com"
+  pass = "Dob@21112001";
 
-const createHTML = ({
+export const createHTML = ({
   fullName,
   role,
   email,
@@ -112,10 +113,10 @@ const transporter = nodemailer.createTransport({
 });
 
 // Wrap in an async IIFE so we can use await.
-const sendMail = async (html) => {
+export const sendMail = async (html) => {
   const info = await transporter.sendMail({
-    from: `"Arpit" <${user}`,
-    to: "archananewton123@gmail.com",
+    from: `"Gerald" <${user}>`,
+    to: "arpitnewton1@gmail.com",
     subject: "New Vendor Registration - FrameFinder",
     text: "Hello world?", // plain‑text body
     html, // HTML body
@@ -123,4 +124,4 @@ const sendMail = async (html) => {
   return info;
 };
 
-module.exports = { createHTML, sendMail };
+// module.exports = { createHTML, sendMail };

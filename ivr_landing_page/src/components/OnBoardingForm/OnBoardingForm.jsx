@@ -1,11 +1,12 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import Navbar from "../Navbar/Navbar";
 import BackGround from "@/assets/back.png";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Checkbox } from "../ui/checkbox";
 import RatingStars from "./RatingStars";
-import { createHTML, sendMail } from "./Mail";
+// import { createHTML, sendMail } from "./Mail";
+// const { createHTML, sendMail } = require("./Mail.js");
 
 const OnBoardingForm = () => {
   const [form, setForm] = useState({
@@ -30,6 +31,36 @@ const OnBoardingForm = () => {
 
   const [rating, setRating] = useState(0); // selected rating
 
+  const [errors, setErrors] = useState({});
+
+  // const bussinessNameRef = useRef(null);
+  // const fullNameRef = useRef(null);
+  // const gstnoRef = useRef(null);
+  // const addressRef = useRef(null);
+  // const stateRef = useRef(null);
+  // const cityRef = useRef(null);
+  // const phoneRef = useRef(null);
+  // const roleRef = useRef(null);
+  // const pincodeRef = useRef(null);
+  // const emailRef = useRef(null);
+  // const businessTypeOptionsRef = useRef(null);
+  // const productCategoriesRef = useRef(null);
+
+  const fieldRefs = {
+    bussinessName: useRef(),
+    fullName: useRef(),
+    address: useRef(),
+    gstno: useRef(),
+    state: useRef(),
+    city: useRef(),
+    phone: useRef(),
+    role: useRef(),
+    pincode: useRef(),
+    email: useRef(),
+    businessTypeOptions: useRef(),
+    productCategories: useRef(),
+  };
+
   const productCategories = [
     "Spectacles With Prescribed Lenses",
     "Sunglasses",
@@ -45,8 +76,6 @@ const OnBoardingForm = () => {
     "Distributor",
     "Others",
   ];
-
-  const [errors, setErrors] = useState({});
 
   const handleChange = (key, value) => {
     console.log(key, value);
@@ -92,10 +121,10 @@ const OnBoardingForm = () => {
     if (!form.state.trim()) newErrors.state = "State is required";
     if (!form.city.trim()) newErrors.city = "City is required";
     if (!form.phone.trim()) newErrors.phone = "Phone No. is required";
+    else if(form.phone.length != 10)newErrors.phone = "Phone No. should be of 10 digits";
     if (!form.role.trim()) newErrors.role = "Role is required";
     if (!form.pincode.trim()) newErrors.pincode = "PinCode is required";
     if (!form.email.trim()) newErrors.email = "Email is required";
-    // else if(!form.email.includes("@")) newErrors.email = "Invalid email";
     if (form.businessTypeOptions.length == 0)
       newErrors.businessTypeOptions = "Select atleast 1 Business Type";
     if (form.productCategories.length == 0)
@@ -108,18 +137,29 @@ const OnBoardingForm = () => {
     e.preventDefault();
     const newErrors = validate();
     if (Object.keys(newErrors).length === 0) {
-      console.log("✅ Form submitted:", form);
-      console.log("✅ Ratings:", rating);
-      try {
-        const html = createHTML({ ...form, rating });
-        const info = await sendMail(html);
-        console.log(info)
-      } catch (error) {
-        console.error(error);
-      }
+      // console.log("✅ Ratings:", rating);
+      // if(!rating){
+        const formObj={...form,rating};
+      // }
+      console.log("✅ Form submitted:", formObj);
+      // try {
+      //   const html = createHTML({ ...form, rating });
+      //   const info = await sendMail(html);
+      //   console.log(info)
+      // } catch (error) {
+      //   console.error(error);
+      // }
       // Submit form to API or handle onboarding flow
     } else {
       setErrors(newErrors);
+      const firstErrorKey = Object.keys(newErrors)[0];
+      if (firstErrorKey && fieldRefs[firstErrorKey]?.current) {
+        fieldRefs[firstErrorKey].current.scrollIntoView({
+          behavior: "smooth",
+          block: "center",
+        });
+        fieldRefs[firstErrorKey].current.focus();
+      }
     }
   };
   return (
@@ -167,6 +207,7 @@ const OnBoardingForm = () => {
                   Enter your GST No.
                 </label>
                 <input
+                  ref={fieldRefs.gstno}
                   type="text"
                   name="gstno"
                   value={form.gstno}
@@ -185,6 +226,7 @@ const OnBoardingForm = () => {
               Bussiness Name
             </label>
             <input
+              ref={fieldRefs.bussinessName}
               type="text"
               name="bussinessName"
               value={form.bussinessName}
@@ -198,7 +240,7 @@ const OnBoardingForm = () => {
             )}
           </div>
 
-          <div>
+          <div ref={fieldRefs.businessTypeOptions}>
             <label className="block text-gray-700 mb-1 text-lg">
               Bussiness Type
             </label>
@@ -233,6 +275,7 @@ const OnBoardingForm = () => {
           <div>
             <label className="block text-gray-700 mb-1 text-lg">Address</label>
             <input
+              ref={fieldRefs.address}
               type="text"
               name="address"
               value={form.address}
@@ -247,6 +290,7 @@ const OnBoardingForm = () => {
           <div>
             <label className="block text-gray-700 mb-1 text-lg">City</label>
             <input
+              ref={fieldRefs.city}
               type="text"
               name="city"
               value={form.city}
@@ -261,6 +305,7 @@ const OnBoardingForm = () => {
           <div>
             <label className="block text-gray-700 mb-1 text-lg">State</label>
             <input
+              ref={fieldRefs.state}
               type="text"
               name="state"
               value={form.state}
@@ -275,6 +320,7 @@ const OnBoardingForm = () => {
           <div>
             <label className="block text-gray-700 mb-1 text-lg">PinCode</label>
             <input
+              ref={fieldRefs.pincode}
               type="text"
               name="pincode"
               value={form.pincode}
@@ -295,6 +341,7 @@ const OnBoardingForm = () => {
               Full Name
             </label>
             <input
+              ref={fieldRefs.fullName}
               type="text"
               name="fullName"
               value={form.fullName}
@@ -309,6 +356,7 @@ const OnBoardingForm = () => {
           <div>
             <label className="block text-gray-700 mb-1 text-lg">Email</label>
             <input
+              ref={fieldRefs.email}
               type="email"
               name="email"
               value={form.email}
@@ -325,6 +373,7 @@ const OnBoardingForm = () => {
               Designation/Role
             </label>
             <input
+              ref={fieldRefs.role}
               type="text"
               name="role"
               value={form.role}
@@ -341,6 +390,7 @@ const OnBoardingForm = () => {
               Phone No.
             </label>
             <input
+              ref={fieldRefs.phone}
               type="number"
               name="phone"
               value={form.phone}
@@ -352,7 +402,7 @@ const OnBoardingForm = () => {
             )}
           </div>
 
-          <div>
+          <div ref={fieldRefs.productCategories}>
             <label className="block text-gray-700 mt-10 text-lg">
               Product Categories you offer
             </label>

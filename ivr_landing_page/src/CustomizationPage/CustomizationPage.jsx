@@ -3,6 +3,7 @@ import React from "react";
 import BackGround from "@/assets/back.png";
 import LensType from "./components/LensType";
 import LensDescriptionPage from "./components/LensDescriptionPage";
+import PrescriptionDetails from "./components/PrescriptionDetails";
 
 const CustomizationPage = () => {
   return (
@@ -15,8 +16,9 @@ const CustomizationPage = () => {
           backgroundSize: "cover",
         }}
       >
-        <LensType />
+        {/* <LensType /> */}
         {/* <LensDescriptionPage /> */}
+        <PrescriptionDetails/>
       </div>
     </>
   );
