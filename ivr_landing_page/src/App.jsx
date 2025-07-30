@@ -12,6 +12,7 @@ function App() {
     <Routes>
       <Route path="/" element={<HomePage />} />
       <Route path="/onBoard" element={<OnBoardingForm />} />
+      <Route path="/customize" element={<CustomizationPage />} />
     </Routes>
   );
 }

@@ -121,7 +121,8 @@ const OnBoardingForm = () => {
     if (!form.state.trim()) newErrors.state = "State is required";
     if (!form.city.trim()) newErrors.city = "City is required";
     if (!form.phone.trim()) newErrors.phone = "Phone No. is required";
-    else if(form.phone.length != 10)newErrors.phone = "Phone No. should be of 10 digits";
+    else if (form.phone.length != 10)
+      newErrors.phone = "Phone No. should be of 10 digits";
     if (!form.role.trim()) newErrors.role = "Role is required";
     if (!form.pincode.trim()) newErrors.pincode = "PinCode is required";
     if (!form.email.trim()) newErrors.email = "Email is required";
@@ -139,7 +140,7 @@ const OnBoardingForm = () => {
     if (Object.keys(newErrors).length === 0) {
       // console.log("✅ Ratings:", rating);
       // if(!rating){
-        const formObj={...form,rating};
+      const formObj = { ...form, rating };
       // }
       console.log("✅ Form submitted:", formObj);
       // try {
@@ -178,6 +179,7 @@ const OnBoardingForm = () => {
             Bussiness Details
           </div>
 
+          {/* GST Entry */}
           <div>
             <label className="block text-gray-700 mb-1 text-lg">
               Do you have GST Registration
@@ -221,6 +223,7 @@ const OnBoardingForm = () => {
             )}
           </div>
 
+          {/* Bussiness Name */}
           <div>
             <label className="block text-gray-700 mb-1 text-lg">
               Bussiness Name
@@ -240,6 +243,7 @@ const OnBoardingForm = () => {
             )}
           </div>
 
+          {/* Bussiness Type Options */}
           <div ref={fieldRefs.businessTypeOptions}>
             <label className="block text-gray-700 mb-1 text-lg">
               Bussiness Type
@@ -272,6 +276,7 @@ const OnBoardingForm = () => {
             Store Location
           </div>
 
+          {/* Address */}
           <div>
             <label className="block text-gray-700 mb-1 text-lg">Address</label>
             <input
@@ -287,6 +292,7 @@ const OnBoardingForm = () => {
             )}
           </div>
 
+          {/* City */}
           <div>
             <label className="block text-gray-700 mb-1 text-lg">City</label>
             <input
@@ -302,6 +308,7 @@ const OnBoardingForm = () => {
             )}
           </div>
 
+          {/* State */}
           <div>
             <label className="block text-gray-700 mb-1 text-lg">State</label>
             <input
@@ -317,6 +324,7 @@ const OnBoardingForm = () => {
             )}
           </div>
 
+          {/* PinCode */}
           <div>
             <label className="block text-gray-700 mb-1 text-lg">PinCode</label>
             <input
@@ -336,6 +344,7 @@ const OnBoardingForm = () => {
             Contact Person
           </div>
 
+          {/* Full Name */}
           <div>
             <label className="block text-gray-700 mb-1 text-lg">
               Full Name
@@ -353,6 +362,7 @@ const OnBoardingForm = () => {
             )}
           </div>
 
+          {/* Email */}
           <div>
             <label className="block text-gray-700 mb-1 text-lg">Email</label>
             <input
@@ -368,6 +378,7 @@ const OnBoardingForm = () => {
             )}
           </div>
 
+          {/* Role */}
           <div>
             <label className="block text-gray-700 mb-1 text-lg">
               Designation/Role
@@ -385,6 +396,7 @@ const OnBoardingForm = () => {
             )}
           </div>
 
+          {/* Phone No. */}
           <div>
             <label className="block text-gray-700 mb-1 text-lg">
               Phone No.
@@ -402,6 +414,7 @@ const OnBoardingForm = () => {
             )}
           </div>
 
+          {/* Product Categories */}
           <div ref={fieldRefs.productCategories}>
             <label className="block text-gray-700 mt-10 text-lg">
               Product Categories you offer
@@ -508,6 +521,7 @@ const OnBoardingForm = () => {
             </div>
           </div>
 
+          {/* Why join Frame Finder */}
           <div>
             <label className="block text-gray-700 mt-10 text-lg">
               Why Join FrameFinder?
@@ -521,6 +535,7 @@ const OnBoardingForm = () => {
             </ul>
           </div>
 
+          {/* Ratings */}
           <div>
             <label className="block text-gray-700 mt-10 mb-5 text-lg">
               How Much Do you like this New Startup Ecommerce Platform?

@@ -4,6 +4,7 @@ import BackGround from "@/assets/back.png";
 import LensType from "./components/LensType";
 import LensDescriptionPage from "./components/LensDescriptionPage";
 import PrescriptionDetails from "./components/PrescriptionDetails";
+import ConfirmDetails from "./components/ConfirmDetails";
 
 const CustomizationPage = () => {
   return (
@@ -18,7 +19,8 @@ const CustomizationPage = () => {
       >
         {/* <LensType /> */}
         {/* <LensDescriptionPage /> */}
-        <PrescriptionDetails/>
+        {/* <PrescriptionDetails/> */}
+        <ConfirmDetails/>
       </div>
     </>
   );
