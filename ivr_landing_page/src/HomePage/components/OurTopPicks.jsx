@@ -6,6 +6,7 @@ import ourTopPicks2 from "@/assets/ourTopPicks2.jpg";
 import ourTopPicks3 from "@/assets/ourTopPicks3.png";
 import { Heart, Star } from "lucide-react";
 import CustomButton from "@/components/Button/CustomButton";
+import { Link } from "react-router";
 
 const OurTopPicks = () => {
   const prodArray = [
@@ -67,12 +68,14 @@ const OurTopPicks = () => {
         defaultValue="new_arrivals"
         className="w-full max-h-fit  mt-10 relative"
       >
-        <Button
-          variant="ghost"
-          className="absolute right-0 top-2 w-fit h-fit cursor-pointer text-2xl py-4 bg-transparent text-green-400 active:text-green-600 hover:text-green-500 hover:bg-zinc-200"
-        >
-          See More
-        </Button>
+        <Link to="/filter">
+          <Button
+            variant="ghost"
+            className="absolute right-0 top-2 w-fit h-fit cursor-pointer text-2xl py-4 bg-transparent text-green-400 active:text-green-600 hover:text-green-500 hover:bg-zinc-200"
+          >
+            See More
+          </Button>
+        </Link>
         <TabsList className="mx-auto border-2 border-theme-color1 bg-white rounded-full h-fit w-4/12 mb-16">
           <TabsTrigger
             className="p-4 rounded-full hover:cursor-pointer data-[state=active]:bg-theme-color1 data-[state=active]:text-white text-lg"
@@ -93,30 +96,32 @@ const OurTopPicks = () => {
         >
           {prodArray.map((prod) => (
             <div className="h-[524px] w-[457px] relative bg-green-200 hover:bg-green-300 cursor-pointer rounded-2xl overflow-hidden">
-              <div className="absolute text-white font-semibold text-lg bg-theme-color1 p-2 rounded-l-full px-4 top-3.5 right-0 w-fit flex gap-2">
-                <Star fill="white" className="text-white " />
-                <div>{prod.rating}</div>
-              </div>
-              <img
-                src={prod.image}
-                alt=""
-                className="w-full h-[365px] mb-2 object-cover"
-              />
-              <div className="flex items-center justify-between px-4 mb-4">
-                <div className="text-[40px]">{prod.text}</div>
-                <Heart className="w-9 h-9" />
-              </div>
-              <div className="flex items-center justify-between px-4 mb-4">
-                <div className="text-[40px]">₹{prod.price} /-</div>
-                <div className="flex gap-6">
-                  <div
-                    className={`w-8 h-8 rounded-full ring-2 ring-offset-2 ${prod.color1}`}
-                  />
-                  <div
-                    className={`w-8 h-8 rounded-full ring-2 ring-offset-2 ${prod.color2}`}
-                  />
+              <Link to="/filter">
+                <div className="absolute text-white font-semibold text-lg bg-theme-color1 p-2 rounded-l-full px-4 top-3.5 right-0 w-fit flex gap-2">
+                  <Star fill="white" className="text-white " />
+                  <div>{prod.rating}</div>
                 </div>
-              </div>
+                <img
+                  src={prod.image}
+                  alt=""
+                  className="w-full h-[365px] mb-2 object-cover"
+                />
+                <div className="flex items-center justify-between px-4 mb-4">
+                  <div className="text-[40px]">{prod.text}</div>
+                  <Heart className="w-9 h-9" />
+                </div>
+                <div className="flex items-center justify-between px-4 mb-4">
+                  <div className="text-[40px]">₹{prod.price} /-</div>
+                  <div className="flex gap-6">
+                    <div
+                      className={`w-8 h-8 rounded-full ring-2 ring-offset-2 ${prod.color1}`}
+                    />
+                    <div
+                      className={`w-8 h-8 rounded-full ring-2 ring-offset-2 ${prod.color2}`}
+                    />
+                  </div>
+                </div>
+              </Link>
             </div>
           ))}
         </TabsContent>
@@ -126,30 +131,32 @@ const OurTopPicks = () => {
         >
           {prodArray.map((prod) => (
             <div className="h-[524px] w-[457px] relative bg-green-200 hover:bg-green-300 rounded-2xl overflow-hidden cursor-pointer">
-              <div className="absolute text-white font-semibold text-lg bg-theme-color1 p-2 rounded-l-full px-4 top-3.5 right-0 w-fit flex gap-2">
-                <Star fill="white" className="text-white " />
-                <div>{prod.rating}</div>
-              </div>
-              <img
-                src={prod.image}
-                alt=""
-                className="w-full h-[365px] mb-2 object-cover"
-              />
-              <div className="flex items-center justify-between px-4 mb-4">
-                <div className="text-[40px]">{prod.text}</div>
-                <Heart className="w-9 h-9" />
-              </div>
-              <div className="flex items-center justify-between px-4 mb-4">
-                <div className="text-[40px]">₹{prod.price} /-</div>
-                <div className="flex gap-6">
-                  <div
-                    className={`w-8 h-8 rounded-full ring-2 ring-offset-2 ${prod.color1}`}
-                  />
-                  <div
-                    className={`w-8 h-8 rounded-full ring-2 ring-offset-2 ${prod.color2}`}
-                  />
+              <Link to="/filter">
+                <div className="absolute text-white font-semibold text-lg bg-theme-color1 p-2 rounded-l-full px-4 top-3.5 right-0 w-fit flex gap-2">
+                  <Star fill="white" className="text-white " />
+                  <div>{prod.rating}</div>
                 </div>
-              </div>
+                <img
+                  src={prod.image}
+                  alt=""
+                  className="w-full h-[365px] mb-2 object-cover"
+                />
+                <div className="flex items-center justify-between px-4 mb-4">
+                  <div className="text-[40px]">{prod.text}</div>
+                  <Heart className="w-9 h-9" />
+                </div>
+                <div className="flex items-center justify-between px-4 mb-4">
+                  <div className="text-[40px]">₹{prod.price} /-</div>
+                  <div className="flex gap-6">
+                    <div
+                      className={`w-8 h-8 rounded-full ring-2 ring-offset-2 ${prod.color1}`}
+                    />
+                    <div
+                      className={`w-8 h-8 rounded-full ring-2 ring-offset-2 ${prod.color2}`}
+                    />
+                  </div>
+                </div>
+              </Link>
             </div>
           ))}
         </TabsContent>
@@ -161,8 +168,7 @@ const OurTopPicks = () => {
         See More
       </Button>
       <div className="mx-auto w-fit mt-24">
-
-      <CustomButton/>
+        <CustomButton />
       </div>
     </div>
   );

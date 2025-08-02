@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import singleVision from "@/assets/singleVision.png";
 import biFocal from "@/assets/biFocal.png";
 import progressive from "@/assets/progressive.png";
@@ -6,10 +6,11 @@ import nonPrescription from "@/assets/nonPrescription.png";
 import { IoIosArrowBack } from "react-icons/io";
 import Arrow from "@/assets/ArrowDown.png"
 
-const LensType = () => {
+
+const LensType = ({setNav}) => {
   return (
-    <div className="w-screen h-screen flex justify-center items-center">
-      <div className="w-3/5 h-fit flex flex-col gap-3 mt-[5%]">
+    <div className="w-screen h-screen flex justify-center items-center overflow-hidden">
+      <div className="w-3/5 h-fit flex flex-col gap-3 mt-[5%] animate-slideUp">
         <div className="flex gap-2 items-center ">
           <div className="hover:bg-white/20 hover:shadow-lg border border-transparent hover:border-white/30 hover:backdrop-blur-xs rounded-full hover:cursor-pointer">
             <IoIosArrowBack size={30} />
@@ -24,7 +25,7 @@ const LensType = () => {
               For distance or near vision (Thin, anti-glare, blue-cut options)
             </div>
           </div>
-          <img src={Arrow} className="rotate-270"/>
+          <img src={Arrow} className="rotate-270 cursor-pointer py-3 px-2 hover:bg-green-200 active:bg-green-300 rounded-full" onClick={()=>setNav("Prescription")}/>
         </div>
         <div className="bg-white rounded-md p-4 flex items-center gap-10">
           <img src={biFocal} alt="" className="w-25 h-25 rounded-md" />
@@ -34,7 +35,7 @@ const LensType = () => {
               For distance or near vision (Thin, anti-glare, blue-cut options)
             </div>
           </div>
-          <img src={Arrow} className="rotate-270"/>
+          <img src={Arrow} className="rotate-270 cursor-pointer py-3 px-2 hover:bg-green-200 active:bg-green-300 rounded-full"/>
         </div>
         <div className="bg-white rounded-md p-4 flex items-center gap-10">
           <img src={progressive} alt="" className="w-25 h-25 rounded-md" />
@@ -44,7 +45,7 @@ const LensType = () => {
               For distance or near vision (Thin, anti-glare, blue-cut options)
             </div>
           </div>
-          <img src={Arrow} className="rotate-270 hover:"/>
+          <img src={Arrow} className="rotate-270 cursor-pointer py-3 px-2 hover:bg-green-200 active:bg-green-300 rounded-full"/>
         </div>
         <div className="bg-white rounded-md p-4 flex items-center gap-10">
           <img src={nonPrescription} alt="" className="w-25 h-25 rounded-md" />
@@ -54,7 +55,7 @@ const LensType = () => {
               For distance or near vision (Thin, anti-glare, blue-cut options)
             </div>
           </div>
-          <img src={Arrow} className="rotate-270"/>
+          <img src={Arrow} className="rotate-270 cursor-pointer py-3 px-2 hover:bg-green-200 active:bg-green-300 rounded-full"/>
         </div>
       </div>
     </div>

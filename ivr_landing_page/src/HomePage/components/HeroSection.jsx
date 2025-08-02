@@ -14,6 +14,7 @@ import MoreIcon from "@/assets/more_icon.png";
 import { CiUser } from "react-icons/ci";
 import { CgDetailsMore } from "react-icons/cg";
 import { CiSearch } from "react-icons/ci";
+import { Link } from "react-router";
 
 const HeroSection = () => {
   const [link, setLink] = useState("none");
@@ -279,12 +280,14 @@ const HeroSection = () => {
           </div>
 
           {/* TEXT-SECTION */}
-          <div className="h-fit text-center w-fit text-white">
-            <div className="text-5xl mb-8">ECO ACETATE</div>
-            <div className="text-2xl mb-12">From Nature, With Love</div>
-            <Button className=" w-3/4 text-lg rounded-full text-center bg-white text-black active:text-white hover:text-zinc-300">
-              Discover Now
-            </Button>
+          <div className="h-fit text-center w-fit text-white space-y-3">
+            <div className="text-5xl">ECO ACETATE</div>
+            <div className="text-2xl">From Nature, With Love</div>
+            <Link to="/filter">
+              <Button className=" w-4/6 h-12 py-4 text-lg rounded-full text-center  cursor-pointer text-white bg-green-500 hover:bg-green-600 active:bg-green-700">
+                Discover Now
+              </Button>
+            </Link>
           </div>
         </div>
         <Caraousal/>

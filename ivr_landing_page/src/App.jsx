@@ -13,6 +13,8 @@ function App() {
       <Route path="/" element={<HomePage />} />
       <Route path="/onBoard" element={<OnBoardingForm />} />
       <Route path="/customize" element={<CustomizationPage />} />
+      <Route path="/filter" element={<FilterPage />} />
+      <Route path="/product" element={<ProductPage />} />
     </Routes>
   );
 }

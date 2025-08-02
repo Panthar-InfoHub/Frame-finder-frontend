@@ -14,6 +14,27 @@
   font-display: swap;
 }
 
+@theme {
+  --animate-slideUp: slideup 0.7s ease-in-out;
+
+  @keyframes slideup {
+    0% {
+      transform: translateY(100%);
+      opacity: 0 ;
+    }
+    100% { 
+      transform: translateY(0%); 
+      opacity :1 
+    }
+  }
+}
+
+@utility scrollbar-hidden {
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
 @theme inline {
   --font-bona-novasc:'BonaNovaSC','sans-serif';
   --color-theme-color1:#00aa78;
@@ -62,6 +83,7 @@
   font-style: normal;
   font-display: swap;
 }
+
 
 
 
