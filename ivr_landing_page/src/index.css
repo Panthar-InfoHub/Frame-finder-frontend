@@ -5,10 +5,9 @@
 
 @custom-variant dark (&:is(.dark *));
 
-
 @font-face {
-  font-family: 'BonaNovaSC';
-  src: url('./assets/Bona_Nova_SC/Bona_Nova_SC-Regular.ttf') format('truetype');
+  font-family: "BonaNovaSC";
+  src: url("./assets/Bona_Nova_SC/Bona_Nova_SC-Regular.ttf") format("truetype");
   /* font-weight: 100 900; */
   font-style: normal;
   font-display: swap;
@@ -20,11 +19,50 @@
   @keyframes slideup {
     0% {
       transform: translateY(100%);
-      opacity: 0 ;
+      opacity: 0;
     }
-    100% { 
-      transform: translateY(0%); 
-      opacity :1 
+    100% {
+      transform: translateY(0%);
+      opacity: 1;
+    }
+  }
+}
+@theme {
+  --animate-slideRight: slideright 0.7s ease-in-out;
+
+  @keyframes slideright {
+    0% {
+      transform: translateX(-100%);
+      opacity: 0;
+    }
+    100% {
+      transform: translateX(0%);
+      opacity: 1;
+    }
+  }
+}
+@theme {
+  --animate-slideLeft: slideleft 0.7s ease-in-out;
+
+  @keyframes slideleft {
+    0% {
+      transform: translateX(100%);
+      opacity: 0;
+    }
+    100% {
+      transform: translateX(0%);
+      opacity: 1;
+    }
+  }
+}
+@theme {
+  --animate-fadeIn: fadein 2s ease-in-out;
+  @keyframes fadein {
+    0% {
+      opacity: 0;
+    }
+    50% {
+      opacity: 1;
     }
   }
 }
@@ -36,8 +74,8 @@
 }
 
 @theme inline {
-  --font-bona-novasc:'BonaNovaSC','sans-serif';
-  --color-theme-color1:#00aa78;
+  --font-bona-novasc: "BonaNovaSC", "sans-serif";
+  --color-theme-color1: #00aa78;
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
@@ -77,20 +115,17 @@
 
 /* comment the entire font face if the downloded comment do not work roperly */
 @font-face {
-  font-family: 'Lexend Deca';
-  src: url('./assets/Lexend_Deca/LexendDeca-VariableFont_wght.ttf') format('truetype');
+  font-family: "Lexend Deca";
+  src: url("./assets/Lexend_Deca/LexendDeca-VariableFont_wght.ttf")
+    format("truetype");
   font-weight: 100 900;
   font-style: normal;
   font-display: swap;
 }
 
-
-
-
 body {
-  font-family: 'Lexend Deca', 'sans-serif';
+  font-family: "Lexend Deca", "sans-serif";
 }
-
 
 :root {
   --radius: 0.625rem;
@@ -166,6 +201,6 @@ body {
     @apply border-border outline-ring/50;
   }
   body {
-    @apply bg-background text-foreground ;
+    @apply bg-background text-foreground;
   }
 }

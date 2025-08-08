@@ -6,6 +6,8 @@ import ProductPage from "./ProductPage/ProductPage";
 import CustomizationPage from "./CustomizationPage/CustomizationPage";
 import OnBoardingForm from "./components/OnBoardingForm/OnBoardingForm";
 import { Route, Routes } from "react-router";
+import CheckOutPage from "./CheckOutPage/CheckOutPage";
+// import ProductPage1 from "./ProductPage/ProductPage1";
 
 function App() {
   return (
@@ -15,6 +17,8 @@ function App() {
       <Route path="/customize" element={<CustomizationPage />} />
       <Route path="/filter" element={<FilterPage />} />
       <Route path="/product" element={<ProductPage />} />
+      <Route path="/checkout" element={<CheckOutPage />} />
+      {/* <Route path="/product1" element={<ProductPage1 />} /> */}
     </Routes>
   );
 }

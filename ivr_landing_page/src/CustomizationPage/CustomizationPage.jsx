@@ -7,9 +7,10 @@ import Prescription from "./components/Prescription";
 import ConfirmDetails from "./components/ConfirmDetails";
 import FillEyeDetails from "./components/FillEyeDetails";
 import LensPackage from "./components/LensPackage";
+import Cart from "./components/Cart";
 
 const CustomizationPage = () => {
-  const [nav,setNav]=useState("LensPackage")
+  const [nav,setNav]=useState("LensType")
   const [state, setState] = useState({
     sph_od: undefined,
     sph_os: undefined,
@@ -28,17 +29,13 @@ const CustomizationPage = () => {
           backgroundSize: "cover",
         }}
       >
-      {/* <div className="fixed top-0 left-0 w-full h-full -z-10 bg-blue-100">
-        <img src={BackGround} className="w-full h-full object-cover" alt="bg" />
-      </div> */}
-      {/* <div class="relative z-10"> */}
-      <Navbar />
+        <Navbar />
         {nav=="LensType" && <LensType setNav={setNav}/>}
         {nav=="Prescription" && <Prescription setNav={setNav}/>}
         {nav=="FillEyeDetails" && <FillEyeDetails setNav={setNav} state={state} setState={setState}/>}
         {nav=="ConfirmDetails" && <ConfirmDetails setNav={setNav} {...state}/>}
         {nav=="LensPackage" && <LensPackage setNav={setNav}/>}
-        {/* </div> */}
+        {nav=="Cart" && <Cart setNav={setNav}/>}
       </div>
     </>
   );

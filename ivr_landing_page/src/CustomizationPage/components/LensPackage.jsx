@@ -15,7 +15,7 @@ const LensPackage = ({ setNav }) => {
           Choose Lens Package
         </div>
         <div className="flex relative p-8 gap-8 border-4 rounded-3xl">
-          <ArrowRight className="w-11 h-11 rounded-full text-green-600 absolute top-[2%] right-[2%] p-2 cursor-pointer hover:bg-green-200 active:bg-green-300" />
+          <ArrowRight className="w-11 h-11 rounded-full text-green-600 absolute top-[2%] right-[2%] p-2 cursor-pointer hover:bg-green-200 active:bg-green-300" onClick={() => setNav("Cart")}/>
           <img
             src={basic_lens}
             className="w-100 aspect-[4/3] rounded-3xl"
@@ -46,12 +46,10 @@ const LensPackage = ({ setNav }) => {
               Computer Lenses ( Blu screen- Protect from Digital rays | UV
               Protection)
             </div>
-            {/* <div className="ml-10"> */}
             <ul className="list-disc text-xl ml-4 list-inside">
               <li>6 Months Warranty</li>
               <li>Double Side Anti-Glare</li>
             </ul>
-            {/* </div> */}
           </div>
           <div className="absolute bottom-0 right-0 text-4xl px-20 py-2  bg-linear-to-r from-white to-theme-color1 rounded-md">
             Frame + Lens: Get it for 1500/-

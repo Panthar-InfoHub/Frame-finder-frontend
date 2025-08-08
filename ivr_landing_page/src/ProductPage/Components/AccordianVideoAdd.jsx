@@ -24,7 +24,7 @@ const AccordianVideoAdd = () => {
   };
   return (
     <div>
-      <div>
+      <div className="w-[80%] mx-auto">
         <div className="p-3 bg-zinc-100 mb-3 rounded-md overflow-hidden">
           <div className="h-fit font-semibold flex justify-between items-center">
             <div>DETAILS</div>
