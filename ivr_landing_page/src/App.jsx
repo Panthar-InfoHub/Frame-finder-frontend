@@ -7,6 +7,7 @@ import CustomizationPage from "./CustomizationPage/CustomizationPage";
 import OnBoardingForm from "./components/OnBoardingForm/OnBoardingForm";
 import { Route, Routes } from "react-router";
 import CheckOutPage from "./CheckOutPage/CheckOutPage";
+import ProfilePage from "./ProfilePage/ProfilePage";
 // import ProductPage1 from "./ProductPage/ProductPage1";
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
       <Route path="/filter" element={<FilterPage />} />
       <Route path="/product" element={<ProductPage />} />
       <Route path="/checkout" element={<CheckOutPage />} />
+      <Route path="/profile" element={<ProfilePage />} />
       {/* <Route path="/product1" element={<ProductPage1 />} /> */}
     </Routes>
   );

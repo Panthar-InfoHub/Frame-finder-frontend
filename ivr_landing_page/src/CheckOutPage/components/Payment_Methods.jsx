@@ -1,13 +1,13 @@
 import React from "react";
 import { IoIosArrowBack } from "react-icons/io";
 
-const Payment_Methods = ({Check,setAdd,add}) => {
+const Payment_Methods = ({setNavLocal}) => {
   return (
-    <div className="flex-[2] animate-slideRight">
+    <div className="flex-[2] animate-slideRight pl-2">
       <div className="flex gap-2 items-center mb-6">
         <div
-          className="hover:bg-white/20 hover:shadow-lg border border-transparent hover:border-white/30 hover:backdrop-blur-xs rounded-full hover:cursor-pointer"
-          //   onClick={() => setNav("LensPackage")}
+          className="rounded-full p-1 cursor-pointer hover:bg-green-200 active:scale-[1.4] transition-all ease-in-out"
+            onClick={() => setNavLocal("Shipping_Add")}
         >
           <IoIosArrowBack size={25} />
         </div>

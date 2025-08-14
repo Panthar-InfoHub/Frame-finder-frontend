@@ -16,6 +16,14 @@ const CheckOutPage = () => {
     name: "",
     phone: "",
   });
+  const [error, setError] = useState({
+    pincode: "",
+    house: "",
+    road: "",
+    landmark: "",
+    name: "",
+    phone: "",
+  });
   const Check = (value) => {
     const n = value[value.length - 1];
     if (!n) return true;
@@ -23,28 +31,62 @@ const CheckOutPage = () => {
     else return false;
   };
 
-  const HandleNextLocalNav=()=>{
-    if(navLocal==="Shipping_Add")setNavLocal("Payment_Methods")
-    else if(navLocal==="Payment_Methods")setNavLocal("Summary")
-    // else if(navLocal==="Summary")setNavLocal("Shipping_Add")
-  }
+  const checkAdd = () => {
+    const newError={}
+    if (!add.pincode) {
+      newError.pincode="Enter the pincode";
+    }if (add.pincode && add.pincode.length !== 6) {
+      newError.pincode= "Enter a valid pincode" ;
+    }if (!add.house) {
+      newError.house="Enter the house Number or Building name ";
+    }if (!add.road) {
+      newError.road="Enter the Road name or Area or Colony " ;
+    }if (!add.name) {
+      newError.name="Enter your Name";
+    }if (!add.phone) {
+      newError.phone="Enter the phone number";
+    }if (add.phone && add.phone.length !== 10) {
+      newError.phone="Enter a valid phone number";
+    }
+    return newError
+  };
+
+  const HandleNextLocalNav = () => {
+    if (navLocal === "Shipping_Add") {
+      const newErrors = checkAdd();
+      if (Object.keys(newErrors).length !== 0) setError({...newErrors});
+      else{
+        if(Object.keys(error).length !== 0)setError({});
+        setNavLocal("Payment_Methods");
+      } 
+    } else if (navLocal === "Payment_Methods") setNavLocal("Summary");
+  };
+
   return (
     <div className="w-[92%] mx-auto overflow-hidden">
       <div className="mt-[2%] text-xl flex space-x-35">
-        <div className="">Shipping Address</div>
-        <div className="">Payment</div>
-        <div className="">Summary</div>
+        <div className={navLocal == "Shipping_Add" ? "text-green-400":""}>
+          Shipping Address
+        </div>
+        <div className={navLocal == "Payment_Methods" ? "text-green-400":""}>
+          Payment
+        </div>
+        <div className={navLocal == "Summary" ? "text-green-400":""}>Summary</div>
       </div>
       {navLocal !== "Summary" && (
         <div className="flex justify-between mt-16">
           {/* left- adress area */}
           {navLocal == "Shipping_Add" ? (
-            <Shipping_Add setAdd={setAdd} Check={Check} add={add} setNavLocal={setNavLocal} />
+            <Shipping_Add
+              setAdd={setAdd}
+              Check={Check}
+              add={add}
+              setNavLocal={setNavLocal}
+              error={error}
+            />
           ) : (
-            <Payment_Methods setAdd={setAdd} Check={Check} add={add} />
+            <Payment_Methods setNavLocal={setNavLocal} />
           )}
-          {/* <Shipping_Add setAdd={setAdd} Check={Check} add={add} /> */}
-          {/* <Payment_Methods setAdd={setAdd} Check={Check} add={add} /> */}
 
           {/* right- bill area */}
           <div className="flex-[1] animate-slideLeft">
@@ -64,11 +106,14 @@ const CheckOutPage = () => {
               </div>
             </div>
             <div className="mx-auto w-2/3">
-              <Link to="">
-                <Button className="text-xl rounded-full bg-theme-color1 w-full py-8 cursor-pointer hover:bg-green-800" onClick={HandleNextLocalNav}>
-                  {navLocal=="Shipping_Add"?"Pay Now":"Place Order"}
-                </Button>
-              </Link>
+              {/* <Link to=""> */}
+              <Button
+                className="text-xl rounded-full bg-theme-color1 w-full py-8 cursor-pointer hover:bg-green-800"
+                onClick={HandleNextLocalNav}
+              >
+                {navLocal == "Shipping_Add" ? "Pay Now" : "Place Order"}
+              </Button>
+              {/* </Link> */}
             </div>
           </div>
         </div>
