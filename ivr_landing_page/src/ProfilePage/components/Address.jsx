@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import dustbin from "@/assets/dustbin.png";
 import pencil from "@/assets/pencil.png";
 import { Button } from "@/components/ui/button";
@@ -6,10 +6,34 @@ import Input from "./Input";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Checkbox } from "@/components/ui/checkbox";
+import personalInfoStore from "@/stores/PersonalInfoStore";
 
 const Address = () => {
+  // !State default values:-
+  //   firstName: "",
+  //   lastName: "",
+  //   gender: "Male",
+  //   mobile: "",
+  //   email: "",
+  //   add1: "",
+  //   add2: "",
+  //   postal: "",
+  //   city: "",
+  //   country: "",
+  //   state: "",
+  //   default: false,
+
+  const { credentials, setCredentials } = personalInfoStore();
   const [open, setOpen] = useState(false);
-  const [state, setState] = useState({
+  const [state, setState] = useState({});
+  const [error, setError] = useState({});
+  useEffect(() => {
+    console.log(credentials);
+  }, [credentials]);
+  // useEffect(() => {
+  //   console.log(state);
+  // }, [state]);
+  const empty = {
     firstName: "",
     lastName: "",
     gender: "Male",
@@ -22,15 +46,35 @@ const Address = () => {
     country: "",
     state: "",
     default: false,
-  });
-  const [error, setError] = useState({});
+  };
+
+  const cred = {
+    firstName: "Ankit",
+    lastName: "Bose",
+    gender: "Male",
+    mobile: "9580989205",
+    email: "ankit@gmail.com",
+    add1: "877",
+    add2: "Near Phillips Play Center Sipri Bazar",
+    postal: "284003",
+    city: "Jhansi",
+    country: "INDIA",
+    state: "Uttar Pradesh",
+    default: true,
+  };
+
+  const handleSwitch = (bool, cred) => {
+    setOpen(bool);
+    if (bool) setState({ ...cred });
+  };
+
   const onChange = (key, value) => {
-    // console.log(key, value);
     setState({
       ...state,
       [key]: value,
     });
   };
+
   const handleCheck = () => {
     const newError = {};
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -52,6 +96,7 @@ const Address = () => {
     if (!state.state) newError.state = "Enter your State";
     return newError;
   };
+
   const handleForm = () => {
     const newError = handleCheck();
     if (Object.keys(newError).length !== 0) {
@@ -59,7 +104,7 @@ const Address = () => {
       return;
     }
     if (Object.keys(error).length !== 0) setError({});
-    console.log(state);
+    setCredentials(state);
   };
 
   if (open)
@@ -70,7 +115,7 @@ const Address = () => {
           <div className="text-4xl">Edit Address</div>
           <Button
             className="px-8 py-5 bg-theme-color1 hover:bg-green-700 cursor-pointer text-xl"
-            onClick={() => setOpen(false)}
+            onClick={() => handleSwitch(false)}
           >
             Back
           </Button>
@@ -102,7 +147,7 @@ const Address = () => {
         <div className="flex gap-6 mb-7">
           <div className="text-2xl">Gender:</div>
           <RadioGroup
-            defaultValue="Male"
+            defaultValue={state.gender}
             className="flex gap-4"
             onValueChange={(val) => onChange("gender", val)}
           >
@@ -218,6 +263,7 @@ const Address = () => {
         <div className="flex gap-2 mb-7">
           <Checkbox
             id="default"
+            checked={state.default}
             onCheckedChange={(check) => onChange("default", check)}
             className="data-[state=checked]:bg-green-400 data-[state=checked]:border-green-400 cursor-pointer"
           />
@@ -244,23 +290,34 @@ const Address = () => {
       <div className="w-3/5 animate-fadeIn">
         <div className="text-4xl mb-12">Address</div>
         <div
-          onClick={() => setOpen(true)}
+          onClick={() => handleSwitch(true, empty)}
           className="text-xl mb-10 text-theme-color1 px-4 py-8 border-t-3 border-b-3 border-theme-color1 border-dashed cursor-pointer hover:bg-zinc-100 transition-all ease-in-out"
         >
           + ADD NEW ADDRESS
         </div>
         <div className="">
           <div className="flex justify-between">
-            <div className="text-xl">Ankit Bose</div>
+            <div className="text-xl">
+              {cred.firstName} {cred.lastName}
+            </div>
             <div className="flex gap-4">
-              <img src={dustbin} alt="" className="h-5 w-4 bg-green-200" />
-              <img src={pencil} alt="" className="h-5 w-4 " />
+              <img
+                src={dustbin}
+                alt=""
+                className="h-11 w-10 p-3 cursor-pointer rounded-xl bg-red-200 active:bg-red-400"
+              />
+              <img
+                src={pencil}
+                alt=""
+                className="h-11 w-10 p-3 cursor-pointer rounded-xl bg-green-200 active:bg-green-400"
+                onClick={() => handleSwitch(true, cred)}
+              />
             </div>
           </div>
           <div className="text-lg text-zinc-400">
-            877, Near Phillips Play Center Sipri Bazar, Jhansi, Uttar Pradesh,
-            284003 INDIA
-            <div className="">Phone: 9580989205</div>
+            {cred.add1}, {cred.add2}, {cred.city}, {cred.state},{cred.postal}{" "}
+            {cred.country}
+            <div className="">Phone: {cred.mobile}</div>
           </div>
         </div>
       </div>

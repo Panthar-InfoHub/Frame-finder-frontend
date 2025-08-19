@@ -8,18 +8,17 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { ArrowLeft } from "lucide-react";
-// import Arrow from "@/assets/ArrowDown.png"
+import personalInfoStore from "@/stores/PersonalInfoStore";
 
-const FillEyeDetails = ({setNav,state,setState}) => {
-  // const [state, setState] = useState({
-  //   sph_od: undefined,
-  //   sph_os: undefined,
-  //   cyl_od: undefined,
-  //   cyl_os: undefined,
-  //   axis_od: undefined,
-  //   axis_os: undefined,
-  //   pd: undefined,
-  // });
+const FillEyeDetails = ({ setNav }) => {
+  const { prescription, setPrescription } = personalInfoStore();
+  const [state, setState] = useState(prescription);
+  useEffect(() => {
+    if (state.save) setPrescription(state);
+  }, [state.save]);
+  useEffect(() => {
+    console.log(prescription);
+  }, [prescription]);
   const [error, setError] = useState({
     sph_od: false,
     sph_os: false,
@@ -29,14 +28,6 @@ const FillEyeDetails = ({setNav,state,setState}) => {
     axis_os: false,
     pd: false,
   });
-  const [check, setCheck] = useState({
-    age: false,
-    save: false,
-  });
-  // useEffect(() => {
-  //   if (state.sph_od < -20) setState({ ...state, sph_od: -20 });
-  //   else if (state.sph_od > 20) setState({ ...state, sph_od: 20 });
-  // }, [state.sph_od]);
 
   const clamp = (value, min, max) => Math.max(min, Math.min(max, value));
 
@@ -49,17 +40,25 @@ const FillEyeDetails = ({setNav,state,setState}) => {
     if (value != clamped) setError({ ...error, [change]: true });
     else if (error[change]) setError({ ...error, [change]: false });
 
-    setState({ ...state, [change]: clamped });
+    const newState = { ...state, [change]: clamped };
+    if (state.save) newState.save = false;
+    setState(newState);
     return;
   };
 
-  const handleCheckbox = (checked, field) =>
-    setCheck({ ...check, [field]: checked });
+  const handleCheckbox = (checked, field) => {
+    const newState = { ...state, [field]: checked };
+    if (state.save) newState.save = false;
+    setState(newState);
+  };
 
   return (
     <div className="w-screen h-screen flex justify-center items-center overflow-hidden">
       <div className="w-[70%] h-[75%] bg-white shadow-lg rounded-md relative flex gap-20 p-16 mt-[5%] animate-slideUp">
-        <ArrowLeft className="w-11 h-11 rounded-full text-green-600 absolute top-[2%] left-[1%] p-2 cursor-pointer hover:bg-green-200 active:bg-green-300" onClick={()=>setNav("Prescription")}/>
+        <ArrowLeft
+          className="w-11 h-11 rounded-full text-green-600 absolute top-[2%] left-[1%] p-2 cursor-pointer hover:bg-green-200 active:bg-green-300"
+          onClick={() => setNav("Prescription")}
+        />
         <div className="w-[45%]">
           <img
             src={EyeGlass2}
@@ -491,6 +490,7 @@ const FillEyeDetails = ({setNav,state,setState}) => {
             >
               <Checkbox
                 id="age"
+                checked={state.age}
                 onCheckedChange={(checked) => handleCheckbox(checked, "age")}
                 className="cursor-pointer data-[state=checked]:bg-theme-color1 data-[state=checked]:border-theme-color1"
               />
@@ -502,6 +502,7 @@ const FillEyeDetails = ({setNav,state,setState}) => {
             >
               <Checkbox
                 id="save"
+                checked={state.save}
                 onCheckedChange={(checked) => handleCheckbox(checked, "save")}
                 className="cursor-pointer data-[state=checked]:bg-theme-color1 data-[state=checked]:border-theme-color1"
               />
@@ -509,7 +510,13 @@ const FillEyeDetails = ({setNav,state,setState}) => {
             </label>
           </div>
         </div>
-        <Button disabled={!check.save} className="absolute bottom-[3%] right-[3%] text-lg bg-green-500 hover:bg-green-600 active:bg-green-700 cursor-pointer px-8 py-6 rounded-full" onClick={()=>setNav("ConfirmDetails")}>Continue</Button>
+        <Button
+          disabled={!state.save}
+          className="absolute bottom-[3%] right-[3%] text-lg bg-green-500 hover:bg-green-600 active:bg-green-700 cursor-pointer px-8 py-6 rounded-full"
+          onClick={() => setNav("ConfirmDetails")}
+        >
+          Continue
+        </Button>
       </div>
     </div>
   );

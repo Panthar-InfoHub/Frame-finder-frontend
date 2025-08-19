@@ -8,18 +8,11 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { ArrowLeft } from "lucide-react";
-// import Arrow from "@/assets/ArrowDown.png"
+import personalInfoStore from "@/stores/PersonalInfoStore";
 
-const ConfirmDetails = ({
-  setNav,
-  sph_od,
-  cyl_od,
-  axis_od,
-  sph_os,
-  cyl_os,
-  axis_os,
-  pd,
-}) => {
+const ConfirmDetails = ({ setNav }) => {
+  const { prescription } = personalInfoStore();
+  const { sph_od, cyl_od, axis_od, sph_os, cyl_os, axis_os, pd } = prescription;
   return (
     <div className="w-screen h-screen flex justify-center items-center overflow-hidden">
       <div className="w-[70%] h-[75%] bg-white shadow-lg rounded-md relative flex gap-20 p-16 mt-[5%] animate-slideUp">
@@ -72,12 +65,18 @@ const ConfirmDetails = ({
             <div className="text-xl text-green-600 text-center">{cyl_os}</div>
             <div className="text-xl text-green-600 text-center">{axis_os}</div>
           </div>
-          <Button variant="ghost" className="text-lg border-2 border-green-300 active:border-green-600 cursor-pointer px-8 py-6 rounded-full">
+          <Button
+            variant="ghost"
+            className="text-lg border-2 border-green-300 active:border-green-600 cursor-pointer px-8 py-6 rounded-full"
+          >
             Edit
           </Button>
         </div>
 
-        <Button className="absolute bottom-[3%] right-[3%] text-lg bg-green-500 hover:bg-green-600 active:bg-green-700 cursor-pointer px-8 py-6 rounded-full" onClick={() => setNav("LensPackage")}>
+        <Button
+          className="absolute bottom-[3%] right-[3%] text-lg bg-green-500 hover:bg-green-600 active:bg-green-700 cursor-pointer px-8 py-6 rounded-full"
+          onClick={() => setNav("LensPackage")}
+        >
           Continue
         </Button>
       </div>

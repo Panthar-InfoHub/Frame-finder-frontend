@@ -1,8 +1,8 @@
 import React from "react";
 
-const Input = ({ head, type,onChange }) => {
+const Input = ({ head, type, onChange, value }) => {
   let typeVal;
-  if (type) typeVal = type ;
+  if (type) typeVal = type;
   else typeVal = "text";
 
   return (
@@ -11,7 +11,8 @@ const Input = ({ head, type,onChange }) => {
         {head}*
       </div>
       <input
-      onChange={onChange}
+        onChange={onChange}
+        value={value}
         type={typeVal}
         className="w-full h-full text-2xl py-4 px-3 rounded-lg focus:border-theme-color1 outline-none border-2 [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-inner-spin-button]:m-0"
       />

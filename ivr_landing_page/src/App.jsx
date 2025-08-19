@@ -8,12 +8,14 @@ import OnBoardingForm from "./components/OnBoardingForm/OnBoardingForm";
 import { Route, Routes } from "react-router";
 import CheckOutPage from "./CheckOutPage/CheckOutPage";
 import ProfilePage from "./ProfilePage/ProfilePage";
+import AuthPage from "./AuthPage/AuthPage";
 // import ProductPage1 from "./ProductPage/ProductPage1";
 
 function App() {
   return (
     <Routes>
       <Route path="/" element={<HomePage />} />
+      <Route path="/auth" element={<AuthPage />} />
       <Route path="/onBoard" element={<OnBoardingForm />} />
       <Route path="/customize" element={<CustomizationPage />} />
       <Route path="/filter" element={<FilterPage />} />

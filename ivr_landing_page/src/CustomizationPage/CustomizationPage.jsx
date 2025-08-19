@@ -1,5 +1,5 @@
 import Navbar from "@/components/Navbar/Navbar";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import BackGround from "@/assets/back.png";
 import LensType from "./components/LensType";
 import LensDescription from "./components/Prescription";
@@ -8,18 +8,10 @@ import ConfirmDetails from "./components/ConfirmDetails";
 import FillEyeDetails from "./components/FillEyeDetails";
 import LensPackage from "./components/LensPackage";
 import Cart from "./components/Cart";
+import personalInfoStore from "@/stores/PersonalInfoStore";
 
 const CustomizationPage = () => {
-  const [nav,setNav]=useState("LensType")
-  const [state, setState] = useState({
-    sph_od: undefined,
-    sph_os: undefined,
-    cyl_od: undefined,
-    cyl_os: undefined,
-    axis_od: undefined,
-    axis_os: undefined,
-    pd: undefined,
-  });
+  const [nav, setNav] = useState("FillEyeDetails");
   return (
     <>
       <div
@@ -30,12 +22,14 @@ const CustomizationPage = () => {
         }}
       >
         <Navbar />
-        {nav=="LensType" && <LensType setNav={setNav}/>}
-        {nav=="Prescription" && <Prescription setNav={setNav}/>}
-        {nav=="FillEyeDetails" && <FillEyeDetails setNav={setNav} state={state} setState={setState}/>}
-        {nav=="ConfirmDetails" && <ConfirmDetails setNav={setNav} {...state}/>}
-        {nav=="LensPackage" && <LensPackage setNav={setNav}/>}
-        {nav=="Cart" && <Cart setNav={setNav}/>}
+        {nav == "LensType" && <LensType setNav={setNav} />}
+        {nav == "Prescription" && <Prescription setNav={setNav} />}
+        {nav == "FillEyeDetails" && <FillEyeDetails setNav={setNav} />}
+        {nav == "ConfirmDetails" && (
+          <ConfirmDetails setNav={setNav}/>
+        )}
+        {nav == "LensPackage" && <LensPackage setNav={setNav} />}
+        {nav == "Cart" && <Cart setNav={setNav} />}
       </div>
     </>
   );
