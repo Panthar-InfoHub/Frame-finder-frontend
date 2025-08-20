@@ -4,7 +4,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { ScrollArea } from "@/components/ui/scroll-area";
 // import FilterComponent from "./components/FilterComponent";
 
-const FilterComponent = ({isCollapsed,filters,toggleSidebar,filterItems,funcFilters}) => {
+const FilterComponent = ({filters,toggleSidebar,filterItems,funcFilters}) => {
 //   const [isCollapsed, setIsCollapsed] = useState(false);
 //   const [filters, setFilters] = useState([]);
 
@@ -49,11 +49,12 @@ const FilterComponent = ({isCollapsed,filters,toggleSidebar,filterItems,funcFilt
 //   };
 
   return (
-    <div
-      className={`h-screen bg-[#FBFBFB] text-black rounded-4xl  transition-all duration-300 ${
-        isCollapsed ? "w-0" : "min-w-100"
-      } flex justify-center items-center overflow-hidden`}
-    >
+    // <div
+    //   className={`h-screen bg-[#FBFBFB] text-black rounded-4xl ease-in-out transition-all duration-300 ${
+    //     isCollapsed ? "w-0" : "min-w-100"
+    //   } flex justify-center items-center overflow-hidden`}
+    // >
+      <>
       <div className="w-3/5 flex flex-col">
         {/* Toggle Button */}
         <div className="flex items-center justify-between p-4">
@@ -82,19 +83,13 @@ const FilterComponent = ({isCollapsed,filters,toggleSidebar,filterItems,funcFilt
                   </div>
                 ))}
               </div>
-              {/* {!isCollapsed && <span>{item.label}</span>} */}
             </div>
           ))}
         </ScrollArea>
       </div>
-    </div>
+      </>
+    // </div> 
   );
 };
-
-// const FilterPage = () => {
-//   <div className="h-full">
-//     <FilterComponent />
-//   </div>;
-// };
 
 export default FilterComponent;

@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Search } from "lucide-react";
 import React, { useState } from "react";
-import Logo from "@/assets/logo.png";
+// import Logo from "@/assets/logo.png";
 import Caraousal from "./Caraousal/Caraousal";
 import CustomButton from "@/components/Button/CustomButton.jsx";
 import man from "@/assets/man.png";
@@ -15,6 +15,7 @@ import { CiUser } from "react-icons/ci";
 import { CgDetailsMore } from "react-icons/cg";
 import { CiSearch } from "react-icons/ci";
 import { Link } from "react-router";
+import Logo from "@/components/Logo/Logo"
 
 const HeroSection = () => {
   const [link, setLink] = useState("none");
@@ -26,8 +27,8 @@ const HeroSection = () => {
     <>
       <div className="w-full h-screen relative">
         <div className="absolute z-10 top-0 left-0 flex flex-col justify-between items-center w-full h-full py-12 px-14">
-          <div className="h-fit w-full flex justify-between items-center text-xl">
-            <img src={Logo} alt="Logo" className="w-[250px] h-[108px]" />
+          <div className="h-fit w-full flex justify-between items-center text-xl mt-4">
+            <Logo size={40} />
             {/* LINKS SECTION */}
             <div className="text-white flex gap-8 text-xl">
               <div

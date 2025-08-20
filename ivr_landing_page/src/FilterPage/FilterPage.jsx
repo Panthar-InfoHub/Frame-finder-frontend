@@ -1,5 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { Menu, Home, Folder, Users, Settings, ChevronRight, ChevronLeft } from "lucide-react"; // using lucide-react for icons
+import {
+  Menu,
+  Home,
+  Folder,
+  Users,
+  Settings,
+  ChevronRight,
+  ChevronLeft,
+} from "lucide-react"; // using lucide-react for icons
 import { Checkbox } from "@/components/ui/checkbox";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import FilterComponent from "./components/FilterComponent";
@@ -104,7 +112,7 @@ const FilterPage = () => {
   // ?to set filters
   const [filters, setFilters] = useState([]);
   // ?to set filtered products
-  const {filteredProducts, setFilteredProducts} = useState([]);
+  const { filteredProducts, setFilteredProducts } = useState([]);
   // ? contains products from API
   let products;
 
@@ -112,7 +120,7 @@ const FilterPage = () => {
     // !TODO: IMPLEMENT API FOR GETTING ALL PRODUCTS
     // ? set products declared on line 105 to the products returnedefrom API
     // ? set filteredProducts to products
-  },[])
+  }, []);
 
   useEffect(() => {
     // !TODO: SET filteredProducts ACCORDING TO FILTERS
@@ -157,13 +165,31 @@ const FilterPage = () => {
   };
   return (
     <div className="w-full">
-      <div className="w-full h-screen flex justify-center items-center mb-20" style={{ overflow: "hidden",backgroundPosition: "center",backgroundRepeat: "no-repeat",backgroundSize: "cover",backgroundImage: `url(${FilterPageTopImage})` }}>
-        <div className="text-white font-bold text-[150px] w-fit">EYEWARE GLASSES</div>
+      <div
+        className="w-full h-screen flex justify-center items-center mb-20"
+        style={{
+          overflow: "hidden",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
+          backgroundSize: "cover",
+          backgroundImage: `url(${FilterPageTopImage})`,
+        }}
+      >
+        <div className="text-white font-bold text-[150px] w-fit">
+          EYEWARE GLASSES
+        </div>
       </div>
       <div className="text-2xl font-bold w-4/5 mx-auto flex justify-between mb-12">
-        <div className="flex justify-between items-center gap-2 px-3 py-2 rounded-md hover:bg-zinc-100 cursor-pointer active:bg-zinc-200" onClick={toggleSidebar}>
+        <div
+          className="flex justify-between items-center gap-2 px-3 py-2 rounded-md hover:bg-zinc-100 cursor-pointer active:bg-zinc-200"
+          onClick={toggleSidebar}
+        >
           <div className="">FILTERS</div>
-          {isCollapsed?<ChevronRight className="w-7 h-7 text-green-400"/>:<ChevronLeft className="w-7 h-7 text-green-400"/>}
+          {isCollapsed ? (
+            <ChevronRight className="w-7 h-7 text-green-400" />
+          ) : (
+            <ChevronLeft className="w-7 h-7 text-green-400" />
+          )}
         </div>
         {/* SET FILTEREDPRODUCTS.LENGTH IN PLACE OF FILTERS.LENGTH */}
         <div className="">{filters.length} PRODUCTS</div>
@@ -171,17 +197,25 @@ const FilterPage = () => {
         <div className="">RESET</div>
       </div>
       <div className="flex gap-14">
-        <FilterComponent
-          isCollapsed={isCollapsed}
-          filters={filters}
-          filterItems={filterItems}
-          funcFilters={funcFilters}
-        />
+        <div
+          className={`h-screen bg-[#FBFBFB] text-black rounded-4xl ease-in-out transition-all duration-300 ${
+            isCollapsed ? "w-0" : "min-w-100"
+          } flex justify-center items-center overflow-hidden`}
+        >
+          <FilterComponent
+            // isCollapsed={isCollapsed}
+            filters={filters}
+            filterItems={filterItems}
+            funcFilters={funcFilters}
+          />
+        </div>
         <div className="max-w-4/5 mx-auto">
           {/* FILTER LIST */}
           <div className="flex flex-wrap gap-4 h-fit mb-10">
             {filters.map((val) => (
-              <div className="px-4 py-3 bg-[#E8EDF5] font-[500] rounded-md">{val}</div>
+              <div className="px-4 py-3 bg-[#E8EDF5] font-[500] rounded-md">
+                {val}
+              </div>
             ))}
             {/* <div className="px-4 py-3 bg-[#E8EDF5] font-[500] rounded-md">
               EyeGlasses
@@ -214,7 +248,7 @@ const FilterPage = () => {
           alt="Addvertisments"
         />
       </div>
-      <Footer/>
+      <Footer />
     </div>
   );
 };

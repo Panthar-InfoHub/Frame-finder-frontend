@@ -14,7 +14,10 @@ const FillEyeDetails = ({ setNav }) => {
   const { prescription, setPrescription } = personalInfoStore();
   const [state, setState] = useState(prescription);
   useEffect(() => {
-    if (state.save) setPrescription(state);
+    if (state.save){
+      setPrescription(state);
+      if(Object.keys(error).length !== 0) setError({});
+    } 
   }, [state.save]);
   useEffect(() => {
     console.log(prescription);
@@ -31,25 +34,22 @@ const FillEyeDetails = ({ setNav }) => {
 
   const clamp = (value, min, max) => Math.max(min, Math.min(max, value));
 
-  const change = ({ val, op, change, min, max }) => {
+  const change = ({ val, op, key, min, max }) => {
     let value, clamped;
-    if (!op) value = Math.round(val * 100) / 100;
-    else if (op == "+") value = Math.round((state[change] + val) * 100) / 100;
-    else value = Math.round((state[change] - val) * 100) / 100;
-    clamped = clamp(value, min, max);
-    if (value != clamped) setError({ ...error, [change]: true });
-    else if (error[change]) setError({ ...error, [change]: false });
+    if (key == "save" || key == "age") clamped = val;
+    else {
+      if (!op) value = Math.round(val * 100) / 100;
+      else if (op == "+") value = Math.round((state[key] + val) * 100) / 100;
+      else value = Math.round((state[key] - val) * 100) / 100;
+      clamped = clamp(value, min, max);
+      if (value != clamped) setError({ ...error, [key]: true });
+      else if (error[key]) setError({ ...error, [key]: false });
+    }
 
-    const newState = { ...state, [change]: clamped };
+    const newState = { ...state, [key]: clamped };
     if (state.save) newState.save = false;
     setState(newState);
     return;
-  };
-
-  const handleCheckbox = (checked, field) => {
-    const newState = { ...state, [field]: checked };
-    if (state.save) newState.save = false;
-    setState(newState);
   };
 
   return (
@@ -106,7 +106,7 @@ const FillEyeDetails = ({ setNav }) => {
                 onChange={(e) =>
                   change({
                     val: Number(e.target.value),
-                    change: "sph_od",
+                    key: "sph_od",
                     min: -20,
                     max: 20,
                   })
@@ -120,7 +120,7 @@ const FillEyeDetails = ({ setNav }) => {
                     change({
                       val: 0.01,
                       op: "+",
-                      change: "sph_od",
+                      key: "sph_od",
                       min: -20,
                       max: 20,
                     })
@@ -134,7 +134,7 @@ const FillEyeDetails = ({ setNav }) => {
                     change({
                       val: 0.01,
                       op: "-",
-                      change: "sph_od",
+                      key: "sph_od",
                       min: -20,
                       max: 20,
                     })
@@ -161,7 +161,7 @@ const FillEyeDetails = ({ setNav }) => {
                 onChange={(e) =>
                   change({
                     val: Number(e.target.value),
-                    change: "cyl_od",
+                    key: "cyl_od",
                     min: -6,
                     max: 6,
                   })
@@ -175,7 +175,7 @@ const FillEyeDetails = ({ setNav }) => {
                     change({
                       val: 0.01,
                       op: "+",
-                      change: "cyl_od",
+                      key: "cyl_od",
                       min: -6,
                       max: 6,
                     })
@@ -189,7 +189,7 @@ const FillEyeDetails = ({ setNav }) => {
                     change({
                       val: 0.01,
                       op: "-",
-                      change: "cyl_od",
+                      key: "cyl_od",
                       min: -6,
                       max: 6,
                     })
@@ -216,7 +216,7 @@ const FillEyeDetails = ({ setNav }) => {
                 onChange={(e) =>
                   change({
                     val: Number(e.target.value),
-                    change: "axis_od",
+                    key: "axis_od",
                     min: 0,
                     max: 180,
                   })
@@ -230,7 +230,7 @@ const FillEyeDetails = ({ setNav }) => {
                     change({
                       val: 1,
                       op: "+",
-                      change: "axis_od",
+                      key: "axis_od",
                       min: 0,
                       max: 180,
                     })
@@ -244,7 +244,7 @@ const FillEyeDetails = ({ setNav }) => {
                     change({
                       val: 1,
                       op: "-",
-                      change: "axis_od",
+                      key: "axis_od",
                       min: 0,
                       max: 180,
                     })
@@ -273,7 +273,7 @@ const FillEyeDetails = ({ setNav }) => {
                 onChange={(e) =>
                   change({
                     val: Number(e.target.value),
-                    change: "sph_os",
+                    key: "sph_os",
                     min: -20,
                     max: 20,
                   })
@@ -287,7 +287,7 @@ const FillEyeDetails = ({ setNav }) => {
                     change({
                       val: 0.01,
                       op: "+",
-                      change: "sph_os",
+                      key: "sph_os",
                       min: -20,
                       max: 20,
                     })
@@ -301,7 +301,7 @@ const FillEyeDetails = ({ setNav }) => {
                     change({
                       val: 0.01,
                       op: "-",
-                      change: "sph_os",
+                      key: "sph_os",
                       min: -20,
                       max: 20,
                     })
@@ -328,7 +328,7 @@ const FillEyeDetails = ({ setNav }) => {
                 onChange={(e) =>
                   change({
                     val: Number(e.target.value),
-                    change: "cyl_os",
+                    key: "cyl_os",
                     min: -6,
                     max: 6,
                   })
@@ -342,7 +342,7 @@ const FillEyeDetails = ({ setNav }) => {
                     change({
                       val: 0.01,
                       op: "+",
-                      change: "cyl_os",
+                      key: "cyl_os",
                       min: -6,
                       max: 6,
                     })
@@ -356,7 +356,7 @@ const FillEyeDetails = ({ setNav }) => {
                     change({
                       val: 0.01,
                       op: "-",
-                      change: "cyl_os",
+                      key: "cyl_os",
                       min: -6,
                       max: 6,
                     })
@@ -383,7 +383,7 @@ const FillEyeDetails = ({ setNav }) => {
                 onChange={(e) =>
                   change({
                     val: Number(e.target.value),
-                    change: "axis_os",
+                    key: "axis_os",
                     min: 0,
                     max: 180,
                   })
@@ -397,7 +397,7 @@ const FillEyeDetails = ({ setNav }) => {
                     change({
                       val: 1,
                       op: "+",
-                      change: "axis_os",
+                      key: "axis_os",
                       min: 0,
                       max: 180,
                     })
@@ -411,7 +411,7 @@ const FillEyeDetails = ({ setNav }) => {
                     change({
                       val: 1,
                       op: "-",
-                      change: "axis_os",
+                      key: "axis_os",
                       min: 0,
                       max: 180,
                     })
@@ -442,7 +442,7 @@ const FillEyeDetails = ({ setNav }) => {
                 onChange={(e) =>
                   change({
                     val: Number(e.target.value),
-                    change: "pd",
+                    key: "pd",
                     min: 0,
                     max: 80,
                   })
@@ -457,7 +457,7 @@ const FillEyeDetails = ({ setNav }) => {
                     change({
                       val: 1,
                       op: "+",
-                      change: "pd",
+                      key: "pd",
                       min: 0,
                       max: 80,
                     })
@@ -471,7 +471,7 @@ const FillEyeDetails = ({ setNav }) => {
                     change({
                       val: 1,
                       op: "-",
-                      change: "pd",
+                      key: "pd",
                       min: 0,
                       max: 80,
                     })
@@ -491,7 +491,9 @@ const FillEyeDetails = ({ setNav }) => {
               <Checkbox
                 id="age"
                 checked={state.age}
-                onCheckedChange={(checked) => handleCheckbox(checked, "age")}
+                onCheckedChange={(checked) =>
+                  change({ val: checked, key: "age" })
+                }
                 className="cursor-pointer data-[state=checked]:bg-theme-color1 data-[state=checked]:border-theme-color1"
               />
               Wearer is under 18 years old
@@ -503,7 +505,9 @@ const FillEyeDetails = ({ setNav }) => {
               <Checkbox
                 id="save"
                 checked={state.save}
-                onCheckedChange={(checked) => handleCheckbox(checked, "save")}
+                onCheckedChange={(checked) =>
+                  change({ val: checked, key: "save" })
+                }
                 className="cursor-pointer data-[state=checked]:bg-theme-color1 data-[state=checked]:border-theme-color1"
               />
               Save this prescription

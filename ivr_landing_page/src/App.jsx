@@ -1,4 +1,3 @@
-// import Navbar from "@/components/Navbar/navbar";
 import "./App.css";
 import HomePage from "./HomePage/HomePage";
 import FilterPage from "./FilterPage/FilterPage";
@@ -9,7 +8,6 @@ import { Route, Routes } from "react-router";
 import CheckOutPage from "./CheckOutPage/CheckOutPage";
 import ProfilePage from "./ProfilePage/ProfilePage";
 import AuthPage from "./AuthPage/AuthPage";
-// import ProductPage1 from "./ProductPage/ProductPage1";
 
 function App() {
   return (
@@ -22,16 +20,8 @@ function App() {
       <Route path="/product" element={<ProductPage />} />
       <Route path="/checkout" element={<CheckOutPage />} />
       <Route path="/profile" element={<ProfilePage />} />
-      {/* <Route path="/product1" element={<ProductPage1 />} /> */}
     </Routes>
   );
 }
 
 export default App;
-// <div className="min-h-screen w-full">
-// <HomePage/>
-{/* <FilterPage/> */}
-{/* <ProductPage/> */}
-{/* <CustomizationPage/> */}
-{/* <OnBoardingForm/> */}
-// </div>
