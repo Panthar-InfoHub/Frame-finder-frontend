@@ -235,7 +235,7 @@ const FilterPage = () => {
           <div className="flex gap-10 flex-wrap">
             {/*  */}
             {Array.from({ length: 15 }).map((_, index) => (
-              <ProductCard key={index} image={eyeGlass1} />
+              <ProductCard key={index} image={eyeGlass1} link={"/product"}/>
             ))}
           </div>
         </div>

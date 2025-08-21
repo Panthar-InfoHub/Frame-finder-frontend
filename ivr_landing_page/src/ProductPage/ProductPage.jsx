@@ -10,9 +10,11 @@ import AccordianVideoAdd from "@/ProductPage/Components/AccordianVideoAdd";
 import CardCaraousal from "./Components/CardCaraousal";
 import Advert1 from "@/components/Advertisments/Advert1";
 import Footer from "@/components/Footer/Footer";
+import { Link } from "react-router";
 const ProductPage = () => {
   const color1 = "black",
     color2 = "blue-400";
+
   return (
     <div className="w-full overflow-hidden">
       <div className="h-52">
@@ -107,12 +109,16 @@ const ProductPage = () => {
               </div>
 
               <div className="flex gap-3">
-                <Button className="font-[400] text-lg flex-1 text-white bg-[#00aa78] rounded-lg hover:bg-[#3a826b] active:bg-[#295c4c] cursor-pointer h-[100px]">
-                  Select Lenses and Purchase
-                </Button>
-                <Button className="font-[400] text-lg flex-1 text-white bg-[#00aa78] rounded-lg hover:bg-[#3a826b] active:bg-[#295c4c] cursor-pointer h-[100px]">
-                  Buy Only Frame
-                </Button>
+                <Link to="/customize">
+                  <Button className="font-[400] text-lg flex-1 text-white bg-[#00aa78] rounded-lg hover:bg-[#3a826b] active:bg-[#295c4c] cursor-pointer h-[100px]">
+                    Select Lenses and Purchase
+                  </Button>
+                </Link>
+                <Link to="/customize">
+                  <Button className="font-[400] text-lg flex-1 text-white bg-[#00aa78] rounded-lg hover:bg-[#3a826b] active:bg-[#295c4c] cursor-pointer h-[100px]">
+                    Buy Only Frame
+                  </Button>
+                </Link>
               </div>
             </div>
             <div className="mb-15 mt-45">

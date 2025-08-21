@@ -96,7 +96,7 @@ const OurTopPicks = () => {
         >
           {prodArray.map((prod) => (
             <div className="h-[524px] w-[457px] relative bg-green-200 hover:bg-green-300 cursor-pointer rounded-2xl overflow-hidden">
-              <Link to="/filter">
+              <Link to="/product">
                 <div className="absolute text-white font-semibold text-lg bg-theme-color1 p-2 rounded-l-full px-4 top-3.5 right-0 w-fit flex gap-2">
                   <Star fill="white" className="text-white " />
                   <div>{prod.rating}</div>
@@ -131,7 +131,7 @@ const OurTopPicks = () => {
         >
           {prodArray.map((prod) => (
             <div className="h-[524px] w-[457px] relative bg-green-200 hover:bg-green-300 rounded-2xl overflow-hidden cursor-pointer">
-              <Link to="/filter">
+              <Link to="/product">
                 <div className="absolute text-white font-semibold text-lg bg-theme-color1 p-2 rounded-l-full px-4 top-3.5 right-0 w-fit flex gap-2">
                   <Star fill="white" className="text-white " />
                   <div>{prod.rating}</div>

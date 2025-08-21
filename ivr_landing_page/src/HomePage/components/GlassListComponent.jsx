@@ -41,7 +41,7 @@ const GlassListComponent = ({ prodArray, link, border_radius, heading }) => {
       </div>
       <div className="h-fit flex w-full justify-between mt-24">
         {prodArray.map((prod) => (
-          <Link to="/filter">
+          <Link to="/product">
             <div
               className={`h-fit w-[250px] px-4 py-2 flex gap-4 flex-col justify-between items-center rounded-xl hover:shadow-[0_13px_27px_-5px_rgb(187_247_208),_0_8px_16px_-8px_rgb(134_239_172)]`}
             >
