@@ -11,7 +11,7 @@ import Cart from "./components/Cart";
 import personalInfoStore from "@/stores/PersonalInfoStore";
 
 const CustomizationPage = () => {
-  const [nav, setNav] = useState("LensType");
+  const [nav, setNav] = useState("FillEyeDetails");
   return (
     <>
       <div

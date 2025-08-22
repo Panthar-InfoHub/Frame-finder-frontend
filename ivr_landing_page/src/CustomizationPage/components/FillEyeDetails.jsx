@@ -12,18 +12,27 @@ import personalInfoStore from "@/stores/PersonalInfoStore";
 // import Arrow from "@/assets/ArrowDown.png"
 
 const FillEyeDetails = ({ setNav }) => {
-  const { prescription, setPrescription } = personalInfoStore();
-  const [state, setState] = useState(prescription);
+  const {
+    normalPrescription,
+    sphericalPriscrition,
+    setNormalPrescription,
+    setSphericalPrescription,
+  } = personalInfoStore();
+  const [state, setState] = useState(normalPrescription);
+  const [save,setSave] = useState(false);
   const presRef = useRef(null);
   useEffect(() => {
-    if (state.save) {
-      setPrescription(state);
+    if (save) {
+      setSphericalPrescription(state);
       if (Object.keys(error).length !== 0) setError({});
     }
-  }, [state.save]);
+  }, [save]);
   useEffect(() => {
-    console.log(prescription);
-  }, [prescription]);
+    console.log("sphericalPriscrition",sphericalPriscrition);
+  }, [sphericalPriscrition]);
+  useEffect(() => {
+    console.log("state", state);
+  }, [state]);
   const [error, setError] = useState({
     sph_od: false,
     sph_os: false,
@@ -31,10 +40,10 @@ const FillEyeDetails = ({ setNav }) => {
     cyl_os: false,
     axis_od: false,
     axis_os: false,
-    spherical_od:false,
-    spherical_os:false,
-    box_od:false,
-    box_os:false,
+    spherical_od: false,
+    spherical_os: false,
+    box_od: false,
+    box_os: false,
     pd: false,
   });
 
@@ -54,7 +63,7 @@ const FillEyeDetails = ({ setNav }) => {
     }
 
     const newState = { ...state, [key]: clamped };
-    if (state.save) newState.save = false;
+    if (save) setSave(false)
     setState(newState);
     return;
   };
@@ -466,255 +475,255 @@ const FillEyeDetails = ({ setNav }) => {
       </div>
     );
   };
-  const spherical=()=>{
-    return(
+  const spherical = () => {
+    return (
       <div className="grid grid-cols-3 w-4/5 h-4/5 mx-auto border-2 rounded-4xl overflow-hidden">
-            <div className="col-start-2 text-xl grid place-items-center border-1 border-l-2">
-              OD Right Eye
+        <div className="col-start-2 text-xl grid place-items-center border-1 border-l-2">
+          OD Right Eye
+        </div>
+        <div className="text-xl grid place-items-center border-1">
+          OS Left Eye
+        </div>
+        <div className="text-xl flex items-center pl-3 border-1 border-t-2">
+          Spherical
+        </div>
+        <div className="relative flex items-center justify-center gap-1 border-1">
+          {error.sph_od && (
+            <div className="block absolute bottom-0 left-[12%] text-red-500 text-xs w-[85%]">
+              value must lie between -20 and 20
             </div>
-            <div className="text-xl grid place-items-center border-1">
-              OS Left Eye
-            </div>
-            <div className="text-xl flex items-center pl-3 border-1 border-t-2">
-              Spherical
-            </div>
-            <div className="relative flex items-center justify-center gap-1 border-1">
-              {error.spherical_od && (
-                <div className="block absolute bottom-0 left-[12%] text-red-500 text-xs w-[85%]">
-                  value must lie between -20 and 20
-                </div>
-              )}
-              <input
-                type="number"
-                placeholder="Ex. 2.55"
-                min="-20"
-                max="20"
-                value={state.spherical_od}
-                onChange={(e) =>
-                  change({
-                    val: Number(e.target.value),
-                    key: "spherical_od",
-                    min: -20,
-                    max: 20,
-                  })
-                }
-                className="w-21 text-xl p-1 outline-none border rounded appearance-none  [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
-              />
+          )}
+          <input
+            type="number"
+            placeholder="Ex. 2.55"
+            min="-20"
+            max="20"
+            value={state.sph_od}
+            onChange={(e) =>
+              change({
+                val: Number(e.target.value),
+                key: "sph_od",
+                min: -20,
+                max: 20,
+              })
+            }
+            className="w-21 text-xl p-1 outline-none border rounded appearance-none  [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+          />
 
-              <div className="h-10 flex flex-col justify-between">
-                <div
-                  onClick={() =>
-                    change({
-                      val: 0.01,
-                      op: "+",
-                      key: "spherical_od",
-                      min: -20,
-                      max: 20,
-                    })
-                  }
-                  className="text-sm p-1 leading-none w-6 h-4 hover:bg-blue-100 rounded-t cursor-pointer"
-                >
-                  <img src={Arrow} className="rotate-180" />
-                </div>
-                <div
-                  onClick={() =>
-                    change({
-                      val: 0.01,
-                      op: "-",
-                      key: "spherical_od",
-                      min: -20,
-                      max: 20,
-                    })
-                  }
-                  className="text-sm  p-1 leading-none w-6 h-4 hover:bg-blue-100 rounded-b cursor-pointer"
-                >
-                  <img src={Arrow} className="" />
-                </div>
-              </div>
-            </div>
-            <div className="relative flex items-center justify-center gap-1 border-1">
-              {error.spherical_os && (
-                <div className="block absolute bottom-0 left-[12%] text-red-500 text-xs w-[85%]">
-                  value must lie between -6 and 6
-                </div>
-              )}
-
-              <input
-                type="number"
-                placeholder="Ex. 2.55"
-                min="-6"
-                max="6"
-                value={state.spherical_os}
-                onChange={(e) =>
-                  change({
-                    val: Number(e.target.value),
-                    key: "spherical_os",
-                    min: -6,
-                    max: 6,
-                  })
-                }
-                className="w-21 text-xl p-1 outline-none border rounded appearance-none  [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
-              />
-
-              <div className="h-10 flex flex-col justify-between">
-                <div
-                  onClick={() =>
-                    change({
-                      val: 0.01,
-                      op: "+",
-                      key: "spherical_os",
-                      min: -6,
-                      max: 6,
-                    })
-                  }
-                  className="text-sm p-1 leading-none w-6 h-4 hover:bg-blue-100 rounded-t cursor-pointer"
-                >
-                  <img src={Arrow} className="rotate-180" />
-                </div>
-                <div
-                  onClick={() =>
-                    change({
-                      val: 0.01,
-                      op: "-",
-                      key: "spherical_os",
-                      min: -6,
-                      max: 6,
-                    })
-                  }
-                  className="text-sm  p-1 leading-none w-6 h-4 hover:bg-blue-100 rounded-b cursor-pointer"
-                >
-                  <img src={Arrow} className="" />
-                </div>
-              </div>
-            </div>
-            <div className="text-xl flex items-center pl-3 border-1">
-              No. of Box
-            </div>
-            <div className="relative flex items-center justify-center gap-1 border-1">
-              {error.box_od && (
-                <div className="block absolute bottom-0 left-[12%] text-red-500 text-xs w-[85%]">
-                  value must lie between -20 and 20
-                </div>
-              )}
-              <input
-                type="number"
-                placeholder="Ex. 2.55"
-                min="-20"
-                max="20"
-                value={state.box_od}
-                onChange={(e) =>
-                  change({
-                    val: Number(e.target.value),
-                    key: "box_od",
-                    min: -20,
-                    max: 20,
-                  })
-                }
-                className="w-21 text-xl p-1 outline-none border rounded appearance-none  [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
-              />
-
-              <div className="h-10 flex flex-col justify-between">
-                <div
-                  onClick={() =>
-                    change({
-                      val: 0.01,
-                      op: "+",
-                      key: "box_od",
-                      min: -20,
-                      max: 20,
-                    })
-                  }
-                  className="text-sm p-1 leading-none w-6 h-4 hover:bg-blue-100 rounded-t cursor-pointer"
-                >
-                  <img src={Arrow} className="rotate-180" />
-                </div>
-                <div
-                  onClick={() =>
-                    change({
-                      val: 0.01,
-                      op: "-",
-                      key: "box_od",
-                      min: -20,
-                      max: 20,
-                    })
-                  }
-                  className="text-sm  p-1 leading-none w-6 h-4 hover:bg-blue-100 rounded-b cursor-pointer"
-                >
-                  <img src={Arrow} className="" />
-                </div>
-              </div>
-            </div>
-            <div className="relative flex items-center justify-center gap-1 border-1">
-              {error.box_os && (
-                <div className="block absolute bottom-0 left-[12%] text-red-500 text-xs w-[85%]">
-                  value must lie between -6 and 6
-                </div>
-              )}
-
-              <input
-                type="number"
-                placeholder="Ex. 2.55"
-                min="-6"
-                max="6"
-                value={state.box_os}
-                onChange={(e) =>
-                  change({
-                    val: Number(e.target.value),
-                    key: "box_os",
-                    min: -6,
-                    max: 6,
-                  })
-                }
-                className="w-21 text-xl p-1 outline-none border rounded appearance-none  [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
-              />
-
-              <div className="h-10 flex flex-col justify-between">
-                <div
-                  onClick={() =>
-                    change({
-                      val: 0.01,
-                      op: "+",
-                      key: "box_os",
-                      min: -6,
-                      max: 6,
-                    })
-                  }
-                  className="text-sm p-1 leading-none w-6 h-4 hover:bg-blue-100 rounded-t cursor-pointer"
-                >
-                  <img src={Arrow} className="rotate-180" />
-                </div>
-                <div
-                  onClick={() =>
-                    change({
-                      val: 0.01,
-                      op: "-",
-                      key: "box_os",
-                      min: -6,
-                      max: 6,
-                    })
-                  }
-                  className="text-sm  p-1 leading-none w-6 h-4 hover:bg-blue-100 rounded-b cursor-pointer"
-                >
-                  <img src={Arrow} className="" />
-                </div>
-              </div>
+          <div className="h-10 flex flex-col justify-between">
+            <div
+              onClick={() =>
+                change({
+                  val: 0.01,
+                  op: "+",
+                  key: "sph_od",
+                  min: -20,
+                  max: 20,
+                })
+              }
+              className="text-sm p-1 leading-none w-6 h-4 hover:bg-blue-100 rounded-t cursor-pointer"
+            >
+              <img src={Arrow} className="rotate-180" />
             </div>
             <div
-              className="col-span-3 text-xl cursor-pointer hover:bg-green-100 active:bg-green-200 flex justify-between items-center px-4 border-1"
-              onClick={uploadPrescription}
+              onClick={() =>
+                change({
+                  val: 0.01,
+                  op: "-",
+                  key: "sph_od",
+                  min: -20,
+                  max: 20,
+                })
+              }
+              className="text-sm  p-1 leading-none w-6 h-4 hover:bg-blue-100 rounded-b cursor-pointer"
             >
-              <div className="">Upload Prescription</div>
-              <div className="">
-                <img
-                  src={Arrow}
-                  className="rotate-270 cursor-pointer py-3 px-2 rounded-full"
-                />
-              </div>
-              <input ref={presRef} type="file" className="hidden" />
+              <img src={Arrow} className="" />
             </div>
           </div>
-    )
-  }
+        </div>
+        <div className="relative flex items-center justify-center gap-1 border-1">
+          {error.sph_os && (
+            <div className="block absolute bottom-0 left-[12%] text-red-500 text-xs w-[85%]">
+              value must lie between -6 and 6
+            </div>
+          )}
+
+          <input
+            type="number"
+            placeholder="Ex. 2.55"
+            min="-6"
+            max="6"
+            value={state.sph_os}
+            onChange={(e) =>
+              change({
+                val: Number(e.target.value),
+                key: "sph_os",
+                min: -6,
+                max: 6,
+              })
+            }
+            className="w-21 text-xl p-1 outline-none border rounded appearance-none  [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+          />
+
+          <div className="h-10 flex flex-col justify-between">
+            <div
+              onClick={() =>
+                change({
+                  val: 0.01,
+                  op: "+",
+                  key: "sph_os",
+                  min: -6,
+                  max: 6,
+                })
+              }
+              className="text-sm p-1 leading-none w-6 h-4 hover:bg-blue-100 rounded-t cursor-pointer"
+            >
+              <img src={Arrow} className="rotate-180" />
+            </div>
+            <div
+              onClick={() =>
+                change({
+                  val: 0.01,
+                  op: "-",
+                  key: "sph_os",
+                  min: -6,
+                  max: 6,
+                })
+              }
+              className="text-sm  p-1 leading-none w-6 h-4 hover:bg-blue-100 rounded-b cursor-pointer"
+            >
+              <img src={Arrow} className="" />
+            </div>
+          </div>
+        </div>
+        <div className="text-xl flex items-center pl-3 border-1">
+          No. of Box
+        </div>
+        <div className="relative flex items-center justify-center gap-1 border-1">
+          {error.box_od && (
+            <div className="block absolute bottom-0 left-[12%] text-red-500 text-xs w-[85%]">
+              value must lie between -20 and 20
+            </div>
+          )}
+          <input
+            type="number"
+            placeholder="Ex. 2.55"
+            min="-20"
+            max="20"
+            value={state.box_od}
+            onChange={(e) =>
+              change({
+                val: Number(e.target.value),
+                key: "box_od",
+                min: -20,
+                max: 20,
+              })
+            }
+            className="w-21 text-xl p-1 outline-none border rounded appearance-none  [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+          />
+
+          <div className="h-10 flex flex-col justify-between">
+            <div
+              onClick={() =>
+                change({
+                  val: 0.01,
+                  op: "+",
+                  key: "box_od",
+                  min: -20,
+                  max: 20,
+                })
+              }
+              className="text-sm p-1 leading-none w-6 h-4 hover:bg-blue-100 rounded-t cursor-pointer"
+            >
+              <img src={Arrow} className="rotate-180" />
+            </div>
+            <div
+              onClick={() =>
+                change({
+                  val: 0.01,
+                  op: "-",
+                  key: "box_od",
+                  min: -20,
+                  max: 20,
+                })
+              }
+              className="text-sm  p-1 leading-none w-6 h-4 hover:bg-blue-100 rounded-b cursor-pointer"
+            >
+              <img src={Arrow} className="" />
+            </div>
+          </div>
+        </div>
+        <div className="relative flex items-center justify-center gap-1 border-1">
+          {error.box_os && (
+            <div className="block absolute bottom-0 left-[12%] text-red-500 text-xs w-[85%]">
+              value must lie between -6 and 6
+            </div>
+          )}
+
+          <input
+            type="number"
+            placeholder="Ex. 2.55"
+            min="-6"
+            max="6"
+            value={state.box_os}
+            onChange={(e) =>
+              change({
+                val: Number(e.target.value),
+                key: "box_os",
+                min: -6,
+                max: 6,
+              })
+            }
+            className="w-21 text-xl p-1 outline-none border rounded appearance-none  [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+          />
+
+          <div className="h-10 flex flex-col justify-between">
+            <div
+              onClick={() =>
+                change({
+                  val: 0.01,
+                  op: "+",
+                  key: "box_os",
+                  min: -6,
+                  max: 6,
+                })
+              }
+              className="text-sm p-1 leading-none w-6 h-4 hover:bg-blue-100 rounded-t cursor-pointer"
+            >
+              <img src={Arrow} className="rotate-180" />
+            </div>
+            <div
+              onClick={() =>
+                change({
+                  val: 0.01,
+                  op: "-",
+                  key: "box_os",
+                  min: -6,
+                  max: 6,
+                })
+              }
+              className="text-sm  p-1 leading-none w-6 h-4 hover:bg-blue-100 rounded-b cursor-pointer"
+            >
+              <img src={Arrow} className="" />
+            </div>
+          </div>
+        </div>
+        <div
+          className="col-span-3 text-xl cursor-pointer hover:bg-green-100 active:bg-green-200 flex justify-between items-center px-4 border-1"
+          onClick={uploadPrescription}
+        >
+          <div className="">Upload Prescription</div>
+          <div className="">
+            <img
+              src={Arrow}
+              className="rotate-270 cursor-pointer py-3 px-2 rounded-full"
+            />
+          </div>
+          <input ref={presRef} type="file" className="hidden" />
+        </div>
+      </div>
+    );
+  };
 
   return (
     <div className="w-screen h-screen flex justify-center items-center overflow-hidden">
@@ -745,10 +754,11 @@ const FillEyeDetails = ({ setNav }) => {
             Fill in your Prescription Details
           </div>
           {/* Spherical */}
+          {false ? normal() : spherical()}
           {/* {spherical()} */}
 
           {/* Normal */}
-          {normal()}
+          {/* {normal()} */}
           <div className="space-y-2">
             <label
               htmlFor="age"
@@ -770,10 +780,8 @@ const FillEyeDetails = ({ setNav }) => {
             >
               <Checkbox
                 id="save"
-                checked={state.save}
-                onCheckedChange={(checked) =>
-                  change({ val: checked, key: "save" })
-                }
+                checked={save}
+                onCheckedChange={(checked) =>setSave(checked)}
                 className="cursor-pointer data-[state=checked]:bg-theme-color1 data-[state=checked]:border-theme-color1"
               />
               Save this prescription
