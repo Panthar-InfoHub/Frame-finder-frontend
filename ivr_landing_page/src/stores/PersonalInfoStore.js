@@ -16,26 +16,33 @@ const personalInfoStore = create((set, get) => ({
     default: false,
   },
   normalPrescription: {
-    sph_od: undefined,
-    sph_os: undefined,
-    cyl_od: undefined,
-    cyl_os: undefined,
-    axis_od: undefined,
-    axis_os: undefined,
-    pd: undefined,
+    sph_od: 0,
+    sph_os: 0,
+    cyl_od: 0,
+    cyl_os: 0,
+    axis_od: 0,
+    axis_os: 0,
+    pd: 0,
     age: false,
   },
-  sphericalPriscrition:{
-    sph_od:undefined,
-    sph_os:undefined,
-    box_od:undefined,
-    box_os:undefined,
+  sphericalPrescription: {
+    sph_od: 0,
+    sph_os: 0,
+    box_od: 0,
+    box_os: 0,
     age: false,
   },
   setCredentials: (cred) => set({ credentials: cred }),
-  setNormalPrescription: (pres) => set({ normalPrescription: pres }),
-  setSphericalPrescription: (pres) => set({ sphericalPriscrition: pres }),
+  setNormalPrescription: (pres) => {
+    console.log("from setNormalPrescription",pres)
+    set((state) => (state.normalPrescription = pres));
+  },
+  setSphericalPrescription: (pres) => {
+    console.log("from setSphericalPrescription", pres);
+    set((state) => (state.sphericalPrescription = pres));
+  },
 }));
+// set((state) => newState, true)
 
 export default personalInfoStore;
 // const [error, setError] = useState({});

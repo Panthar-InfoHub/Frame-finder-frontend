@@ -24,10 +24,14 @@ const CustomizationPage = () => {
         <Navbar />
         {nav == "LensType" && <LensType setNav={setNav} />}
         {nav == "Prescription" && <Prescription setNav={setNav} />}
-        {nav == "FillEyeDetails" && <FillEyeDetails setNav={setNav} />}
-        {nav == "ConfirmDetails" && (
-          <ConfirmDetails setNav={setNav}/>
+        {nav == "FillEyeDetails" && (
+          <FillEyeDetails
+            setNav={setNav}
+            currentState={"normalPrescription"}
+          />
+          // normalPrescription
         )}
+        {nav == "ConfirmDetails" && <ConfirmDetails setNav={setNav} />}
         {nav == "LensPackage" && <LensPackage setNav={setNav} />}
         {nav == "Cart" && <Cart setNav={setNav} />}
       </div>
