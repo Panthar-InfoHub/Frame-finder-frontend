@@ -15,7 +15,7 @@ const personalInfoStore = create((set, get) => ({
     state: "",
     default: false,
   },
-  normalPrescription: {
+  sunGlassPrescription: {
     sph_od: 0,
     sph_os: 0,
     cyl_od: 0,
@@ -32,14 +32,42 @@ const personalInfoStore = create((set, get) => ({
     box_os: 0,
     age: false,
   },
+  toricPrescription: {
+    sph_od: 0,
+    sph_os: 0,
+    power_od: 0,
+    power_os: 0,
+    axis_od: 0,
+    axis_os: 0,
+    box_od: 1,
+    box_os: 1,
+    age: false,
+  },
+  multiFocalPrescription: {
+    sph_od: 0,
+    sph_os: 0,
+    power_od: 0,
+    power_os: 0,
+    box_od: 1,
+    box_os: 1,
+    age: false,
+  },
   setCredentials: (cred) => set({ credentials: cred }),
-  setNormalPrescription: (pres) => {
-    console.log("from setNormalPrescription",pres)
-    set((state) => (state.normalPrescription = pres));
+  setSunGlassPrescription: (pres) => {
+    console.log("from setSunGlassPrescription",pres)
+    set((state) => (state.sunGlassPrescription = pres));
   },
   setSphericalPrescription: (pres) => {
     console.log("from setSphericalPrescription", pres);
     set((state) => (state.sphericalPrescription = pres));
+  },
+  setToricPrescription: (pres) => {
+    console.log("from setToricPrescription", pres);
+    set((state) => (state.toricPrescription = pres));
+  },
+  setMultiFocalPrescription: (pres) => {
+    console.log("from multiFocalPrescription", pres);
+    set((state) => (state.multiFocalPrescription = pres));
   },
 }));
 // set((state) => newState, true)

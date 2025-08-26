@@ -3,9 +3,9 @@ import React, { useEffect, useState } from "react";
 import Arrow from "@/assets/ArrowDown.png";
 import { Checkbox } from "@/components/ui/checkbox";
 
-const NormalPrescription = ({ save, setSave }) => {
-  const { normalPrescription, setNormalPrescription } = personalInfoStore();
-  const [state, setState] = useState(normalPrescription);
+const SunGlassPrescription = ({ save, setSave }) => {
+  const { sunGlassPrescription, setSunGlassPrescription } = personalInfoStore();
+  const [state, setState] = useState(sunGlassPrescription);
   const [error, setError] = useState({});
   useEffect(() => {
     const obj = {};
@@ -15,12 +15,12 @@ const NormalPrescription = ({ save, setSave }) => {
   useEffect(() => {
     if (save) {
       if (Object.keys(error).length !== 0) setError(false);
-      setNormalPrescription(state);
+      setSunGlassPrescription(state);
     }
   }, [save]);
-  useEffect(()=>{
-    console.log("normalPrescription",normalPrescription)
-  },[normalPrescription])
+  useEffect(() => {
+    console.log("sunGlassPrescription", sunGlassPrescription);
+  }, [sunGlassPrescription]);
 
   const clamp = (value, min, max) => Math.max(min, Math.min(max, value));
 
@@ -44,16 +44,20 @@ const NormalPrescription = ({ save, setSave }) => {
 
   return (
     <>
-      <div className="text-2xl text-center">
+      {/* <div className="text-2xl text-center">
         Fill in your Prescription Details
-      </div>
-      <div className="grid grid-cols-4 w-full h-4/5 border-2 rounded-4xl overflow-hidden">
-        <div className="col-start-2 text-2xl grid place-items-center border-1 border-l-2">
+      </div> */}
+      <div className="w-full max-w-[700px] min-w-[350px] mx-auto h-[70%]  grid grid-cols-4 border-2 rounded-4xl overflow-hidden">
+        <div className="col-start-2 max-[1300px]:text-sm text-2xl grid place-items-center border-1 border-l-2">
           SPH
         </div>
-        <div className="text-2xl grid place-items-center border-1">CYL</div>
-        <div className="text-2xl grid place-items-center border-1">Axis</div>
-        <div className="text-xl flex items-center pl-3 border-1 border-t-2">
+        <div className="text-2xl max-[1300px]:text-sm grid place-items-center border-1">
+          CYL
+        </div>
+        <div className="text-2xl max-[1300px]:text-sm grid place-items-center border-1">
+          Axis
+        </div>
+        <div className="text-xl max-[1300px]:text-sm flex items-center pl-3 border-1 border-t-2">
           OD <br /> Right Eye
         </div>
         <div className="relative flex items-center justify-center gap-1 border-1">
@@ -62,51 +66,53 @@ const NormalPrescription = ({ save, setSave }) => {
               value must lie between -20 and 20
             </div>
           )}
-          <input
-            type="number"
-            placeholder="Ex. 2.55"
-            min="-20"
-            max="20"
-            value={state.sph_od}
-            onChange={(e) =>
-              change({
-                val: Number(e.target.value),
-                key: "sph_od",
-                min: -20,
-                max: 20,
-              })
-            }
-            className="w-21 text-xl p-1 outline-none border rounded appearance-none  [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
-          />
+          <div className="flex items-center justify-center gap-1 w-4/5 h-[35%] min-h-[25px] max-h-[55px]">
+            <input
+              type="number"
+              placeholder="Ex. 2.55"
+              min="-20"
+              max="20"
+              value={state.sph_od}
+              onChange={(e) =>
+                change({
+                  val: Number(e.target.value),
+                  key: "sph_od",
+                  min: -20,
+                  max: 20,
+                })
+              }
+              className="flex-[4] max-[1300px]:flex-[3] h-full  max-[1300px]:text-[14px] text-xl p-1 outline-none border rounded appearance-none  [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+            />
 
-          <div className="h-10 flex flex-col justify-between">
-            <div
-              onClick={() =>
-                change({
-                  val: 0.01,
-                  op: "+",
-                  key: "sph_od",
-                  min: -20,
-                  max: 20,
-                })
-              }
-              className="text-sm p-1 leading-none w-6 h-4 hover:bg-blue-100 rounded-t cursor-pointer"
-            >
-              <img src={Arrow} className="rotate-180" />
-            </div>
-            <div
-              onClick={() =>
-                change({
-                  val: 0.01,
-                  op: "-",
-                  key: "sph_od",
-                  min: -20,
-                  max: 20,
-                })
-              }
-              className="text-sm  p-1 leading-none w-6 h-4 hover:bg-blue-100 rounded-b cursor-pointer"
-            >
-              <img src={Arrow} className="" />
+            <div className="h-full flex-[1] flex flex-col justify-between items-center">
+              <div
+                onClick={() =>
+                  change({
+                    val: 0.01,
+                    op: "+",
+                    key: "sph_od",
+                    min: -20,
+                    max: 20,
+                  })
+                }
+                className="w-full h-[45%] p-[15%] leading-none hover:bg-blue-100 rounded-t cursor-pointer"
+              >
+                <img src={Arrow} className="rotate-180 w-full h-full" />
+              </div>
+              <div
+                onClick={() =>
+                  change({
+                    val: 0.01,
+                    op: "-",
+                    key: "sph_od",
+                    min: -20,
+                    max: 20,
+                  })
+                }
+                className="w-full h-[45%] p-[15%] leading-none hover:bg-blue-100 rounded-b cursor-pointer"
+              >
+                <img src={Arrow} className="w-full h-full" />
+              </div>
             </div>
           </div>
         </div>
@@ -220,7 +226,7 @@ const NormalPrescription = ({ save, setSave }) => {
             </div>
           </div>
         </div>
-        <div className="text-xl flex items-center pl-3 border-1">
+        <div className="text-xl max-[1300px]:text-sm flex items-center pl-3 border-1">
           OS <br /> Left Eye
         </div>
         <div className="relative flex items-center justify-center gap-1 border-1">
@@ -387,7 +393,7 @@ const NormalPrescription = ({ save, setSave }) => {
             </div>
           </div>
         </div>
-        <div className="text-xl flex items-center pl-3 border-1">
+        <div className="text-xl max-[1300px]:text-sm flex items-center pl-3 border-1">
           PD <br /> Pupillary Distance
         </div>
         <div className="relative col-span-3 px-2 flex items-center justify-center gap-1 border-1">
@@ -448,7 +454,7 @@ const NormalPrescription = ({ save, setSave }) => {
           </div>
         </div>
       </div>
-      <div className="space-y-2">
+      <div className="w-full max-w-[700px] min-w-[350px] mx-auto mt-5 space-y-2">
         <label htmlFor="age" className="flex items-center gap-2 cursor-pointer">
           <Checkbox
             id="age"
@@ -475,4 +481,4 @@ const NormalPrescription = ({ save, setSave }) => {
   );
 };
 
-export default NormalPrescription;
+export default SunGlassPrescription;

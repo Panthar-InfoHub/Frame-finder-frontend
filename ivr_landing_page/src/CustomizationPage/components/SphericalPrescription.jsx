@@ -49,9 +49,9 @@ const SphericalPrescription = ({ save, setSave }) => {
 
   return (
     <>
-      <div className="text-2xl text-center">
-        Fill in your Prescription Details
-      </div>
+      {/* <div className="text-2xl text-center">
+        Fill in your Prescription Details for Spherical Lenses
+      </div> */}
       <div className="grid grid-cols-3 w-4/5 h-4/5 mx-auto border-2 rounded-4xl overflow-hidden">
         <div className="col-start-2 text-xl grid place-items-center border-1 border-l-2">
           OD Right Eye

@@ -27,9 +27,8 @@ const CustomizationPage = () => {
         {nav == "FillEyeDetails" && (
           <FillEyeDetails
             setNav={setNav}
-            currentState={"normalPrescription"}
+            currentState={"SunGlass"}
           />
-          // normalPrescription
         )}
         {nav == "ConfirmDetails" && <ConfirmDetails setNav={setNav} />}
         {nav == "LensPackage" && <LensPackage setNav={setNav} />}
