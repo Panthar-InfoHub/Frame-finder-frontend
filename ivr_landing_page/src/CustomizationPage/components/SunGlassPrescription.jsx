@@ -44,20 +44,17 @@ const SunGlassPrescription = ({ save, setSave }) => {
 
   return (
     <>
-      {/* <div className="text-2xl text-center">
-        Fill in your Prescription Details
-      </div> */}
-      <div className="w-full max-w-[700px] min-w-[350px] mx-auto h-[70%]  grid grid-cols-4 border-2 rounded-4xl overflow-hidden">
-        <div className="col-start-2 max-[1300px]:text-sm text-2xl grid place-items-center border-1 border-l-2">
+      <div className="max-w-[700px] min-w-[350px] mx-auto h-[70%] max-[1300px]:h-[350px] w-full grid grid-cols-4 border-2 rounded-4xl overflow-hidden">
+        <div className="col-start-2 min-[1300px]:text-xl grid place-items-center border-1 border-l-2">
           SPH
         </div>
-        <div className="text-2xl max-[1300px]:text-sm grid place-items-center border-1">
+        <div className="min-[1300px]:text-xl grid place-items-center border-1">
           CYL
         </div>
-        <div className="text-2xl max-[1300px]:text-sm grid place-items-center border-1">
+        <div className="min-[1300px]:text-xl grid place-items-center border-1">
           Axis
         </div>
-        <div className="text-xl max-[1300px]:text-sm flex items-center pl-3 border-1 border-t-2">
+        <div className="min-[1300px]:text-xl flex items-center px-3 border-1 border-t-2">
           OD <br /> Right Eye
         </div>
         <div className="relative flex items-center justify-center gap-1 border-1">
@@ -81,10 +78,10 @@ const SunGlassPrescription = ({ save, setSave }) => {
                   max: 20,
                 })
               }
-              className="flex-[4] max-[1300px]:flex-[3] h-full  max-[1300px]:text-[14px] text-xl p-1 outline-none border rounded appearance-none  [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+              className="flex-[4] h-full text-xl p-1 outline-none border-b-3 focus:border-b-green-300 appearance-none  [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
             />
 
-            <div className="h-full flex-[1] flex flex-col justify-between items-center">
+            <div className="h-full flex-[1] max-[1000px]:hidden flex flex-col justify-between items-center">
               <div
                 onClick={() =>
                   change({
@@ -95,7 +92,7 @@ const SunGlassPrescription = ({ save, setSave }) => {
                     max: 20,
                   })
                 }
-                className="w-full h-[45%] p-[15%] leading-none hover:bg-blue-100 rounded-t cursor-pointer"
+                className="w-full h-[45%] min-h-[9px] p-[15%] leading-none hover:bg-blue-100 rounded-t cursor-pointer"
               >
                 <img src={Arrow} className="rotate-180 w-full h-full" />
               </div>
@@ -109,7 +106,7 @@ const SunGlassPrescription = ({ save, setSave }) => {
                     max: 20,
                   })
                 }
-                className="w-full h-[45%] p-[15%] leading-none hover:bg-blue-100 rounded-b cursor-pointer"
+                className="w-full h-[45%] min-h-[9px] p-[15%] leading-none hover:bg-blue-100 rounded-b cursor-pointer"
               >
                 <img src={Arrow} className="w-full h-full" />
               </div>
@@ -123,7 +120,57 @@ const SunGlassPrescription = ({ save, setSave }) => {
             </div>
           )}
 
-          <input
+          <div className="flex items-center justify-center gap-1 w-4/5 h-[35%] min-h-[25px] max-h-[55px]">
+            <input
+              type="number"
+              placeholder="Ex. 2.55"
+              min="-6"
+              max="6"
+              value={state.cyl_od}
+              onChange={(e) =>
+                change({
+                  val: Number(e.target.value),
+                  key: "cyl_od",
+                  min: -6,
+                  max: 6,
+                })
+              }
+              className="flex-[4] h-full  text-xl p-1 outline-none border-b-3 focus:border-b-green-300  appearance-none  [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+            />
+
+            <div className="h-full flex-[1] max-[1000px]:hidden flex flex-col justify-between items-center">
+              <div
+                onClick={() =>
+                  change({
+                    val: 0.01,
+                    op: "+",
+                    key: "cyl_od",
+                    min: -6,
+                    max: 6,
+                  })
+                }
+                className="w-full h-[45%] min-h-[9px] p-[15%] leading-none hover:bg-blue-100 rounded-t cursor-pointer"
+              >
+                <img src={Arrow} className="rotate-180 w-full h-full" />
+              </div>
+              <div
+                onClick={() =>
+                  change({
+                    val: 0.01,
+                    op: "-",
+                    key: "cyl_od",
+                    min: -6,
+                    max: 6,
+                  })
+                }
+                className="w-full h-[45%] min-h-[9px] p-[15%] leading-none hover:bg-blue-100 rounded-b cursor-pointer"
+              >
+                <img src={Arrow} className="w-full h-full" />
+              </div>
+            </div>
+          </div>
+
+          {/* <input
             type="number"
             placeholder="Ex. 2.55"
             min="-6"
@@ -169,7 +216,7 @@ const SunGlassPrescription = ({ save, setSave }) => {
             >
               <img src={Arrow} className="" />
             </div>
-          </div>
+          </div> */}
         </div>
         <div className="relative flex items-center justify-center gap-1 border-1">
           {error.axis_od && (
@@ -178,7 +225,57 @@ const SunGlassPrescription = ({ save, setSave }) => {
             </div>
           )}
 
-          <input
+          <div className="flex items-center justify-center gap-1 w-4/5 h-[35%] min-h-[25px] max-h-[55px]">
+            <input
+              type="number"
+              placeholder="Ex. 50"
+              min="0"
+              max="180"
+              value={state.axis_od}
+              onChange={(e) =>
+                change({
+                  val: Number(e.target.value),
+                  key: "axis_od",
+                  min: 0,
+                  max: 180,
+                })
+              }
+              className="flex-[4] h-full  text-xl p-1 outline-none border-b-3 focus:border-b-green-300 appearance-none  [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+            />
+
+            <div className="h-full flex-[1] max-[1000px]:hidden flex flex-col justify-between items-center">
+              <div
+                onClick={() =>
+                  change({
+                    val: 1,
+                    op: "+",
+                    key: "axis_od",
+                    min: 0,
+                    max: 180,
+                  })
+                }
+                className="w-full h-[45%] min-h-[9px] p-[15%] leading-none hover:bg-blue-100 rounded-t cursor-pointer"
+              >
+                <img src={Arrow} className="rotate-180 w-full h-full" />
+              </div>
+              <div
+                onClick={() =>
+                  change({
+                    val: 1,
+                    op: "-",
+                    key: "axis_od",
+                    min: 0,
+                    max: 180,
+                  })
+                }
+                className="w-full h-[45%] min-h-[9px] p-[15%] leading-none hover:bg-blue-100 rounded-b cursor-pointer"
+              >
+                <img src={Arrow} className="w-full h-full" />
+              </div>
+            </div>
+          </div>
+
+          {/* <input
             type="number"
             placeholder="Ex. 50"
             min="0"
@@ -224,9 +321,9 @@ const SunGlassPrescription = ({ save, setSave }) => {
             >
               <img src={Arrow} className="" />
             </div>
-          </div>
+          </div> */}
         </div>
-        <div className="text-xl max-[1300px]:text-sm flex items-center pl-3 border-1">
+        <div className="min-[1300px]:text-xl flex items-center px-3 border-1">
           OS <br /> Left Eye
         </div>
         <div className="relative flex items-center justify-center gap-1 border-1">
@@ -235,7 +332,58 @@ const SunGlassPrescription = ({ save, setSave }) => {
               value must lie between -20 and 20
             </div>
           )}
-          <input
+
+          <div className="flex items-center justify-center gap-1 w-4/5 h-[35%] min-h-[25px] max-h-[55px]">
+            <input
+              type="number"
+              placeholder="Ex. 2.55"
+              min="-20"
+              max="20"
+              value={state.sph_os}
+              onChange={(e) =>
+                change({
+                  val: Number(e.target.value),
+                  key: "sph_os",
+                  min: -20,
+                  max: 20,
+                })
+              }
+              className="flex-[4] h-full  text-xl p-1 outline-none border-b-3 focus:border-b-green-300 appearance-none  [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+            />
+
+            <div className="h-full flex-[1] max-[1000px]:hidden flex flex-col justify-between items-center">
+              <div
+                onClick={() =>
+                  change({
+                    val: 0.01,
+                    op: "+",
+                    key: "sph_os",
+                    min: -20,
+                    max: 20,
+                  })
+                }
+                className="max-[1000px]:w-3 max-[1000px]:h-3 w-full h-[45%] min-h-[9px] p-[15%] leading-none hover:bg-blue-100 rounded-t cursor-pointer"
+              >
+                <img src={Arrow} className="rotate-180 w-full h-full" />
+              </div>
+              <div
+                onClick={() =>
+                  change({
+                    val: 0.01,
+                    op: "-",
+                    key: "sph_os",
+                    min: -20,
+                    max: 20,
+                  })
+                }
+                className="max-[1000px]:w-3 max-[1000px]:h-3 w-full h-[45%] min-h-[9px] p-[15%] leading-none hover:bg-blue-100 rounded-b cursor-pointer"
+              >
+                <img src={Arrow} className="w-full h-full" />
+              </div>
+            </div>
+          </div>
+
+          {/* <input
             type="number"
             placeholder="Ex. 2.55"
             min="-20"
@@ -281,7 +429,7 @@ const SunGlassPrescription = ({ save, setSave }) => {
             >
               <img src={Arrow} className="" />
             </div>
-          </div>
+          </div> */}
         </div>
         <div className="relative flex items-center justify-center gap-1 border-1">
           {error.cyl_os && (
@@ -290,7 +438,57 @@ const SunGlassPrescription = ({ save, setSave }) => {
             </div>
           )}
 
-          <input
+          <div className="flex items-center justify-center gap-1 w-4/5 h-[35%] min-h-[25px] max-h-[55px]">
+            <input
+              type="number"
+              placeholder="Ex. 2.55"
+              min="-6"
+              max="6"
+              value={state.cyl_os}
+              onChange={(e) =>
+                change({
+                  val: Number(e.target.value),
+                  key: "cyl_os",
+                  min: -6,
+                  max: 6,
+                })
+              }
+              className="flex-[4] h-full  text-xl p-1 outline-none border-b-3 focus:border-b-green-300 appearance-none  [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+            />
+
+            <div className="h-full flex-[1] max-[1000px]:hidden flex flex-col justify-between items-center">
+              <div
+                onClick={() =>
+                  change({
+                    val: 0.01,
+                    op: "+",
+                    key: "cyl_os",
+                    min: -6,
+                    max: 6,
+                  })
+                }
+                className="w-full h-[45%] min-h-[9px] p-[15%] leading-none hover:bg-blue-100 rounded-t cursor-pointer"
+              >
+                <img src={Arrow} className="rotate-180 w-full h-full" />
+              </div>
+              <div
+                onClick={() =>
+                  change({
+                    val: 0.01,
+                    op: "-",
+                    key: "cyl_os",
+                    min: -6,
+                    max: 6,
+                  })
+                }
+                className="w-full h-[45%] min-h-[9px] p-[15%] leading-none hover:bg-blue-100 rounded-b cursor-pointer"
+              >
+                <img src={Arrow} className="w-full h-full" />
+              </div>
+            </div>
+          </div>
+
+          {/* <input
             type="number"
             placeholder="Ex. 2.55"
             min="-6"
@@ -336,7 +534,7 @@ const SunGlassPrescription = ({ save, setSave }) => {
             >
               <img src={Arrow} className="" />
             </div>
-          </div>
+          </div> */}
         </div>
         <div className="relative flex items-center justify-center gap-1 border-1">
           {error.axis_os && (
@@ -345,7 +543,57 @@ const SunGlassPrescription = ({ save, setSave }) => {
             </div>
           )}
 
-          <input
+          <div className="flex items-center justify-center gap-1 w-4/5 h-[35%] min-h-[25px] max-h-[55px]">
+            <input
+              type="number"
+              placeholder="Ex. 50"
+              min="0"
+              max="180"
+              value={state.axis_os}
+              onChange={(e) =>
+                change({
+                  val: Number(e.target.value),
+                  key: "axis_os",
+                  min: 0,
+                  max: 180,
+                })
+              }
+              className="flex-[4] h-full  text-xl p-1 outline-none border-b-3 focus:border-b-green-300 appearance-none  [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+            />
+
+            <div className="h-full flex-[1] max-[1000px]:hidden flex flex-col justify-between items-center">
+              <div
+                onClick={() =>
+                  change({
+                    val: 1,
+                    op: "+",
+                    key: "axis_os",
+                    min: 0,
+                    max: 180,
+                  })
+                }
+                className="w-full h-[45%] min-h-[9px] p-[15%] leading-none hover:bg-blue-100 rounded-t cursor-pointer"
+              >
+                <img src={Arrow} className="rotate-180 w-full h-full" />
+              </div>
+              <div
+                onClick={() =>
+                  change({
+                    val: 1,
+                    op: "-",
+                    key: "axis_os",
+                    min: 0,
+                    max: 180,
+                  })
+                }
+                className="w-full h-[45%] min-h-[9px] p-[15%] leading-none hover:bg-blue-100 rounded-b cursor-pointer"
+              >
+                <img src={Arrow} className="w-full h-full" />
+              </div>
+            </div>
+          </div>
+
+          {/* <input
             type="number"
             placeholder="Ex. 50"
             min="0"
@@ -391,9 +639,9 @@ const SunGlassPrescription = ({ save, setSave }) => {
             >
               <img src={Arrow} className="" />
             </div>
-          </div>
+          </div> */}
         </div>
-        <div className="text-xl max-[1300px]:text-sm flex items-center pl-3 border-1">
+        <div className="min-[1300px]:text-xl flex items-center px-3 border-1">
           PD <br /> Pupillary Distance
         </div>
         <div className="relative col-span-3 px-2 flex items-center justify-center gap-1 border-1">
@@ -403,8 +651,57 @@ const SunGlassPrescription = ({ save, setSave }) => {
             </div>
           )}
 
-          {/* <div className="w-4/5"> */}
-          <input
+          <div className="flex items-center justify-center gap-1 w-4/5 h-[35%] min-h-[25px] max-h-[55px]">
+            <input
+              type="number"
+              placeholder="Enter your pupillary distance Ex. 50"
+              min="0"
+              max="80"
+              value={state.pd}
+              onChange={(e) =>
+                change({
+                  val: Number(e.target.value),
+                  key: "pd",
+                  min: 0,
+                  max: 80,
+                })
+              }
+              className="h-full w-[100%] text-xl p-1 outline-none border-b-3 focus:border-b-green-300 appearance-none  [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+            />
+
+            <div className="h-full flex flex-col max-[1000px]:hidden justify-between items-center">
+              <div
+                onClick={() =>
+                  change({
+                    val: 1,
+                    op: "+",
+                    key: "pd",
+                    min: 0,
+                    max: 80,
+                  })
+                }
+                className="w-4/5 h-[45%] min-h-[9px] p-[15%] leading-none hover:bg-blue-100 rounded-t cursor-pointer"
+              >
+                <img src={Arrow} className="rotate-180 w-full h-full" />
+              </div>
+              <div
+                onClick={() =>
+                  change({
+                    val: 1,
+                    op: "-",
+                    key: "pd",
+                    min: 0,
+                    max: 80,
+                  })
+                }
+                className="w-4/5 h-[45%] min-h-[9px] p-[15%] leading-none hover:bg-blue-100 rounded-b cursor-pointer"
+              >
+                <img src={Arrow} className="w-full h-full" />
+              </div>
+            </div>
+          </div>
+
+          {/* <input
             type="number"
             placeholder="Enter your pupillary distance Ex. 50"
             min="0"
@@ -421,7 +718,6 @@ const SunGlassPrescription = ({ save, setSave }) => {
             className="flex-1 text-xl p-1 outline-none border rounded appearance-none  [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
           />
 
-          {/* </div> */}
           <div className="h-10 flex flex-col justify-between">
             <div
               onClick={() =>
@@ -451,7 +747,7 @@ const SunGlassPrescription = ({ save, setSave }) => {
             >
               <img src={Arrow} className="" />
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
       <div className="w-full max-w-[700px] min-w-[350px] mx-auto mt-5 space-y-2">

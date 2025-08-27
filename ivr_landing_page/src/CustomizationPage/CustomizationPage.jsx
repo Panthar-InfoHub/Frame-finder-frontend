@@ -27,7 +27,7 @@ const CustomizationPage = () => {
         {nav == "FillEyeDetails" && (
           <FillEyeDetails
             setNav={setNav}
-            currentState={"SunGlass"}
+            currentState={"Spherical"}
           />
         )}
         {nav == "ConfirmDetails" && <ConfirmDetails setNav={setNav} />}
