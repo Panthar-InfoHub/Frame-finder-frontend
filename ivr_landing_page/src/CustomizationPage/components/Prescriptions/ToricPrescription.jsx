@@ -3,26 +3,32 @@ import React, { useEffect, useRef, useState } from "react";
 import Arrow from "@/assets/ArrowDown.png";
 import { Checkbox } from "@/components/ui/checkbox";
 
-const MultiFocalPrescription = ({ save, setSave }) => {
-  const { multiFocalPrescription, setMultiFocalPrescription } =
-    personalInfoStore();
-  const [state, setState] = useState(multiFocalPrescription);
+const ToricPrescription = ({ setSave }) => {
+  const { toricPrescription, setToricPrescription } = personalInfoStore();
+  const [state, setState] = useState(toricPrescription);
   const [error, setError] = useState({});
   const inputRef = useRef(null);
+  const first = useRef(true);
+
   useEffect(() => {
     const obj = {};
     for (let key in state) obj[key] = false;
     setError(obj);
   }, []);
   useEffect(() => {
-    if (save) {
-      if (Object.keys(error).length !== 0) setError(false);
-      setMultiFocalPrescription(state);
+    setSave(state.save)
+    if (first.current) {
+      first.current = false;
+      console.log("i stopped runnning")
+      return;
     }
-  }, [save]);
+    console.log("i ran")
+    if (state.save && Object.keys(error).length !== 0) setError(false);
+    setToricPrescription(state);
+  }, [state.save]);
   useEffect(() => {
-    console.log("multiFocalPrescription", multiFocalPrescription);
-  }, [multiFocalPrescription]);
+    console.log("toricPrescription", toricPrescription);
+  }, [toricPrescription]);
 
   const clamp = (value, min, max) => Math.max(min, Math.min(max, value));
 
@@ -39,7 +45,7 @@ const MultiFocalPrescription = ({ save, setSave }) => {
     }
 
     const newState = { ...state, [key]: clamped };
-    if (save) setSave(false);
+    if (state.save) newState.save = false;
     setState(newState);
     return;
   };
@@ -64,7 +70,7 @@ const MultiFocalPrescription = ({ save, setSave }) => {
               value must lie between -20 and 20
             </div>
           )}
-          <div className="flex items-center justify-center gap-1 w-4/5 h-[35%] min-h-[25px] max-h-[55px]">
+          <div className="flex items-center justify-center gap-1 w-4/5 h-[45%] min-h-[25px] max-h-[55px]">
             <input
               type="number"
               placeholder="Ex. 2.55"
@@ -79,10 +85,10 @@ const MultiFocalPrescription = ({ save, setSave }) => {
                   max: 20,
                 })
               }
-              className="flex-[4] h-full text-xl p-1 outline-none border-b-3 focus:border-b-green-300 appearance-none  [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+              className="flex-[7] max-[1500px]:flex-[4] h-full text-xl p-1 outline-none border-b-3 focus:border-b-green-300 appearance-none  [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
             />
 
-            <div className="h-10 flex flex-col justify-between">
+            <div className="h-full flex-[1] max-[1000px]:hidden flex flex-col justify-between items-center">
               <div
                 onClick={() =>
                   change({
@@ -95,7 +101,7 @@ const MultiFocalPrescription = ({ save, setSave }) => {
                 }
                 className="w-full h-[45%] min-h-[9px] p-[15%] leading-none hover:bg-blue-100 rounded-t cursor-pointer"
               >
-                <img src={Arrow} className="rotate-180" />
+                <img src={Arrow} className="rotate-180 h-full w-full" />
               </div>
               <div
                 onClick={() =>
@@ -109,7 +115,7 @@ const MultiFocalPrescription = ({ save, setSave }) => {
                 }
                 className="w-full h-[45%] min-h-[9px] p-[15%] leading-none hover:bg-blue-100 rounded-b cursor-pointer"
               >
-                <img src={Arrow} className="" />
+                <img src={Arrow} className="w-full h-full" />
               </div>
             </div>
           </div>
@@ -120,7 +126,7 @@ const MultiFocalPrescription = ({ save, setSave }) => {
               value must lie between -20 and 20
             </div>
           )}
-          <div className="flex items-center justify-center gap-1 w-4/5 h-[35%] min-h-[25px] max-h-[55px]">
+          <div className="flex items-center justify-center gap-1 w-4/5 h-[45%] min-h-[25px] max-h-[55px]">
             <input
               type="number"
               placeholder="Ex. 2.55"
@@ -135,10 +141,10 @@ const MultiFocalPrescription = ({ save, setSave }) => {
                   max: 20,
                 })
               }
-              className="flex-[4] h-full text-xl p-1 outline-none border-b-3 focus:border-b-green-300 appearance-none  [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+              className="flex-[7] max-[1500px]:flex-[4] h-full text-xl p-1 outline-none border-b-3 focus:border-b-green-300 appearance-none  [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
             />
 
-            <div className="h-10 flex flex-col justify-between">
+            <div className="h-full flex-[1] max-[1000px]:hidden flex flex-col justify-between items-center">
               <div
                 onClick={() =>
                   change({
@@ -151,7 +157,7 @@ const MultiFocalPrescription = ({ save, setSave }) => {
                 }
                 className="w-full h-[45%] min-h-[9px] p-[15%] leading-none hover:bg-blue-100 rounded-t cursor-pointer"
               >
-                <img src={Arrow} className="rotate-180" />
+                <img src={Arrow} className="rotate-180 h-full w-full" />
               </div>
               <div
                 onClick={() =>
@@ -165,7 +171,7 @@ const MultiFocalPrescription = ({ save, setSave }) => {
                 }
                 className="w-full h-[45%] min-h-[9px] p-[15%] leading-none hover:bg-blue-100 rounded-b cursor-pointer"
               >
-                <img src={Arrow} className="" />
+                <img src={Arrow} className="h-full w-full" />
               </div>
             </div>
           </div>
@@ -179,7 +185,7 @@ const MultiFocalPrescription = ({ save, setSave }) => {
               value must lie between -20 and 20
             </div>
           )}
-          <div className="flex items-center justify-center gap-1 w-4/5 h-[35%] min-h-[25px] max-h-[55px]">
+          <div className="flex items-center justify-center gap-1 w-4/5 h-[45%] min-h-[25px] max-h-[55px]">
             <input
               type="number"
               placeholder="Ex. 2.55"
@@ -194,10 +200,10 @@ const MultiFocalPrescription = ({ save, setSave }) => {
                   max: 20,
                 })
               }
-              className="flex-[4] h-full text-xl p-1 outline-none border-b-3 focus:border-b-green-300 appearance-none  [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+              className="flex-[7] max-[1500px]:flex-[4] h-full text-xl p-1 outline-none border-b-3 focus:border-b-green-300 appearance-none  [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
             />
 
-            <div className="h-10 flex flex-col justify-between">
+            <div className="h-full flex-[1] max-[1000px]:hidden flex flex-col justify-between items-center">
               <div
                 onClick={() =>
                   change({
@@ -210,7 +216,7 @@ const MultiFocalPrescription = ({ save, setSave }) => {
                 }
                 className="w-full h-[45%] min-h-[9px] p-[15%] leading-none hover:bg-blue-100 rounded-t cursor-pointer"
               >
-                <img src={Arrow} className="rotate-180" />
+                <img src={Arrow} className="rotate-180 h-full w-full" />
               </div>
               <div
                 onClick={() =>
@@ -224,7 +230,7 @@ const MultiFocalPrescription = ({ save, setSave }) => {
                 }
                 className="w-full h-[45%] min-h-[9px] p-[15%] leading-none hover:bg-blue-100 rounded-b cursor-pointer"
               >
-                <img src={Arrow} className="" />
+                <img src={Arrow} className="h-full w-full" />
               </div>
             </div>
           </div>
@@ -235,7 +241,7 @@ const MultiFocalPrescription = ({ save, setSave }) => {
               value must lie between -20 and 20
             </div>
           )}
-          <div className="flex items-center justify-center gap-1 w-4/5 h-[35%] min-h-[25px] max-h-[55px]">
+          <div className="flex items-center justify-center gap-1 w-4/5 h-[45%] min-h-[25px] max-h-[55px]">
             <input
               type="number"
               placeholder="Ex. 2.55"
@@ -250,10 +256,10 @@ const MultiFocalPrescription = ({ save, setSave }) => {
                   max: 20,
                 })
               }
-              className="flex-[4] h-full text-xl p-1 outline-none border-b-3 focus:border-b-green-300 appearance-none  [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+              className="flex-[7] max-[1500px]:flex-[4] h-full text-xl p-1 outline-none border-b-3 focus:border-b-green-300 appearance-none  [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
             />
 
-            <div className="h-10 flex flex-col justify-between">
+            <div className="h-full flex-[1] max-[1000px]:hidden flex flex-col justify-between items-center">
               <div
                 onClick={() =>
                   change({
@@ -266,7 +272,7 @@ const MultiFocalPrescription = ({ save, setSave }) => {
                 }
                 className="w-full h-[45%] min-h-[9px] p-[15%] leading-none hover:bg-blue-100 rounded-t cursor-pointer"
               >
-                <img src={Arrow} className="rotate-180" />
+                <img src={Arrow} className="rotate-180 h-full w-full" />
               </div>
               <div
                 onClick={() =>
@@ -280,7 +286,122 @@ const MultiFocalPrescription = ({ save, setSave }) => {
                 }
                 className="w-full h-[45%] min-h-[9px] p-[15%] leading-none hover:bg-blue-100 rounded-b cursor-pointer"
               >
-                <img src={Arrow} className="" />
+                <img src={Arrow} className="h-full w-full" />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="min-[1300px]:text-xl flex items-center px-3 border-1">
+          Axis
+        </div>
+        <div className="relative flex items-center justify-center gap-1 border-1">
+          {error.axis_od && (
+            <div className="block absolute bottom-[1px] left-1 text-red-500 text-[11px]">
+              value must lie between 0 and 180
+            </div>
+          )}
+          <div className="flex items-center justify-center gap-1 w-4/5 h-[45%] min-h-[25px] max-h-[55px]">
+            <input
+              type="number"
+              placeholder="Enter your pupillary distance Ex. 50"
+              min="0"
+              max="180"
+              value={state.axis_od}
+              onChange={(e) =>
+                change({
+                  val: Number(e.target.value),
+                  key: "axis_od",
+                  min: 0,
+                  max: 180,
+                })
+              }
+              className="flex-[7] max-[1500px]:flex-[4] h-full text-xl p-1 outline-none border-b-3 focus:border-b-green-300 appearance-none  [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+            />
+
+            <div className="h-full flex-[1] max-[1000px]:hidden flex flex-col justify-between items-center">
+              <div
+                onClick={() =>
+                  change({
+                    val: 5,
+                    op: "+",
+                    key: "axis_od",
+                    min: 0,
+                    max: 180,
+                  })
+                }
+                className="w-full h-[45%] min-h-[9px] p-[15%] leading-none hover:bg-blue-100 rounded-t cursor-pointer"
+              >
+                <img src={Arrow} className="rotate-180 h-full w-full" />
+              </div>
+              <div
+                onClick={() =>
+                  change({
+                    val: 5,
+                    op: "-",
+                    key: "axis_od",
+                    min: 0,
+                    max: 180,
+                  })
+                }
+                className="w-full h-[45%] min-h-[9px] p-[15%] leading-none hover:bg-blue-100 rounded-b cursor-pointer"
+              >
+                <img src={Arrow} className="h-full w-full" />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="relative flex items-center justify-center gap-1 border-1">
+          {error.axis_os && (
+            <div className="block absolute bottom-[1px] left-1 text-red-500 text-[11px]">
+              value must lie between 0 and 180
+            </div>
+          )}
+          <div className="flex items-center justify-center gap-1 w-4/5 h-[45%] min-h-[25px] max-h-[55px]">
+            <input
+              type="number"
+              placeholder="Enter your pupillary distance Ex. 50"
+              min="0"
+              max="180"
+              value={state.axis_os}
+              onChange={(e) =>
+                change({
+                  val: Number(e.target.value),
+                  key: "axis_os",
+                  min: 0,
+                  max: 180,
+                })
+              }
+              className="flex-[7] max-[1500px]:flex-[4] h-full text-xl p-1 outline-none border-b-3 focus:border-b-green-300 appearance-none  [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+            />
+
+            <div className="h-full flex-[1] max-[1000px]:hidden flex flex-col justify-between items-center">
+              <div
+                onClick={() =>
+                  change({
+                    val: 5,
+                    op: "+",
+                    key: "axis_os",
+                    min: 0,
+                    max: 180,
+                  })
+                }
+                className="w-full h-[45%] min-h-[9px] p-[15%] leading-none hover:bg-blue-100 rounded-t cursor-pointer"
+              >
+                <img src={Arrow} className="rotate-180 h-full w-full" />
+              </div>
+              <div
+                onClick={() =>
+                  change({
+                    val: 5,
+                    op: "-",
+                    key: "axis_os",
+                    min: 0,
+                    max: 180,
+                  })
+                }
+                className="w-full h-[45%] min-h-[9px] p-[15%] leading-none hover:bg-blue-100 rounded-b cursor-pointer"
+              >
+                <img src={Arrow} className="h-full w-full" />
               </div>
             </div>
           </div>
@@ -294,7 +415,7 @@ const MultiFocalPrescription = ({ save, setSave }) => {
               value must lie between 1 and 10
             </div>
           )}
-          <div className="flex items-center justify-center gap-1 w-4/5 h-[35%] min-h-[25px] max-h-[55px]">
+          <div className="flex items-center justify-center gap-1 w-4/5 h-[45%] min-h-[25px] max-h-[55px]">
             <input
               type="number"
               placeholder="Enter your pupillary distance Ex. 50"
@@ -309,11 +430,10 @@ const MultiFocalPrescription = ({ save, setSave }) => {
                   max: 10,
                 })
               }
-              className="flex-[4] h-full text-xl p-1 outline-none border-b-3 focus:border-b-green-300 appearance-none  [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+              className="flex-[7] max-[1500px]:flex-[4] h-full text-xl p-1 outline-none border-b-3 focus:border-b-green-300 appearance-none  [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
             />
 
-            {/* </div> */}
-            <div className="h-10 flex flex-col justify-between">
+            <div className="h-full flex-[1] max-[1000px]:hidden flex flex-col justify-between items-center">
               <div
                 onClick={() =>
                   change({
@@ -326,7 +446,7 @@ const MultiFocalPrescription = ({ save, setSave }) => {
                 }
                 className="w-full h-[45%] min-h-[9px] p-[15%] leading-none hover:bg-blue-100 rounded-t cursor-pointer"
               >
-                <img src={Arrow} className="rotate-180" />
+                <img src={Arrow} className="rotate-180 h-full w-full" />
               </div>
               <div
                 onClick={() =>
@@ -340,7 +460,7 @@ const MultiFocalPrescription = ({ save, setSave }) => {
                 }
                 className="w-full h-[45%] min-h-[9px] p-[15%] leading-none hover:bg-blue-100 rounded-b cursor-pointer"
               >
-                <img src={Arrow} className="" />
+                <img src={Arrow} className="h-full w-full" />
               </div>
             </div>
           </div>
@@ -351,7 +471,7 @@ const MultiFocalPrescription = ({ save, setSave }) => {
               value must lie between 1 and 10
             </div>
           )}
-          <div className="flex items-center justify-center gap-1 w-4/5 h-[35%] min-h-[25px] max-h-[55px]">
+          <div className="flex items-center justify-center gap-1 w-4/5 h-[45%] min-h-[25px] max-h-[55px]">
             <input
               type="number"
               placeholder="Enter your pupillary distance Ex. 50"
@@ -366,11 +486,10 @@ const MultiFocalPrescription = ({ save, setSave }) => {
                   max: 10,
                 })
               }
-              className="flex-[4] h-full text-xl p-1 outline-none border-b-3 focus:border-b-green-300 appearance-none  [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+              className="flex-[7] max-[1500px]:flex-[4] h-full text-xl p-1 outline-none border-b-3 focus:border-b-green-300 appearance-none  [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
             />
 
-            {/* </div> */}
-            <div className="h-10 flex flex-col justify-between">
+            <div className="h-full flex-[1] max-[1000px]:hidden flex flex-col justify-between items-center">
               <div
                 onClick={() =>
                   change({
@@ -383,7 +502,7 @@ const MultiFocalPrescription = ({ save, setSave }) => {
                 }
                 className="w-full h-[45%] min-h-[9px] p-[15%] leading-none hover:bg-blue-100 rounded-t cursor-pointer"
               >
-                <img src={Arrow} className="rotate-180" />
+                <img src={Arrow} className="rotate-180 h-full w-full" />
               </div>
               <div
                 onClick={() =>
@@ -397,13 +516,13 @@ const MultiFocalPrescription = ({ save, setSave }) => {
                 }
                 className="w-full h-[45%] min-h-[9px] p-[15%] leading-none hover:bg-blue-100 rounded-b cursor-pointer"
               >
-                <img src={Arrow} className="" />
+                <img src={Arrow} className="h-full w-full" />
               </div>
             </div>
           </div>
         </div>
         <div
-          className="relative px-6 cursor-pointer active:bg-green-100 flex col-span-3 justify-between items-center gap-1 border-1"
+          className="relative px-6 py-4 cursor-pointer active:bg-green-100 flex col-span-3 justify-between items-center gap-1 border-1"
           onClick={handleInput}
         >
           <div className="text-xl">Upload Prescription</div>
@@ -427,8 +546,8 @@ const MultiFocalPrescription = ({ save, setSave }) => {
         >
           <Checkbox
             id="save"
-            checked={save}
-            onCheckedChange={(checked) => setSave(checked)}
+            checked={state.save}
+            onCheckedChange={(checked) => setState({ ...state, save: checked })}
             className="cursor-pointer data-[state=checked]:bg-theme-color1 data-[state=checked]:border-theme-color1"
           />
           Save this prescription
@@ -437,8 +556,6 @@ const MultiFocalPrescription = ({ save, setSave }) => {
     </>
   );
 };
-export default MultiFocalPrescription;
-
 {
   /* <div className="text-xl flex items-center pl-3 border-1">
           PD <br /> Pupillary Distance
@@ -499,3 +616,5 @@ export default MultiFocalPrescription;
           </div>
         </div> */
 }
+
+export default ToricPrescription;

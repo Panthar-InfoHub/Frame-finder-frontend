@@ -9,6 +9,8 @@ const SphericalPrescription = ({ save, setSave }) => {
   const [state, setState] = useState(sphericalPrescription);
   const [error, setError] = useState({});
   const presRef = useRef(null);
+  const first = useRef(true);
+
 
   useEffect(() => {
     const obj = {};
@@ -16,11 +18,16 @@ const SphericalPrescription = ({ save, setSave }) => {
     setError(obj);
   }, []);
   useEffect(() => {
-    if (save) {
-      if (Object.keys(error).length !== 0) setError(false);
-      setSphericalPrescription(state);
+    setSave(state.save)
+    if (first.current) {
+      first.current = false;
+      console.log("i stopped runnning")
+      return;
     }
-  }, [save]);
+    console.log("i ran")
+    if (state.save && Object.keys(error).length !== 0) setError(false);
+    setSphericalPrescription(state);
+  }, [state.save]);
   useEffect(() => {
     console.log("sphericalPrescription", sphericalPrescription);
   }, [sphericalPrescription]);
@@ -42,7 +49,7 @@ const SphericalPrescription = ({ save, setSave }) => {
     }
 
     const newState = { ...state, [key]: clamped };
-    if (save) setSave(false);
+    if (state.save) newState.save = false;
     setState(newState);
     return;
   };
@@ -86,7 +93,7 @@ const SphericalPrescription = ({ save, setSave }) => {
               className="flex-[4] h-full text-xl p-1 outline-none border-b-3 focus:border-b-green-300 appearance-none  [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
             />
 
-            <div className="h-10 flex flex-col justify-between">
+            <div className="h-10 max-[1000px]:hidden flex flex-col justify-between">
               <div
                 onClick={() =>
                   change({
@@ -142,7 +149,7 @@ const SphericalPrescription = ({ save, setSave }) => {
               className="flex-[4] h-full text-xl p-1 outline-none border-b-3 focus:border-b-green-300 appearance-none  [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
             />
 
-            <div className="h-10 flex flex-col justify-between">
+            <div className="h-10 max-[1000px]:hidden flex flex-col justify-between">
               <div
                 onClick={() =>
                   change({
@@ -174,7 +181,7 @@ const SphericalPrescription = ({ save, setSave }) => {
             </div>
           </div>
         </div>
-        <div className="text-xl flex items-center pl-3 border-1">
+        <div className="min-[1300px]:text-xl flex items-center px-3 border-1">
           No. of Box
         </div>
         <div className="relative flex items-center justify-center gap-1 border-1">
@@ -201,7 +208,7 @@ const SphericalPrescription = ({ save, setSave }) => {
               className="flex-[4] h-full text-xl p-1 outline-none border-b-3 focus:border-b-green-300 appearance-none  [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
             />
 
-            <div className="h-10 flex flex-col justify-between">
+            <div className="h-10 max-[1000px]:hidden flex flex-col justify-between">
               <div
                 onClick={() =>
                   change({
@@ -239,52 +246,53 @@ const SphericalPrescription = ({ save, setSave }) => {
               value must lie between -6 and 6
             </div>
           )}
-
-          <input
-            type="number"
-            placeholder="Ex. 2.55"
-            min="-6"
-            max="6"
-            value={state.box_os}
-            onChange={(e) =>
-              change({
-                val: Number(e.target.value),
-                key: "box_os",
-                min: -6,
-                max: 6,
-              })
-            }
-            className="flex-[4] h-full text-xl p-1 outline-none border-b-3 focus:border-b-green-300 appearance-none  [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
-          />
-
-          <div className="h-10 flex flex-col justify-between">
-            <div
-              onClick={() =>
+          <div className="flex items-center justify-center gap-1 w-4/5 h-[35%] min-h-[25px] max-h-[55px]">
+            <input
+              type="number"
+              placeholder="Ex. 2.55"
+              min="-6"
+              max="6"
+              value={state.box_os}
+              onChange={(e) =>
                 change({
-                  val: 0.01,
-                  op: "+",
+                  val: Number(e.target.value),
                   key: "box_os",
                   min: -6,
                   max: 6,
                 })
               }
-              className="w-full h-[45%] min-h-[9px] p-[15%] leading-none hover:bg-blue-100 rounded-t cursor-pointer"
-            >
-              <img src={Arrow} className="rotate-180" />
-            </div>
-            <div
-              onClick={() =>
-                change({
-                  val: 0.01,
-                  op: "-",
-                  key: "box_os",
-                  min: -6,
-                  max: 6,
-                })
-              }
-              className="w-full h-[45%] min-h-[9px] p-[15%] leading-none hover:bg-blue-100 rounded-b cursor-pointer"
-            >
-              <img src={Arrow} className="" />
+              className="flex-[4] h-full text-xl p-1 outline-none border-b-3 focus:border-b-green-300 appearance-none  [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+            />
+
+            <div className="h-10 max-[1000px]:hidden flex flex-col justify-between">
+              <div
+                onClick={() =>
+                  change({
+                    val: 0.01,
+                    op: "+",
+                    key: "box_os",
+                    min: -6,
+                    max: 6,
+                  })
+                }
+                className="w-full h-[45%] min-h-[9px] p-[15%] leading-none hover:bg-blue-100 rounded-t cursor-pointer"
+              >
+                <img src={Arrow} className="rotate-180" />
+              </div>
+              <div
+                onClick={() =>
+                  change({
+                    val: 0.01,
+                    op: "-",
+                    key: "box_os",
+                    min: -6,
+                    max: 6,
+                  })
+                }
+                className="w-full h-[45%] min-h-[9px] p-[15%] leading-none hover:bg-blue-100 rounded-b cursor-pointer"
+              >
+                <img src={Arrow} className="" />
+              </div>
             </div>
           </div>
         </div>
@@ -302,7 +310,7 @@ const SphericalPrescription = ({ save, setSave }) => {
           <input ref={presRef} type="file" className="hidden" />
         </div>
       </div>
-      <div className="space-y-2">
+      <div className="w-full max-w-[700px] min-w-[350px] mx-auto mt-5 space-y-2">
         <label htmlFor="age" className="flex items-center gap-2 cursor-pointer">
           <Checkbox
             id="age"
@@ -318,8 +326,8 @@ const SphericalPrescription = ({ save, setSave }) => {
         >
           <Checkbox
             id="save"
-            checked={save}
-            onCheckedChange={(checked) => setSave(checked)}
+            checked={state.save}
+            onCheckedChange={(checked) => setState({ ...state, save: checked })}
             className="cursor-pointer data-[state=checked]:bg-theme-color1 data-[state=checked]:border-theme-color1"
           />
           Save this prescription

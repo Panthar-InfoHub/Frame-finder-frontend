@@ -9,22 +9,38 @@ import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { ArrowLeft } from "lucide-react";
 import personalInfoStore from "@/stores/PersonalInfoStore";
+import SunGlassConfirm from "./ConfirmPrescriptions/SunGlassConfirm";
+import MultiFocalConfirm from "./ConfirmPrescriptions/MultiFocalConfirm";
+import SphericalConfirm from "./ConfirmPrescriptions/SphericalConfirm";
+import ToricConfirm from "./ConfirmPrescriptions/ToricConfirm";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 const ConfirmDetails = ({ setNav }) => {
-  const { prescription } = personalInfoStore();
-  const { sph_od, cyl_od, axis_od, sph_os, cyl_os, axis_os, pd } = prescription;
+  const [head,setHead]=useState(false);
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth <= 1500 ) setHead(true);
+      else if(window.innerWidth > 1500) setHead(false);
+    };
+    window.addEventListener("resize", handleResize);
+    handleResize()
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
   return (
-    <div className="w-screen h-screen flex justify-center items-center overflow-hidden">
-      <div className="w-[70%] h-[75%] bg-white shadow-lg rounded-md relative flex gap-20 p-16 mt-[5%] animate-slideUp">
+    <div className="w-screen h-screen overflow-y-auto py-40">
+      <div className="w-[70%] min-[1500px]:h-[85%] h-fit bg-white shadow-lg rounded-md relative min-[1500px]:flex min-[1500px]:gap-20 p-16 mx-auto animate-slideUp">
         <ArrowLeft
           className="w-11 h-11 rounded-full text-green-600 absolute top-[2%] left-[1%] p-2 cursor-pointer hover:bg-green-200 active:bg-green-300"
           onClick={() => setNav("FillEyeDetails")}
         />
-        <div className="w-[45%]">
+        {head && (
+          <div className="text-2xl text-center mb-5">Confirm Your Prescription</div>
+        )}
+        <div className="flex-[4]">
           <img
             src={EyeGlass2}
             alt=""
-            className="w-full h-[85%] border-3 rounded-xl"
+            className="w-full min-[1500px]:h-[85%] h-100 border-3 rounded-xl object-cover"
           />
           <div className="flex justify-between mt-4">
             <div className="w-[40%]">
@@ -37,9 +53,13 @@ const ConfirmDetails = ({ setNav }) => {
             </div>
           </div>
         </div>
-        <div className="flex-1 space-y-6">
-          <div className="text-2xl text-center">Confirm Your Prescription</div>
-          <div className="text-lg">
+        <div className="flex-[5] space-y-6">
+          {!head && (
+            <div className="text-2xl text-center">
+              Confirm Your Prescription
+            </div>
+          )}
+          <div className={`text-lg ${head && "mt-8"}`}>
             Make sure your prescription matches the information below. Pay close
             attention to the plus (+) or minus (-).
           </div>
@@ -47,30 +67,42 @@ const ConfirmDetails = ({ setNav }) => {
           <div className="text-lg">
             Prescription: <span className="text-green-600">Single Vision</span>
           </div>
-          <div className="text-2xl">
-            PD-Pupillary Distance: <span className="text-green-600">{pd}</span>
-          </div>
-          <div className="grid grid-cols-4 w-3/4 h-fit gap-1">
-            <div className="col-start-2 text-xl grid place-items-center">
-              SPH
+          <Tabs defaultValue="SunGlass" className="w-full">
+            <div className="flex justify-between items-baseline gap-2">
+              <TabsList className="bg-green-200 mb-4">
+                <TabsTrigger value="SunGlass" className="cursor-pointer">
+                  SunGlass
+                </TabsTrigger>
+                <TabsTrigger value="MultiFocal" className="cursor-pointer">
+                  MultiFocal
+                </TabsTrigger>
+                <TabsTrigger value="Spherical" className="cursor-pointer">
+                  Spherical
+                </TabsTrigger>
+                <TabsTrigger value="Toric" className="cursor-pointer">
+                  Toric
+                </TabsTrigger>
+              </TabsList>
+              <Button
+                variant="ghost"
+                className="text-lg border-2 border-green-300 active:border-green-600 cursor-pointer px-8 py-6 rounded-full"
+              >
+                Edit
+              </Button>
             </div>
-            <div className="text-xl grid place-items-center ">CYL</div>
-            <div className="text-xl grid place-items-center ">Axis</div>
-            <div className="text-xl flex items-center pl-3">Right OD</div>
-            <div className="text-xl text-green-600 text-center">{sph_od}</div>
-            <div className="text-xl text-green-600 text-center">{cyl_od}</div>
-            <div className="text-xl text-green-600 text-center">{axis_od}</div>
-            <div className="text-xl flex items-center pl-3 ">Left OS</div>
-            <div className="text-xl text-green-600 text-center">{sph_os}</div>
-            <div className="text-xl text-green-600 text-center">{cyl_os}</div>
-            <div className="text-xl text-green-600 text-center">{axis_os}</div>
-          </div>
-          <Button
-            variant="ghost"
-            className="text-lg border-2 border-green-300 active:border-green-600 cursor-pointer px-8 py-6 rounded-full"
-          >
-            Edit
-          </Button>
+            <TabsContent value="SunGlass">
+              <SunGlassConfirm />
+            </TabsContent>
+            <TabsContent value="MultiFocal">
+              <MultiFocalConfirm />
+            </TabsContent>
+            <TabsContent value="Spherical">
+              <SphericalConfirm />
+            </TabsContent>
+            <TabsContent value="Toric">
+              <ToricConfirm />
+            </TabsContent>
+          </Tabs>
         </div>
 
         <Button

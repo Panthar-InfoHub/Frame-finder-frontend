@@ -2,12 +2,11 @@ import React, { useEffect, useRef, useState } from "react";
 import EyeGlass2 from "@/assets/EyeGlass2.jpg";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react";
-import NormalPrescription from "./SunGlassPrescription";
-import SphericalPrescription from "./sphericalPrescription";
-import ToricPrescription from "./ToricPrescription";
-import MutltiFocalPrescription from "./MultiFocalPrescription";
-import MultiFocalPrescription from "./MultiFocalPrescription";
-import SunGlassPrescription from "./SunGlassPrescription";
+import NormalPrescription from "./Prescriptions/SunGlassPrescription";
+import SphericalPrescription from "./Prescriptions/SphericalPrescription";
+import ToricPrescription from "./Prescriptions/ToricPrescription";
+import MultiFocalPrescription from "./Prescriptions/MultiFocalPrescription";
+import SunGlassPrescription from "./Prescriptions/SunGlassPrescription";
 
 const FillEyeDetails = ({ setNav, currentState }) => {
   const [save, setSave] = useState(false);
@@ -47,7 +46,7 @@ const FillEyeDetails = ({ setNav, currentState }) => {
             </div>
           </div>
           <div className="flex-[1]">
-            {currentState=="SunGlass" && <SunGlassPrescription save={save} setSave={setSave} />}
+            {currentState=="SunGlass" && <SunGlassPrescription setSave={setSave} />}
             {currentState=="MultiFocal" && <MultiFocalPrescription save={save} setSave={setSave} />}
             {currentState=="Spherical" && <SphericalPrescription save={save} setSave={setSave} />}
             {currentState=="Toric" && <ToricPrescription save={save} setSave={setSave} />}

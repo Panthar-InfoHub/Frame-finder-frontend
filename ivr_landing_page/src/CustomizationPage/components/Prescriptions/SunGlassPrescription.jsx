@@ -1,23 +1,28 @@
 import personalInfoStore from "@/stores/PersonalInfoStore";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Arrow from "@/assets/ArrowDown.png";
 import { Checkbox } from "@/components/ui/checkbox";
 
-const SunGlassPrescription = ({ save, setSave }) => {
+const SunGlassPrescription = ({ setSave }) => {
   const { sunGlassPrescription, setSunGlassPrescription } = personalInfoStore();
   const [state, setState] = useState(sunGlassPrescription);
   const [error, setError] = useState({});
+  const first = useRef(true);
   useEffect(() => {
     const obj = {};
     for (let key in state) obj[key] = false;
     setError(obj);
   }, []);
   useEffect(() => {
-    if (save) {
-      if (Object.keys(error).length !== 0) setError(false);
-      setSunGlassPrescription(state);
+    setSave(state.save)
+    if (first.current) {
+      first.current = false;
+      return;
     }
-  }, [save]);
+    if (state.save && Object.keys(error).length !== 0) setError(false);
+
+    setSunGlassPrescription(state);
+  }, [state.save]);
   useEffect(() => {
     console.log("sunGlassPrescription", sunGlassPrescription);
   }, [sunGlassPrescription]);
@@ -37,7 +42,8 @@ const SunGlassPrescription = ({ save, setSave }) => {
     }
 
     const newState = { ...state, [key]: clamped };
-    if (save) setSave(false);
+    if (state.save) newState.save = false;
+
     setState(newState);
     return;
   };
@@ -766,8 +772,8 @@ const SunGlassPrescription = ({ save, setSave }) => {
         >
           <Checkbox
             id="save"
-            checked={save}
-            onCheckedChange={(checked) => setSave(checked)}
+            checked={state.save}
+            onCheckedChange={(checked) => setState({ ...state, save: checked })}
             className="cursor-pointer data-[state=checked]:bg-theme-color1 data-[state=checked]:border-theme-color1"
           />
           Save this prescription

@@ -24,6 +24,7 @@ const personalInfoStore = create((set, get) => ({
     axis_os: 0,
     pd: 0,
     age: false,
+    save:false,
   },
   sphericalPrescription: {
     sph_od: 0,
@@ -31,6 +32,7 @@ const personalInfoStore = create((set, get) => ({
     box_od: 0,
     box_os: 0,
     age: false,
+    save:false,
   },
   toricPrescription: {
     sph_od: 0,
@@ -42,6 +44,7 @@ const personalInfoStore = create((set, get) => ({
     box_od: 1,
     box_os: 1,
     age: false,
+    save:false,
   },
   multiFocalPrescription: {
     sph_od: 0,
@@ -51,6 +54,7 @@ const personalInfoStore = create((set, get) => ({
     box_od: 1,
     box_os: 1,
     age: false,
+    save:false,
   },
   setCredentials: (cred) => set({ credentials: cred }),
   setSunGlassPrescription: (pres) => {
@@ -70,7 +74,5 @@ const personalInfoStore = create((set, get) => ({
     set((state) => (state.multiFocalPrescription = pres));
   },
 }));
-// set((state) => newState, true)
 
 export default personalInfoStore;
-// const [error, setError] = useState({});
