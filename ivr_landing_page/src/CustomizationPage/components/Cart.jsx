@@ -5,16 +5,22 @@ import { ArrowLeft, ArrowRight } from "lucide-react";
 import ProductImage from "@/assets/ProductImage.jpg";
 import case_cover from "@/assets/case_cover.jpg";
 import { IoIosArrowBack } from "react-icons/io";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { Button } from "@/components/ui/button";
 
-const Cart = ({ setNav }) => {
+const Cart = ({ setNav,nav }) => {
+  let navigate = useNavigate();
+  const handleBack=()=>{
+    if(nav.prev=="product")
+    navigate(-1)
+  else setNav({prev:"Prescription",curr:"FillEyeDetails"})
+  }
   return (
     <div className="w-screen h-screen flex justify-center items-center overflow-hidden pt-[6%]">
       <div className="relative w-[90%] h-[95%] flex gap-15 pt-15">
         <div className="absolute top-0 left-0 flex gap-2 items-center animate-fadeIn">
-          <div className="hover:bg-white/20 hover:shadow-lg border border-transparent hover:border-white/30 hover:backdrop-blur-xs rounded-full hover:cursor-pointer" onClick={() => setNav("LensPackage")}>
-            <IoIosArrowBack size={30} />
+          <div className="hover:bg-white/20 hover:shadow-lg border border-transparent hover:border-white/30 hover:backdrop-blur-xs rounded-full hover:cursor-pointer" onClick={() => setNav((state)=>({prev:"ConfirmDetails",curr:state.prev}))}>
+            <IoIosArrowBack size={30}/>
           </div>
           <div className="text-3xl">Cart | 2 items</div>
         </div>

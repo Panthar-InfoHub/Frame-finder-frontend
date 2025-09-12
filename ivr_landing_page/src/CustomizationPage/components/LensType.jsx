@@ -12,8 +12,8 @@ const LensType = ({setNav}) => {
     <div className="w-screen h-screen flex justify-center items-center overflow-hidden">
       <div className="w-3/5 h-fit flex flex-col gap-3 mt-[5%] animate-slideUp">
         <div className="flex gap-2 items-center ">
-          <div className="hover:bg-white/20 hover:shadow-lg border border-transparent hover:border-white/30 hover:backdrop-blur-xs rounded-full hover:cursor-pointer">
-            <IoIosArrowBack size={30} />
+          <div className="hover:bg-white/20 hover:shadow-lg border border-transparent hover:border-white/30 hover:backdrop-blur-xs rounded-full hover:cursor-pointer"  onClick={() => setNav((state)=>({prev:"product",curr:state.prev}))}>
+            <IoIosArrowBack size={30}/>
           </div>
           <div className="text-3xl">Select Lens Type</div>
         </div>
@@ -25,7 +25,7 @@ const LensType = ({setNav}) => {
               For distance or near vision (Thin, anti-glare, blue-cut options)
             </div>
           </div>
-          <img src={Arrow} className="rotate-270 cursor-pointer py-3 px-2 hover:bg-green-200 active:bg-green-300 rounded-full" onClick={()=>setNav("Prescription")}/>
+          <img src={Arrow} className="rotate-270 cursor-pointer py-3 px-2 hover:bg-green-200 active:bg-green-300 rounded-full" onClick={()=>setNav((state)=>({prev:state.curr,curr:"Prescription"}))}/>
         </div>
         <div className="bg-white rounded-md p-4 flex items-center gap-10">
           <img src={biFocal} alt="" className="w-25 h-25 rounded-md" />
@@ -35,7 +35,7 @@ const LensType = ({setNav}) => {
               For distance or near vision (Thin, anti-glare, blue-cut options)
             </div>
           </div>
-          <img src={Arrow} className="rotate-270 cursor-pointer py-3 px-2 hover:bg-green-200 active:bg-green-300 rounded-full"/>
+          <img src={Arrow} className="rotate-270 cursor-pointer py-3 px-2 hover:bg-green-200 active:bg-green-300 rounded-full" onClick={()=>setNav((state)=>({prev:state.curr,curr:"Prescription"}))}/>
         </div>
         <div className="bg-white rounded-md p-4 flex items-center gap-10">
           <img src={progressive} alt="" className="w-25 h-25 rounded-md" />
@@ -55,7 +55,7 @@ const LensType = ({setNav}) => {
               For distance or near vision (Thin, anti-glare, blue-cut options)
             </div>
           </div>
-          <img src={Arrow} className="rotate-270 cursor-pointer py-3 px-2 hover:bg-green-200 active:bg-green-300 rounded-full"/>
+          <img src={Arrow} className="rotate-270 cursor-pointer py-3 px-2 hover:bg-green-200 active:bg-green-300 rounded-full" onClick={()=>setNav((state)=>({prev:state.curr,curr:"LensPackage"}))}/>
         </div>
       </div>
     </div>

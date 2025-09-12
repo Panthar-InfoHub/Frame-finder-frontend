@@ -10,7 +10,7 @@ const Prescription = ({setNav}) => {
   return (
     <div className="w-screen h-screen flex justify-center items-center overflow-hidden">
       <div className="w-[65%] h-[70%] bg-white relative shadow-lg rounded-md flex gap-8 p-16 mt-[5%] animate-slideUp">
-      <ArrowLeft className="w-11 h-11 rounded-full text-green-600 absolute top-[2%] left-[1%] p-2 cursor-pointer hover:bg-green-200 active:bg-green-300" onClick={()=>setNav("LensType")}/>
+      <ArrowLeft className="w-11 h-11 rounded-full text-green-600 absolute top-[2%] left-[1%] p-2 cursor-pointer hover:bg-green-200 active:bg-green-300" onClick={()=>setNav((state)=>({prev:"product",curr:state.prev}))}/>
         <div className="w-[45%]">
           <img
             src={EyeGlass2}
@@ -39,7 +39,7 @@ const Prescription = ({setNav}) => {
                 Upload a clear photo of your prescription.
               </div>
             </div>
-            <div className="rotate-270 transition-all ease-in-out duration-200 hover:cursor-pointer active:bg-green-200 hover:scale-130 py-3 px-1 rounded-full" onClick={()=>setNav("FillEyeDetails")}>
+            <div className="rotate-270 transition-all ease-in-out duration-200 hover:cursor-pointer active:bg-green-200 hover:scale-130 py-3 px-1 rounded-full" onClick={()=>setNav((state)=>({prev:state.curr,curr:"FillEyeDetails"}))}>
               <img src={Arrow}  />
             </div>
           </div>

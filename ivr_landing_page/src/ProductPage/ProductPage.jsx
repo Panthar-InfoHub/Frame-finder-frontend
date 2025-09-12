@@ -10,8 +10,9 @@ import AccordianVideoAdd from "@/ProductPage/Components/AccordianVideoAdd";
 import CardCaraousal from "./Components/CardCaraousal";
 import Advert1 from "@/components/Advertisments/Advert1";
 import Footer from "@/components/Footer/Footer";
-import { Link } from "react-router";
+import { Link, useLocation, useParams } from "react-router";
 const ProductPage = () => {
+  const { type } = useParams();
   const color1 = "black",
     color2 = "blue-400";
 
@@ -108,18 +109,28 @@ const ProductPage = () => {
                 ></div>
               </div>
 
-              <div className="flex gap-3">
-                <Link to="/customize">
-                  <Button className="font-[400] text-lg flex-1 text-white bg-[#00aa78] rounded-lg hover:bg-[#3a826b] active:bg-[#295c4c] cursor-pointer h-[100px]">
-                    Select Lenses and Purchase
+              {/* <div className="flex gap-3"> */}
+              {type != "contact_lens" ? (
+                <div className="flex gap-3">
+                  <Link to="/customize" state={{ type: "LensType" }} >
+                    <Button className="font-[400] text-lg flex-1 text-white bg-[#00aa78] rounded-lg hover:bg-[#3a826b] active:bg-[#295c4c] cursor-pointer h-[100px]">
+                      Select Lenses and Purchase
+                    </Button>
+                  </Link>
+                  <Link to="/customize" state={{ type: "Cart" }} >
+                    <Button className="font-[400] text-lg flex-1 text-white bg-[#00aa78] rounded-lg hover:bg-[#3a826b] active:bg-[#295c4c] cursor-pointer h-[100px]">
+                      Buy Only Frame
+                    </Button>
+                  </Link>
+                </div>
+              ) : (
+                <Link to="/customize" state={{ type: "Prescription" }} >
+                  <Button className="font-[400] text-lg w-full text-white bg-[#00aa78] rounded-lg hover:bg-[#3a826b] active:bg-[#295c4c] cursor-pointer h-[100px]">
+                    Purchase Power Lens
                   </Button>
                 </Link>
-                <Link to="/customize">
-                  <Button className="font-[400] text-lg flex-1 text-white bg-[#00aa78] rounded-lg hover:bg-[#3a826b] active:bg-[#295c4c] cursor-pointer h-[100px]">
-                    Buy Only Frame
-                  </Button>
-                </Link>
-              </div>
+              )}
+              {/* </div> */}
             </div>
             <div className="mb-15 mt-45">
               <AccordianVideoAdd />

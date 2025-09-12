@@ -16,8 +16,8 @@ function App() {
       <Route path="/auth" element={<AuthPage />} />
       <Route path="/onBoard" element={<OnBoardingForm />} />
       <Route path="/customize" element={<CustomizationPage />} />
-      <Route path="/filter" element={<FilterPage />} />
-      <Route path="/product" element={<ProductPage />} />
+      <Route path="/filter/:type" element={<FilterPage />} />
+      <Route path="/product/:type" element={<ProductPage />} />
       <Route path="/checkout" element={<CheckOutPage />} />
       <Route path="/profile" element={<ProfilePage />} />
     </Routes>

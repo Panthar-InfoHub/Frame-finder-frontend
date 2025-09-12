@@ -16,31 +16,46 @@ import ToricConfirm from "./ConfirmPrescriptions/ToricConfirm";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 const ConfirmDetails = ({ setNav }) => {
-  const [head,setHead]=useState(false);
+  const [head, setHead] = useState(false);
+  const {
+    sunGlassPrescription,
+    sphericalPrescription,
+    toricPrescription,
+    multiFocalPrescription,
+  } = personalInfoStore();
+
+  let defaultTab;
+  if (sunGlassPrescription.save) defaultTab = "SunGlass";
+  else if (sphericalPrescription.save) defaultTab = "Spherical";
+  else if (toricPrescription.save) defaultTab = "Toric";
+  else if (multiFocalPrescription.save) defaultTab = "MultiFocal";
+
   useEffect(() => {
     const handleResize = () => {
-      if (window.innerWidth <= 1500 ) setHead(true);
-      else if(window.innerWidth > 1500) setHead(false);
+      if (window.innerWidth <= 1500) setHead(true);
+      else if (window.innerWidth > 1500) setHead(false);
     };
     window.addEventListener("resize", handleResize);
-    handleResize()
+    handleResize();
     return () => window.removeEventListener("resize", handleResize);
   }, []);
   return (
-    <div className="w-screen h-screen overflow-y-auto py-40">
-      <div className="w-[70%] min-[1500px]:h-[85%] h-fit bg-white shadow-lg rounded-md relative min-[1500px]:flex min-[1500px]:gap-20 p-16 mx-auto animate-slideUp">
+    <div className="w-screen h-screen overflow-y-auto">
+      <div className="max-[800px]:w-[98%] w-[70%]  h-fit bg-white shadow-lg rounded-md relative min-[1500px]:flex min-[1500px]:gap-20 p-16 mt-45 max-[1500px]:mb-20 mx-auto animate-slideUp">
         <ArrowLeft
           className="w-11 h-11 rounded-full text-green-600 absolute top-[2%] left-[1%] p-2 cursor-pointer hover:bg-green-200 active:bg-green-300"
-          onClick={() => setNav("FillEyeDetails")}
+          onClick={()=>setNav((state)=>({prev:"Prescription",curr:state.prev}))}
         />
         {head && (
-          <div className="text-2xl text-center mb-5">Confirm Your Prescription</div>
+          <div className="text-2xl text-center mb-5">
+            Confirm Your Prescription
+          </div>
         )}
         <div className="flex-[4]">
           <img
             src={EyeGlass2}
             alt=""
-            className="w-full min-[1500px]:h-[85%] h-100 border-3 rounded-xl object-cover"
+            className="w-full h-100 border-3 rounded-xl object-cover"
           />
           <div className="flex justify-between mt-4">
             <div className="w-[40%]">
@@ -67,19 +82,35 @@ const ConfirmDetails = ({ setNav }) => {
           <div className="text-lg">
             Prescription: <span className="text-green-600">Single Vision</span>
           </div>
-          <Tabs defaultValue="SunGlass" className="w-full">
+          <Tabs defaultValue={defaultTab} className="w-full">
             <div className="flex justify-between items-baseline gap-2">
               <TabsList className="bg-green-200 mb-4">
-                <TabsTrigger value="SunGlass" className="cursor-pointer">
+                <TabsTrigger
+                  disabled={!sunGlassPrescription.save}
+                  value="SunGlass"
+                  className="cursor-pointer"
+                >
                   SunGlass
                 </TabsTrigger>
-                <TabsTrigger value="MultiFocal" className="cursor-pointer">
+                <TabsTrigger
+                  disabled={!multiFocalPrescription.save}
+                  value="MultiFocal"
+                  className="cursor-pointer"
+                >
                   MultiFocal
                 </TabsTrigger>
-                <TabsTrigger value="Spherical" className="cursor-pointer">
+                <TabsTrigger
+                  disabled={!sphericalPrescription.save}
+                  value="Spherical"
+                  className="cursor-pointer"
+                >
                   Spherical
                 </TabsTrigger>
-                <TabsTrigger value="Toric" className="cursor-pointer">
+                <TabsTrigger
+                  disabled={!toricPrescription.save}
+                  value="Toric"
+                  className="cursor-pointer"
+                >
                   Toric
                 </TabsTrigger>
               </TabsList>
@@ -107,7 +138,7 @@ const ConfirmDetails = ({ setNav }) => {
 
         <Button
           className="absolute bottom-[3%] right-[3%] text-lg bg-green-500 hover:bg-green-600 active:bg-green-700 cursor-pointer px-8 py-6 rounded-full"
-          onClick={() => setNav("LensPackage")}
+          onClick={()=>setNav((state)=>({prev:state.curr,curr:"LensPackage"}))}
         >
           Continue
         </Button>

@@ -8,6 +8,7 @@ import {
   ChevronRight,
   ChevronLeft,
 } from "lucide-react"; // using lucide-react for icons
+import { useParams } from "react-router";
 import { Checkbox } from "@/components/ui/checkbox";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import FilterComponent from "./components/FilterComponent";
@@ -116,6 +117,12 @@ const FilterPage = () => {
   // ? contains products from API
   let products;
 
+  const { type } = useParams();
+  let heading;
+  if (type == "contact_lenses") heading = "Contact Lens";
+  else if (type == "sunglasses") heading = "Sunglasses";
+  else if (type == "eyeglasses") heading = "Eyeware Glasses";
+
   useEffect(() => {
     // !TODO: IMPLEMENT API FOR GETTING ALL PRODUCTS
     // ? set products declared on line 105 to the products returnedefrom API
@@ -175,9 +182,7 @@ const FilterPage = () => {
           backgroundImage: `url(${FilterPageTopImage})`,
         }}
       >
-        <div className="text-white font-bold text-[150px] w-fit">
-          EYEWARE GLASSES
-        </div>
+        <div className="text-white font-bold text-[150px] w-fit">{heading}</div>
       </div>
       <div className="text-2xl font-bold w-4/5 mx-auto flex justify-between mb-12">
         <div
@@ -235,7 +240,7 @@ const FilterPage = () => {
           <div className="flex gap-10 flex-wrap">
             {/*  */}
             {Array.from({ length: 15 }).map((_, index) => (
-              <ProductCard key={index} image={eyeGlass1} link={"/product"}/>
+              <ProductCard key={index} image={eyeGlass1} link={"/product"} />
             ))}
           </div>
         </div>

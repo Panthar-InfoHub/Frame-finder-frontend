@@ -44,7 +44,7 @@ const personalInfoStore = create((set, get) => ({
     box_od: 1,
     box_os: 1,
     age: false,
-    save:false,
+    save:true,
   },
   multiFocalPrescription: {
     sph_od: 0,
@@ -54,7 +54,7 @@ const personalInfoStore = create((set, get) => ({
     box_od: 1,
     box_os: 1,
     age: false,
-    save:false,
+    save:true,
   },
   setCredentials: (cred) => set({ credentials: cred }),
   setSunGlassPrescription: (pres) => {

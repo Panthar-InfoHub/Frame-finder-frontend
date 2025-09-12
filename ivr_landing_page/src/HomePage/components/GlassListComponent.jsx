@@ -26,11 +26,15 @@ const GlassListComponent = ({ prodArray, link, border_radius, heading }) => {
   //     text: "Metal Work",
   //   },
   // ];
+  let type;
+  if (heading == "Eyeware Glasses") type = "eyeglasses";
+  // else if (heading == "Contact Lens") type = "contact_lenses";
+  else if (heading == "Sunglasses") type = "sunglasses";
   return (
     <div className="mt-40">
       <div className="relative text-center w-full mx-auto">
         <div className="font-lexend text-5xl ">{heading}</div>
-        <Link to="/filter">
+        <Link to={`/filter/${type}`}>
           <Button
             variant="ghost"
             className="absolute right-0 top-2 w-fit h-fit cursor-pointer text-2xl py-4 bg-transparent text-green-400 active:text-green-600 hover:text-green-500 hover:bg-zinc-200"
@@ -41,7 +45,7 @@ const GlassListComponent = ({ prodArray, link, border_radius, heading }) => {
       </div>
       <div className="h-fit flex w-full justify-between mt-24">
         {prodArray.map((prod) => (
-          <Link to="/product">
+          <Link to={`/product/${type}`}>
             <div
               className={`h-fit w-[250px] px-4 py-2 flex gap-4 flex-col justify-between items-center rounded-xl hover:shadow-[0_13px_27px_-5px_rgb(187_247_208),_0_8px_16px_-8px_rgb(134_239_172)]`}
             >

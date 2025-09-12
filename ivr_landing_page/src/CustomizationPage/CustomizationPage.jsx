@@ -7,9 +7,16 @@ import ConfirmDetails from "./components/ConfirmDetails";
 import FillEyeDetails from "./components/FillEyeDetails";
 import LensPackage from "./components/LensPackage";
 import Cart from "./components/Cart";
+import { useLocation, useNavigate } from "react-router";
 
 const CustomizationPage = () => {
-  const [nav, setNav] = useState("ConfirmDetails");
+  const { type } = useLocation();
+  const [nav, setNav] = useState({
+    prev: "product",
+    curr: type,
+  });
+  let navigate = useNavigate();
+  const handleBack = () => navigate(-1);
   return (
     <>
       <div
@@ -20,17 +27,18 @@ const CustomizationPage = () => {
         }}
       >
         <Navbar />
-        {nav == "LensType" && <LensType setNav={setNav} />}
-        {nav == "Prescription" && <Prescription setNav={setNav} />}
-        {nav == "FillEyeDetails" && (
-          <FillEyeDetails
+        {nav.curr == "LensType" && <LensType setNav={setNav} />}
+        {nav.curr == "Prescription" && <Prescription setNav={setNav} />}
+        {nav.curr == "FillEyeDetails" && <FillEyeDetails setNav={setNav} />}
+        {nav.curr == "ConfirmDetails" && <ConfirmDetails setNav={setNav} />}
+        {nav.curr == "LensPackage" && <LensPackage setNav={setNav} />}
+        {nav.curr == "Cart" && (
+          <Cart
             setNav={setNav}
-            currentState={"Spherical"}
+            nav={nav}
           />
         )}
-        {nav == "ConfirmDetails" && <ConfirmDetails setNav={setNav} />}
-        {nav == "LensPackage" && <LensPackage setNav={setNav} />}
-        {nav == "Cart" && <Cart setNav={setNav} />}
+        {nav.curr == "product" && handleBack()}
       </div>
     </>
   );
