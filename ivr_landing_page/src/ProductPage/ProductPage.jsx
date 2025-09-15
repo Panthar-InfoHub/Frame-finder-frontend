@@ -13,6 +13,9 @@ import Footer from "@/components/Footer/Footer";
 import { Link, useLocation, useParams } from "react-router";
 const ProductPage = () => {
   const { type } = useParams();
+  const { lens_type } = useLocation().state||{};
+  console.log("type",type)
+  console.log("lens_type",lens_type)
   const color1 = "black",
     color2 = "blue-400";
 
@@ -110,7 +113,7 @@ const ProductPage = () => {
               </div>
 
               {/* <div className="flex gap-3"> */}
-              {type != "contact_lens" ? (
+              {type != "contact_lenses" ? (
                 <div className="flex gap-3">
                   <Link to="/customize" state={{ type: "LensType" }} >
                     <Button className="font-[400] text-lg flex-1 text-white bg-[#00aa78] rounded-lg hover:bg-[#3a826b] active:bg-[#295c4c] cursor-pointer h-[100px]">
@@ -124,8 +127,8 @@ const ProductPage = () => {
                   </Link>
                 </div>
               ) : (
-                <Link to="/customize" state={{ type: "Prescription" }} >
-                  <Button className="font-[400] text-lg w-full text-white bg-[#00aa78] rounded-lg hover:bg-[#3a826b] active:bg-[#295c4c] cursor-pointer h-[100px]">
+                <Link to="/customize" state={{ type: "Prescription",lens_type }} >
+                  <Button className="font-[400] text-2xl w-full text-white bg-[#00aa78] rounded-lg hover:bg-[#3a826b] active:bg-[#295c4c] cursor-pointer h-[100px]">
                     Purchase Power Lens
                   </Button>
                 </Link>

@@ -3,7 +3,7 @@ import React from "react";
 import cust_1 from "@/assets/cust_1.jpg";
 import { Link } from "react-router";
 
-const GlassListComponent = ({ prodArray, link, border_radius, heading }) => {
+const GlassListComponent = ({ prodArray, heading, border_radius}) => {
   // const prodArray = [
   //   {
   //     image: cust_1,
@@ -29,7 +29,7 @@ const GlassListComponent = ({ prodArray, link, border_radius, heading }) => {
   let type;
   if (heading == "Eyeware Glasses") type = "eyeglasses";
   // else if (heading == "Contact Lens") type = "contact_lenses";
-  else if (heading == "Sunglasses") type = "sunglasses";
+  else if (heading == "Sun glasses") type = "sunglasses";
   return (
     <div className="mt-40">
       <div className="relative text-center w-full mx-auto">
@@ -44,8 +44,8 @@ const GlassListComponent = ({ prodArray, link, border_radius, heading }) => {
         </Link>
       </div>
       <div className="h-fit flex w-full justify-between mt-24">
-        {prodArray.map((prod) => (
-          <Link to={`/product/${type}`}>
+        {prodArray.map((prod,ind) => (
+          <Link to={`/product/${type}`} key={ind}>
             <div
               className={`h-fit w-[250px] px-4 py-2 flex gap-4 flex-col justify-between items-center rounded-xl hover:shadow-[0_13px_27px_-5px_rgb(187_247_208),_0_8px_16px_-8px_rgb(134_239_172)]`}
             >

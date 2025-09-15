@@ -9,7 +9,7 @@ import CustomButton from "@/components/Button/CustomButton";
 import { Link } from "react-router";
 
 const OurTopPicks = () => {
-  //  ! implement type of product sunglasses,contact_lenses,eyeglasses
+  //  ! implement type of product to set links to sunglasses,contact_lenses,eyeglasses
   let type="eyeglasses"
   const prodArray = [
     {
@@ -70,12 +70,14 @@ const OurTopPicks = () => {
         defaultValue="new_arrivals"
         className="w-full max-h-fit  mt-10 relative"
       >
+        <Link to={`/filter/${type}`} className="absolute right-0 top-2" >
         <Button
           variant="ghost"
-          className="absolute right-0 top-2 w-fit h-fit cursor-pointer text-2xl py-4 bg-transparent text-green-400 active:text-green-600 hover:text-green-500 hover:bg-zinc-200"
+          className="w-fit h-fit cursor-pointer text-2xl py-4 bg-transparent text-green-400 active:text-green-600 hover:text-green-500 hover:bg-zinc-200"
         >
           See More
         </Button>
+        </Link>
         <TabsList className="mx-auto border-2 border-theme-color1 bg-white rounded-full h-fit w-4/12 mb-16">
           <TabsTrigger
             className="p-4 rounded-full hover:cursor-pointer data-[state=active]:bg-theme-color1 data-[state=active]:text-white text-lg"
@@ -94,8 +96,8 @@ const OurTopPicks = () => {
           value="new_arrivals"
           className="h-4/5 flex flex-wrap gap-y-10 justify-between"
         >
-          {prodArray.map((prod) => (
-            <div className="h-[524px] w-[457px] relative bg-green-200 hover:bg-green-300 cursor-pointer rounded-2xl overflow-hidden">
+          {prodArray.map((prod,ind) => (
+            <div key={ind} className="h-[524px] w-[457px] relative bg-green-200 hover:bg-green-300 cursor-pointer rounded-2xl overflow-hidden">
               <Link to={`/product/${type}`}>
                 <div className="absolute text-white font-semibold text-lg bg-theme-color1 p-2 rounded-l-full px-4 top-3.5 right-0 w-fit flex gap-2">
                   <Star fill="white" className="text-white " />
@@ -129,8 +131,8 @@ const OurTopPicks = () => {
           value="best_seller"
           className="h-4/5 flex flex-wrap gap-y-10 justify-between"
         >
-          {prodArray.map((prod) => (
-            <div className="h-[524px] w-[457px] relative bg-green-200 hover:bg-green-300 rounded-2xl overflow-hidden cursor-pointer">
+          {prodArray.map((prod,ind) => (
+            <div key={ind} className="h-[524px] w-[457px] relative bg-green-200 hover:bg-green-300 rounded-2xl overflow-hidden cursor-pointer">
               <Link to={`/product/${type}`}>
                 <div className="absolute text-white font-semibold text-lg bg-theme-color1 p-2 rounded-l-full px-4 top-3.5 right-0 w-fit flex gap-2">
                   <Star fill="white" className="text-white " />
@@ -161,14 +163,6 @@ const OurTopPicks = () => {
           ))}
         </TabsContent>
       </Tabs>
-      <Link to={`/filter/${type}`}>
-        <Button
-          variant="ghost"
-          className="absolute right-0 top-2 w-fit cursor-pointer text-lg bg-transparent text-green-300 active:text-green-600 hover:text-green-400"
-        >
-          See More
-        </Button>
-      </Link>
       <div className="mx-auto w-fit mt-24">
         <CustomButton />
       </div>

@@ -10,7 +10,8 @@ import Cart from "./components/Cart";
 import { useLocation, useNavigate } from "react-router";
 
 const CustomizationPage = () => {
-  const { type } = useLocation();
+  // ! use lens_type accordingly
+  const { type,lens_type } = useLocation().state;
   const [nav, setNav] = useState({
     prev: "product",
     curr: type,

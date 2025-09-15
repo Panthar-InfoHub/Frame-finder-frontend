@@ -8,7 +8,7 @@ import {
   ChevronRight,
   ChevronLeft,
 } from "lucide-react"; // using lucide-react for icons
-import { useParams } from "react-router";
+import { useLocation, useParams } from "react-router";
 import { Checkbox } from "@/components/ui/checkbox";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import FilterComponent from "./components/FilterComponent";
@@ -118,9 +118,12 @@ const FilterPage = () => {
   let products;
 
   const { type } = useParams();
+  const { lens } = useLocation().state || {};
+  console.log("type",type)
+  console.log("lens",lens)
   let heading;
-  if (type == "contact_lenses") heading = "Contact Lens";
-  else if (type == "sunglasses") heading = "Sunglasses";
+  if (type == "contact_lenses") heading = "Contact Lenses";
+  else if (type == "sunglasses") heading = "Sun glasses";
   else if (type == "eyeglasses") heading = "Eyeware Glasses";
 
   useEffect(() => {
@@ -222,25 +225,13 @@ const FilterPage = () => {
                 {val}
               </div>
             ))}
-            {/* <div className="px-4 py-3 bg-[#E8EDF5] font-[500] rounded-md">
-              EyeGlasses
-            </div>
-            <div className="px-4 py-3 bg-[#E8EDF5] font-[500] rounded-md">
-              SunGlasses
-            </div>
-            <div className="px-4 py-3 bg-[#E8EDF5] font-[500] rounded-md">
-              Frames
-            </div>
-            <div className="px-4 py-3 bg-[#E8EDF5] font-[500] rounded-md">
-              All
-            </div> */}
           </div>
 
           {/* PRODUCT LIST */}
           <div className="flex gap-10 flex-wrap">
             {/*  */}
             {Array.from({ length: 15 }).map((_, index) => (
-              <ProductCard key={index} image={eyeGlass1} link={"/product"} />
+              <ProductCard key={index} image={eyeGlass1} link={`/product/${type}`} lens_type={lens}/>
             ))}
           </div>
         </div>

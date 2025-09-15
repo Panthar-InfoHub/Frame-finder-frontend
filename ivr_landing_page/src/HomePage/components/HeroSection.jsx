@@ -75,11 +75,11 @@ const HeroSection = () => {
                 </div>
                 <div
                   className={`${
-                    link == "contact" ? "max-h-[200px] p-6 " : "max-h-[0px] "
+                    link == "contact" ? "max-h-[200px] p-3 " : "max-h-[0px] "
                   } transition-all ease-in-out duration-200 absolute overflow-hidden w-60 left-[-15%] top-[200%] backdrop-blur-md text-2xl text-zinc-500 bg-white/80 rounded-2xl space-y-3`}
                 >
-                  <div>By Disposibility</div>
-                  <div>By Color</div>
+                  <Link to={`filter/contact_lenses`} state={{ lens: "normal" }}><div className="active:bg-green-100 hover:cursor-pointer p-3 rounded-xl">By Disposibility</div></Link>
+                  <Link to={`filter/contact_lenses`} state={{ lens: "coloured" }}><div className="active:bg-green-100 hover:cursor-pointer p-3 rounded-xl">By Color</div></Link>
                 </div>
               </div>
               {/* LINK - ACCESSORIES SECTION */}

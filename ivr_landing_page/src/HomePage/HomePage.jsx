@@ -72,16 +72,14 @@ const HomePage = () => {
       <div className="w-5/6 mx-auto">
         <GlassListComponent
           prodArray={EyeGlassArray}
-          link={null}
           heading={"Eyeware Glasses"}
         />
         <OurTopPicks />
         <AdvertTop />
         <GlassListComponent
           prodArray={SunGlassArray}
-          link={null}
+          heading={"Sun glasses"}
           border_radius
-          heading={"Sun Glasses"}
         />
         <Advert1 />
       </div>
