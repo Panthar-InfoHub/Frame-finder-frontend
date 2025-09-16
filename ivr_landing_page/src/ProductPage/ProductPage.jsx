@@ -112,7 +112,6 @@ const ProductPage = () => {
                 ></div>
               </div>
 
-              {/* <div className="flex gap-3"> */}
               {type != "contact_lenses" ? (
                 <div className="flex gap-3">
                   <Link to="/customize" state={{ type: "LensType" }} >
@@ -133,7 +132,6 @@ const ProductPage = () => {
                   </Button>
                 </Link>
               )}
-              {/* </div> */}
             </div>
             <div className="mb-15 mt-45">
               <AccordianVideoAdd />

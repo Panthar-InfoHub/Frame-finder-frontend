@@ -15,7 +15,7 @@ import SphericalConfirm from "./ConfirmPrescriptions/SphericalConfirm";
 import ToricConfirm from "./ConfirmPrescriptions/ToricConfirm";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
-const ConfirmDetails = ({ setNav }) => {
+const ConfirmDetails = ({ pushPositionStack,popPositionStack }) => {
   const [head, setHead] = useState(false);
   const {
     sunGlassPrescription,
@@ -44,7 +44,7 @@ const ConfirmDetails = ({ setNav }) => {
       <div className="max-[800px]:w-[98%] w-[70%]  h-fit bg-white shadow-lg rounded-md relative min-[1500px]:flex min-[1500px]:gap-20 p-16 mt-45 max-[1500px]:mb-20 mx-auto animate-slideUp">
         <ArrowLeft
           className="w-11 h-11 rounded-full text-green-600 absolute top-[2%] left-[1%] p-2 cursor-pointer hover:bg-green-200 active:bg-green-300"
-          onClick={()=>setNav((state)=>({prev:"Prescription",curr:state.prev}))}
+          onClick={()=>popPositionStack()}
         />
         {head && (
           <div className="text-2xl text-center mb-5">
@@ -138,7 +138,7 @@ const ConfirmDetails = ({ setNav }) => {
 
         <Button
           className="absolute bottom-[3%] right-[3%] text-lg bg-green-500 hover:bg-green-600 active:bg-green-700 cursor-pointer px-8 py-6 rounded-full"
-          onClick={()=>setNav((state)=>({prev:state.curr,curr:"LensPackage"}))}
+          onClick={()=>pushPositionStack("LensPackage")}
         >
           Continue
         </Button>

@@ -5,12 +5,14 @@ import MyOrder from "./components/MyOrder";
 import Address from "./components/Address";
 import MyPrescription from "./components/MyPrescription";
 import Arrow from "@/assets/ArrowDown.png";
+import { useNavigate } from "react-router";
 
 const ProfilePage = () => {
   const [localNav, setLocalNav] = useState("prescriptions");
   const handleNav = (nav) => {
     if (localNav != nav) setLocalNav(nav);
   };
+  const navigate=useNavigate()
   // console.log(backImage)
   return (
     <div className="relative h-[100vh] w-[100vw] overflow-hidden px-8 flex py-6 pt-20">
@@ -21,6 +23,7 @@ const ProfilePage = () => {
       <img
         src={Arrow}
         className="absolute top-[3%] left-[1%] rotate-90 cursor-pointer py-3 px-2 transition-all ease-in-out hover:bg-green-200 active:bg-green-300 rounded-full"
+        onClick={()=>navigate(-1)}
       />
 
       <div className="flex-[1] h-full rounded-3xl bg-green-200 text-lg pt-8 space-y-4">

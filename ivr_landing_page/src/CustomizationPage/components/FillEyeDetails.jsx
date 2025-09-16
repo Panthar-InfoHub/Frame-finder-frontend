@@ -10,7 +10,7 @@ import SunGlassPrescription from "./Prescriptions/SunGlassPrescription";
 import { IoIosArrowForward } from "react-icons/io";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
-const FillEyeDetails = ({ setNav }) => {
+const FillEyeDetails = ({ pushPositionStack,popPositionStack }) => {
   const [save, setSave] = useState(false);
   const [currentState, setCurrentState] = useState("Spherical");
 
@@ -25,7 +25,7 @@ const FillEyeDetails = ({ setNav }) => {
       <div className="absolute max-[1500px]:w-fit max-[1500px]:mx-4 w-340 h-fit bg-white shadow-lg rounded-md p-8 px-10 mt-[5%] max-[1300px]:mt-[100px] animate-slideUp z-1">
         <ArrowLeft
           className="max-[1300px]:w-8 max-[1300px]:h-8 w-11 h-11 rounded-full text-green-600 absolute top-[2%] left-[1%] p-2 cursor-pointer hover:bg-green-200 active:bg-green-300"
-          onClick={()=>setNav((state)=>({prev:"LensType",curr:state.prev}))}
+          onClick={()=>popPositionStack()}
         />
         <div className="min-[1300px]:flex min-[1300px]:justify-between mb-[2%]">
           <div className="flex gap-5 justify-around min-[1300px]:pl-8 max-[1300px]:mb-6">
@@ -106,7 +106,7 @@ const FillEyeDetails = ({ setNav }) => {
         <Button
           disabled={!save}
           className="absolute bottom-[3%] right-[3%] text-lg bg-green-500 hover:bg-green-600 active:bg-green-700 cursor-pointer px-8 py-6 rounded-full"
-          onClick={()=>setNav((state)=>({prev:state.curr,curr:"ConfirmDetails"}))}
+          onClick={()=>pushPositionStack("ConfirmDetails")}
         >
           Continue
         </Button>

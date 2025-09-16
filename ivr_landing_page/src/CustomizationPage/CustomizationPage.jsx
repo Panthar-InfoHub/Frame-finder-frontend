@@ -11,13 +11,15 @@ import { useLocation, useNavigate } from "react-router";
 
 const CustomizationPage = () => {
   // ! use lens_type accordingly
-  const { type,lens_type } = useLocation().state;
-  const [nav, setNav] = useState({
-    prev: "product",
-    curr: type,
-  });
+  const { type, lens_type } = useLocation().state;
+  const [nav, setNav] = useState(["product", type]);
+  const pushPositionStack = (position) =>
+    setNav((state) => [...state, position]);
+
+  const popPositionStack = () => setNav((state) => state.slice(0, -1));
   let navigate = useNavigate();
   const handleBack = () => navigate(-1);
+
   return (
     <>
       <div
@@ -28,18 +30,43 @@ const CustomizationPage = () => {
         }}
       >
         <Navbar />
-        {nav.curr == "LensType" && <LensType setNav={setNav} />}
-        {nav.curr == "Prescription" && <Prescription setNav={setNav} />}
-        {nav.curr == "FillEyeDetails" && <FillEyeDetails setNav={setNav} />}
-        {nav.curr == "ConfirmDetails" && <ConfirmDetails setNav={setNav} />}
-        {nav.curr == "LensPackage" && <LensPackage setNav={setNav} />}
-        {nav.curr == "Cart" && (
-          <Cart
-            setNav={setNav}
-            nav={nav}
+        {nav[nav.length - 1] == "LensType" && (
+          <LensType
+            pushPositionStack={pushPositionStack}
+            popPositionStack={popPositionStack}
           />
         )}
-        {nav.curr == "product" && handleBack()}
+        {nav[nav.length - 1] == "Prescription" && (
+          <Prescription
+            pushPositionStack={pushPositionStack}
+            popPositionStack={popPositionStack}
+          />
+        )}
+        {nav[nav.length - 1] == "FillEyeDetails" && (
+          <FillEyeDetails
+            pushPositionStack={pushPositionStack}
+            popPositionStack={popPositionStack}
+          />
+        )}
+        {nav[nav.length - 1] == "ConfirmDetails" && (
+          <ConfirmDetails
+            pushPositionStack={pushPositionStack}
+            popPositionStack={popPositionStack}
+          />
+        )}
+        {nav[nav.length - 1] == "LensPackage" && (
+          <LensPackage
+            pushPositionStack={pushPositionStack}
+            popPositionStack={popPositionStack}
+          />
+        )}
+        {nav[nav.length - 1] == "Cart" && (
+          <Cart
+            pushPositionStack={pushPositionStack}
+            popPositionStack={popPositionStack}
+          />
+        )}
+        {nav[nav.length - 1] == "product" && handleBack()}
       </div>
     </>
   );

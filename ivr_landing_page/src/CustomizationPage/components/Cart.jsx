@@ -8,7 +8,7 @@ import { IoIosArrowBack } from "react-icons/io";
 import { Link, useNavigate } from "react-router";
 import { Button } from "@/components/ui/button";
 
-const Cart = ({ setNav,nav }) => {
+const Cart = ({ pushPositionStack,popPositionStack  }) => {
   let navigate = useNavigate();
   const handleBack=()=>{
     if(nav.prev=="product")
@@ -19,7 +19,7 @@ const Cart = ({ setNav,nav }) => {
     <div className="w-screen h-screen flex justify-center items-center overflow-hidden pt-[6%]">
       <div className="relative w-[90%] h-[95%] flex gap-15 pt-15">
         <div className="absolute top-0 left-0 flex gap-2 items-center animate-fadeIn">
-          <div className="hover:bg-white/20 hover:shadow-lg border border-transparent hover:border-white/30 hover:backdrop-blur-xs rounded-full hover:cursor-pointer" onClick={() => setNav((state)=>({prev:"ConfirmDetails",curr:state.prev}))}>
+          <div className="hover:bg-white/20 hover:shadow-lg border border-transparent hover:border-white/30 hover:backdrop-blur-xs rounded-full hover:cursor-pointer" onClick={() => popPositionStack()}>
             <IoIosArrowBack size={30}/>
           </div>
           <div className="text-3xl">Cart | 2 items</div>

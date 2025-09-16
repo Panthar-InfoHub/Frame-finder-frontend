@@ -3,19 +3,19 @@ import basic_lens from "@/assets/basic_lens.png";
 import computer_lens from "@/assets/computer_lens.png";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 
-const LensPackage = ({ setNav }) => {
+const LensPackage = ({ pushPositionStack,popPositionStack }) => {
   return (
     <div className="w-screen h-screen flex justify-center items-center overflow-hidden">
       <div className="w-[70%] h-[78%] mt-[5%] bg-white shadow-lg rounded-md relative p-6 space-y-10 overflow-auto scrollbar-hidden animate-slideUp">
         <ArrowLeft
           className="w-11 h-11 rounded-full text-green-600 absolute top-[2%] left-[1%] p-2 cursor-pointer hover:bg-green-200 active:bg-green-300"
-          onClick={()=>setNav((state)=>({prev:"FillEyeDetails",curr:state.prev}))}
+          onClick={()=>popPositionStack()}
         />
         <div className="text-3xl font-medium text-center">
           Choose Lens Package
         </div>
         <div className="flex relative p-8 gap-8 border-4 rounded-3xl">
-          <ArrowRight className="w-11 h-11 rounded-full text-green-600 absolute top-[2%] right-[2%] p-2 cursor-pointer hover:bg-green-200 active:bg-green-300" onClick={()=>setNav((state)=>({prev:state.curr,curr:"Cart"}))}/>
+          <ArrowRight className="w-11 h-11 rounded-full text-green-600 absolute top-[2%] right-[2%] p-2 cursor-pointer hover:bg-green-200 active:bg-green-300" onClick={()=>pushPositionStack("Cart")}/>
           <img
             src={basic_lens}
             className="w-100 aspect-[4/3] rounded-3xl"
